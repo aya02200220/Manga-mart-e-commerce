@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import mangaData from "../data/mangaData";
-import login from "./login";
+
 interface Image {
-  id: number; // idはnumber型です。
+  id: number;
   title: string;
   price: number;
   image: string;
-  description: string; // descriptionプロパティも追加してください。
+  description: string;
 }
 
-export default function Home() {
+const Home = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [favArr, setFavArr] = useState<Image[]>([]);
 
   useEffect(() => {
-    setImages(mangaData); // API呼び出しの代わりに、直接mangaDataをセットします。
+    setImages(mangaData);
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
     setFavArr(favs);
   }, []);
 
   const onFavClick = (image: Image) => {
-    // ... (お気に入りに追加・削除のロジック)
+    // ... (logic for adding/removing favorites)
   };
 
   return (
@@ -31,7 +32,7 @@ export default function Home() {
           <img src={image.image} alt={image.title} />
           <p>{image.title}</p>
           <p>${image.price.toFixed(2)}</p>
-          <p>{image.description}</p> {/* descriptionも表示 */}
+          <p>{image.description}</p>
           <button onClick={() => onFavClick(image)}>
             {favArr.find((fav) => fav.id === image.id)
               ? "Remove from Fav"
@@ -41,4 +42,6 @@ export default function Home() {
       ))}
     </div>
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(Home), { ssr: false });
