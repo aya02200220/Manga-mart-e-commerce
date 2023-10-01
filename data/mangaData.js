@@ -19,7 +19,7 @@ const mangaData = [
   },
   {
     id: 37,
-    title: "SPY×FAMILY",
+    title: "Oshi no ko",
     image:
       "https://upload.wikimedia.org/wikipedia/it/3/37/Oshi_no_Ko_copertina.jpg",
     price: 9.99,

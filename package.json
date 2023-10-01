@@ -13,10 +13,12 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.11",
     "axios": "^1.5.1",
+    "cloudinary": "^1.41.0",
     "firebase": "^10.4.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-icons": "^4.11.0"
   },
   "devDependencies": {
     "@types/node": "latest",
