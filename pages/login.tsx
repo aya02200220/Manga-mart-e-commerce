@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth, provider } from "../components/firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithRedirect, getRedirectResult } from "firebase/auth";
 
 function App() {
-  const handleLogin = () => {
-    signInWithPopup(auth, provider)
+  useEffect(() => {
+    getRedirectResult(auth)
       .then((result) => {
-        const user = result.user;
-        console.log("Logged in as:", user.displayName);
+        if (result && result.user) {
+          console.log("Logged in as:", result.user.displayName);
+        }
       })
       .catch((error) => {
         console.error("Login error:", error.message);
       });
+  }, []);
+
+  const handleLogin = () => {
+    signInWithRedirect(auth, provider).catch((error) => {
+      console.error("Login error:", error.message);
+    });
   };
 
   return (

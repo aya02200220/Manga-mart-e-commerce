@@ -26,7 +26,6 @@ const Home = () => {
 
   return (
     <div>
-      <login />
       {images.map((image) => (
         <div key={image.id}>
           <img src={image.image} alt={image.title} />
