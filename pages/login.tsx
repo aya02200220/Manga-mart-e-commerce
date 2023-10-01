@@ -1,5 +1,5 @@
 import React from "react";
-import { auth, provider } from "../components/firebase"; // firebase.jsからimport
+import { auth, provider } from "../components/firebase";
 import { signInWithPopup } from "firebase/auth";
 
 function App() {
