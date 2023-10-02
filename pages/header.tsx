@@ -61,7 +61,7 @@ function Header() {
   };
 
   return (
-    <nav className="w-full bg-[#f4f4f4] h-[70px] flex items-center justify-between px-5">
+    <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center justify-between px-20 fixed top-0 z-10">
       <div className="flex flex-row items-center">
         <Image src={Logo} height={50} alt="Manga-mart Logo" />
       </div>

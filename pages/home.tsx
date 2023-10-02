@@ -28,12 +28,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-wrap mx-30 my-20 justify-center gap-6">
+    <div className="flex flex-wrap mx-40 my-20 justify-center gap-10">
       {images.map((image) => (
-        <div key={image.id} className="flex w-[350px]">
-          <div className="w-[180px] flex-shrink-0">
+        <div key={image.id} className="flex w-[320px]">
+          <div className="w-[155px] flex-shrink-0">
             <img
-              className="h-[270px] w-full object-cover rounded-sm"
+              className="h-[250px] w-full object-cover rounded-sm"
               style={{
                 boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
               }}
@@ -41,7 +41,7 @@ const Home = () => {
               alt={image.title}
             />
           </div>
-          <div className="m-4 flex-grow flex flex-col justify-between">
+          <div className="m-4 pl-1 flex-grow flex flex-col justify-between">
             <div className="">
               <Rating
                 name="half-rating-read"
@@ -51,21 +51,21 @@ const Home = () => {
                 size="small"
               />
 
-              <p className="text-[20px]">{image.title}</p>
+              <p className="text-[19px] leading-5 mb-3">{image.title}</p>
               <p>{image.description}</p>
-              <p className="text-2xl font-extrabold ">
+              <p className="text-3xl font-extrabold ">
                 ${image.price.toFixed(2)}
               </p>
             </div>
 
-            <div>
+            <div className="flex ">
               <button
                 onClick={() => onAddClick(image)}
-                className="relative px-6 py-3 font-bold text-[#3d3d3d] group"
+                className="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500 "
               >
-                <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-2 -translate-y-2 bg-[#d987ac] group-hover:translate-x-0 group-hover:translate-y-0"></span>
-                <span className="absolute inset-0 w-full h-full border-4 border-[#444]"></span>
-                <span className="relative flex items-center">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+                <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+                <span className="relative text-white  flex items-center">
                   {" "}
                   {favArr.find((fav) => fav.id === image.id) ? (
                     "Remove from Fav"
