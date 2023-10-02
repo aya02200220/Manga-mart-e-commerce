@@ -1,4 +1,3 @@
-import Login from "./login";
 import Home from "./home";
 import Header from "./header";
 
@@ -8,7 +7,7 @@ const MainRoot = () => {
       <div id="header">
         <Header />
       </div>
-      <div id="about">
+      <div id="home">
         <Home />
       </div>
     </div>
