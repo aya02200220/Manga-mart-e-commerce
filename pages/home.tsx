@@ -28,7 +28,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-wrap mx-40 my-20 justify-center gap-10">
+    <div className="flex flex-wrap mx-40 mt-32 justify-center gap-10">
       {images.map((image) => (
         <div key={image.id} className="flex w-[320px]">
           <div className="w-[155px] flex-shrink-0">
@@ -53,7 +53,7 @@ const Home = () => {
 
               <p className="text-[19px] leading-5 mb-3">{image.title}</p>
               <p>{image.description}</p>
-              <p className="text-3xl font-extrabold ">
+              <p className="text-[28px] font-extrabold">
                 ${image.price.toFixed(2)}
               </p>
             </div>
