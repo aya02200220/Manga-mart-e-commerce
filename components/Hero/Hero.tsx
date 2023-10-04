@@ -27,7 +27,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      {/* /////////// add images //////////// */}
+      {/* /////////// ad images //////////// */}
       <div className="relative h-[400px] w-1/3"></div>
     </div>
   );
