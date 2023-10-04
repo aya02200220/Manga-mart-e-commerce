@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import bg from "../public/bg-jojo.png";
-import bg2 from "../public/onepice-1.jpg";
-import bg3 from "../public/onepice-2.jpg";
-import bg4 from "../public/onepice-3.jpeg";
-import bg5 from "../public/onepice-4.jpg";
-import mangaData from "../data/mangaData";
+import bg from "../../public/bg-jojo.png";
+import bg2 from "../../public/onepice-1.jpg";
+import bg3 from "../../public/onepice-2.jpg";
+import bg4 from "../../public/onepice-3.jpeg";
+import bg5 from "../../public/onepice-4.jpg";
+import mangaData from "../../data/mangaData";
 
 const Hero = () => {
   return (

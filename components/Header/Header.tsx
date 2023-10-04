@@ -22,7 +22,7 @@ import {
 } from "firebase/auth";
 import Image from "next/image";
 
-import Logo from "../public/Manga.png";
+import Logo from "../../public/Manga.png";
 
 function Header() {
   const [user, setUser] = useState<User | null>(null);

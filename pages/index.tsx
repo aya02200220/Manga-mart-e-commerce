@@ -1,5 +1,5 @@
 import Home from "./home";
-import Header from "./header";
+import Header from "../components/Header/Header";
 
 const MainRoot = () => {
   return (

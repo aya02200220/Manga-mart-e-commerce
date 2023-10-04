@@ -4,12 +4,14 @@ import Image from "next/image";
 import { Rating, Button } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
 
-import Hero from "../components/hero";
+import Header from "../components/Header/Header";
+import Hero from "../components/Hero/Hero";
 import MangaCard from "@/components/MangaCard/MangaCard";
 
 const Home = () => {
   return (
     <>
+      <Header />
       <Hero />
       <MangaCard />
     </>
