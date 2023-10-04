@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import mangaData from "../data/mangaData";
+import mangaData from "../../data/mangaData";
 import Image from "next/image";
 import { Rating, Button } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -15,7 +15,7 @@ interface Image {
   rate?: number;
 }
 
-const Index = () => {
+const MangaCard = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [favArr, setFavArr] = useState<Image[]>([]);
 
@@ -108,4 +108,4 @@ const Index = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Index), { ssr: false });
+export default dynamic(() => Promise.resolve(MangaCard), { ssr: false });
