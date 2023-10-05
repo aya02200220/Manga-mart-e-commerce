@@ -50,10 +50,14 @@ const MangaCard = () => {
 
   const handleData = (text: string) => {
     if (text === "All") {
-      setData(mangaData);
+      // setData(mangaData);
+      const sortedData = [...mangaData].sort((a, b) => b.rate - a.rate);
+      setData(sortedData);
     } else {
       const findData = mangaData.filter((item) => item.category === text);
-      setData(findData);
+      const sortedData = [...findData].sort((a, b) => b.rate - a.rate);
+      setData(sortedData);
+      // setData(findData);
     }
   };
 
@@ -124,10 +128,10 @@ const MangaCard = () => {
                     </p>
                   </div>
 
-                  <p className="text-md sm:text-[19px] leading-5 mb-1 sm:mb-3">
+                  <p className="text-md sm:text-[19px] leading-5 mb-1 sm:mb-3 ">
                     {image.title}
                   </p>
-                  <p>{image.description}</p>
+                  {/* <p>{image.description}</p> */}
                   <p className="text-2xl sm:text-[28px] font-extrabold">
                     ${image.price.toFixed(2)}
                   </p>
