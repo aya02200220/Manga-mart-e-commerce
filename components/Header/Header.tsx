@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import { GrFavorite, GrCart } from "react-icons/gr";
-
+import { debounce } from "lodash";
 import { auth, provider } from "@/components/firebase";
 import {
   onAuthStateChanged,
@@ -21,13 +21,30 @@ import {
   User,
 } from "firebase/auth";
 import Image from "next/image";
-
 import Logo from "../../public/Manga.png";
 
-function Header() {
+interface HeaderProps {
+  onSearch?: (term: string) => void;
+}
+
+function Header(props: HeaderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const imageUrl = user?.photoURL ?? "default-image-url";
+  const [searchInput, setSearchInput] = useState("");
+
+  // debounced検索処理
+  const debouncedSearch = debounce((value) => {
+    props.onSearch && props.onSearch(value);
+  }, 300); // 300msのディレイを設定
+
+  useEffect(() => {
+    debouncedSearch(searchInput); // searchInputが変更されたときにdebounced検索を実行
+
+    return () => {
+      debouncedSearch.cancel(); // コンポーネントがアンマウントされるときにdebounceをキャンセル
+    };
+  }, [searchInput]);
 
   const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -93,6 +110,7 @@ function Header() {
               Search
             </InputLabel>
             <OutlinedInput
+              onChange={(e) => setSearchInput(e.target.value)}
               id="search-arb"
               sx={{
                 height: "40px",

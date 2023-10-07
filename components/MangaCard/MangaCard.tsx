@@ -17,8 +17,19 @@ interface Image {
   category: string;
   rate?: number;
 }
+interface MangaCardProps {
+  filteredData: {
+    id: number;
+    title: string;
+    image: string;
+    price: number;
+    description: string;
+    rate: number;
+    category: string;
+  }[];
+}
 
-const MangaCard = () => {
+const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [images, setImages] = useState<Image[]>([]);
   const [favArr, setFavArr] = useState<Image[]>([]);
 
@@ -29,7 +40,6 @@ const MangaCard = () => {
 
   const handleMangaData = (id: number) => {
     const find = mangaData.find((item) => item?.id === id);
-    console.log("Found manga:", find); // これを追加
     if (find) {
       setSingleData(find);
     }
@@ -37,7 +47,6 @@ const MangaCard = () => {
   };
 
   const handleModal = (id: number) => {
-    console.log("handleModal is called with ID:", id); // これを追加
     handleMangaData(id);
   };
   const handleModalClose = () => {
@@ -92,8 +101,8 @@ const MangaCard = () => {
       />
 
       <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-5 lg:mx-32 mt-10 justify-center gap-4 sm:gap-7">
-        {data.length > 0 ? (
-          data.map((image) => (
+        {filteredData.length > 0 ? (
+          filteredData.map((image) => (
             <div
               key={image.id}
               data-aos="fade-up"

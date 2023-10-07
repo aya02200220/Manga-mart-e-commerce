@@ -11,7 +11,6 @@ import MangaCard from "@/components/MangaCard/MangaCard";
 const Home = () => {
   return (
     <>
-      <Header />
       <Hero />
       <MangaCard />
     </>

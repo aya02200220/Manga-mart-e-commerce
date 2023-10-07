@@ -16,12 +16,14 @@
     "axios": "^1.5.1",
     "cloudinary": "^1.41.0",
     "firebase": "^10.4.0",
+    "lodash": "^4.17.21",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.11.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.199",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
