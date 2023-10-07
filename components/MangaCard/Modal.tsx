@@ -5,19 +5,14 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
-  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onRequestClose();
-    }
-  };
   return (
     <>
       {/* <!-- Main modal --> */}
       {isOpen && (
         <div
-          onClick={handleOutsideClick}
+          onClick={onRequestClose}
           aria-hidden="true"
-          className="fixed z-50 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-[calc(100%-1rem)] max-h-full"
+          className="fixed z-50 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full bg-[#0a0a0aa5]"
         >
           <div className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full">
             {/* <!-- Modal content --> */}
@@ -51,8 +46,8 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-6 space-y-6">
-                <p className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400">
+              <div className="p-6 space-y-6 ">
+                <p className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400 overflow-y-auto h-max-[calc(80vh-10rem)]">
                   {manga.description}
                 </p>
               </div>
