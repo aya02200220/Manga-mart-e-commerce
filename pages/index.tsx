@@ -24,9 +24,11 @@ const MainRoot = () => {
         <MangaCard
           filteredData={mangaData.filter(
             (manga) =>
-              manga.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              manga.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              manga.description.toLowerCase().includes(searchTerm.toLowerCase())
+              manga.title.toLowerCase().includes(searchTerm.toLowerCase())
+
+            // manga.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            // manga.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            // manga.description.toLowerCase().includes(searchTerm.toLowerCase())
           )}
         />
       </div>

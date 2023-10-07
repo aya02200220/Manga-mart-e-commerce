@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import mangaData from "../../data/mangaData";
+// import mangaData from "../../data/mangaData";
 import Image from "next/image";
 import { Rating, Button } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -36,10 +36,14 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [singleData, setSingleData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("All");
-  const [data, setData] = useState(mangaData);
+  const [data, setData] = useState(filteredData);
+
+  useEffect(() => {
+    handleData(category); // カテゴリーが変わるたび、またはfilteredDataが変わるたびにデータを更新
+  }, [filteredData, category]);
 
   const handleMangaData = (id: number) => {
-    const find = mangaData.find((item) => item?.id === id);
+    const find = filteredData.find((item) => item?.id === id);
     if (find) {
       setSingleData(find);
     }
@@ -63,21 +67,33 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
     handleData("All");
   }, []);
 
+  // const handleData = (text: string) => {
+  //   if (text === "All") {
+  //     // setData(mangaData);
+  //     const sortedData = [...filteredData].sort((a, b) => b.rate - a.rate);
+  //     setData(sortedData);
+  //   } else {
+  //     const findData = filteredData.filter((item) => item.category === text);
+  //     const sortedData = [...findData].sort((a, b) => b.rate - a.rate);
+  //     setData(sortedData);
+  //     // setData(findData);
+  //   }
+  // };
+
   const handleData = (text: string) => {
-    if (text === "All") {
-      // setData(mangaData);
-      const sortedData = [...mangaData].sort((a, b) => b.rate - a.rate);
-      setData(sortedData);
-    } else {
-      const findData = mangaData.filter((item) => item.category === text);
-      const sortedData = [...findData].sort((a, b) => b.rate - a.rate);
-      setData(sortedData);
-      // setData(findData);
+    let targetData = filteredData;
+
+    if (text !== "All") {
+      targetData = filteredData.filter((item) => item.category === text);
     }
+
+    // レート順にデータをソート
+    const sortedData = [...targetData].sort((a, b) => b.rate - a.rate);
+    setData(sortedData);
   };
 
   useEffect(() => {
-    setImages(mangaData);
+    setImages(filteredData);
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
     setFavArr(favs);
   }, []);
@@ -101,8 +117,8 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
       />
 
       <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-5 lg:mx-32 mt-10 justify-center gap-4 sm:gap-7">
-        {filteredData.length > 0 ? (
-          filteredData.map((image) => (
+        {data.length > 0 ? (
+          data.map((image) => (
             <div
               key={image.id}
               data-aos="fade-up"
