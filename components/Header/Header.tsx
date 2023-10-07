@@ -8,6 +8,8 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  TextField,
+  MenuItem,
 } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import { GrFavorite, GrCart } from "react-icons/gr";
@@ -24,27 +26,38 @@ import Image from "next/image";
 import Logo from "../../public/Manga.png";
 
 interface HeaderProps {
-  onSearch?: (term: string) => void;
+  onSearch?: (term: string, category: string) => void;
 }
+
+const filterMenu = [
+  {
+    value: "Title",
+    label: "Title",
+  },
+  {
+    value: "Description",
+    label: "Description",
+  },
+];
 
 function Header(props: HeaderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const imageUrl = user?.photoURL ?? "default-image-url";
   const [searchInput, setSearchInput] = useState("");
+  const [searchCategory, setSearchCategory] = useState("Title");
 
   // debounced検索処理
-  const debouncedSearch = debounce((value) => {
-    props.onSearch && props.onSearch(value);
-  }, 300); // 300msのディレイを設定
+  const debouncedSearch = debounce((term: string, category: string) => {
+    props.onSearch && props.onSearch(term, category);
+  }, 300);
 
   useEffect(() => {
-    debouncedSearch(searchInput); // searchInputが変更されたときにdebounced検索を実行
-
+    debouncedSearch(searchInput, searchCategory);
     return () => {
-      debouncedSearch.cancel(); // コンポーネントがアンマウントされるときにdebounceをキャンセル
+      debouncedSearch.cancel();
     };
-  }, [searchInput]);
+  }, [searchInput, searchCategory]);
 
   const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -100,7 +113,24 @@ function Header(props: HeaderProps) {
       </div>
 
       <div className="flex justify-between sm:justify-end items-center w-full">
-        <div className="flex ">
+        <div className="flex items-center">
+          <TextField
+            className="bg-[#eaf6ff]"
+            size="small"
+            id="outlined-select-search-category"
+            select
+            label="Search category"
+            defaultValue="Title"
+            sx={{ width: "130px" }}
+            value={searchCategory}
+            onChange={(e) => setSearchCategory(e.target.value)}
+          >
+            {filterMenu.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <FormControl
             className="mr-4"
             sx={{ m: 1, width: { xs: "150px", sm: "200px" } }}
@@ -110,7 +140,9 @@ function Header(props: HeaderProps) {
               Search
             </InputLabel>
             <OutlinedInput
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
               id="search-arb"
               sx={{
                 height: "40px",
@@ -126,6 +158,7 @@ function Header(props: HeaderProps) {
             />
           </FormControl>
         </div>
+
         {/* <div className="flex-grow"></div> */}
         <div className="flex">
           {user ? (

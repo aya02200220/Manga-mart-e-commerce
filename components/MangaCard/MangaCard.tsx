@@ -39,7 +39,12 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [data, setData] = useState(filteredData);
 
   useEffect(() => {
-    handleData(category); // カテゴリーが変わるたび、またはfilteredDataが変わるたびにデータを更新
+    setCategory("All");
+    handleData("All");
+  }, []);
+
+  useEffect(() => {
+    handleData(category);
   }, [filteredData, category]);
 
   const handleMangaData = (id: number) => {
@@ -61,24 +66,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
     handleData(text);
     setCategory(text);
   };
-
-  useEffect(() => {
-    setCategory("All");
-    handleData("All");
-  }, []);
-
-  // const handleData = (text: string) => {
-  //   if (text === "All") {
-  //     // setData(mangaData);
-  //     const sortedData = [...filteredData].sort((a, b) => b.rate - a.rate);
-  //     setData(sortedData);
-  //   } else {
-  //     const findData = filteredData.filter((item) => item.category === text);
-  //     const sortedData = [...findData].sort((a, b) => b.rate - a.rate);
-  //     setData(sortedData);
-  //     // setData(findData);
-  //   }
-  // };
 
   const handleData = (text: string) => {
     let targetData = filteredData;
@@ -128,7 +115,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               <div className="w-[100px] sm:w-[130px] flex-shrink-0">
                 <img
                   onClick={() => handleModal(image?.id)}
-                  className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm"
+                  className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm cursor-pointer"
                   style={{
                     boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
                   }}

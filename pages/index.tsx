@@ -7,8 +7,11 @@ import MangaCard from "@/components/MangaCard/MangaCard";
 
 const MainRoot = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const handleSearch = (term: string) => {
+  const [searchCategory, setSearchCategory] = useState("Title");
+
+  const handleSearch = (term: string, category: string) => {
     setSearchTerm(term);
+    setSearchCategory(category);
   };
 
   return (
@@ -16,20 +19,26 @@ const MainRoot = () => {
       <div id="header">
         <Header onSearch={handleSearch} />
       </div>
-      {/* {console.log(searchTerm)} */}
+      {console.log(searchTerm)}
       <div id="hero">
         <Hero />
       </div>
+
       <div id="mangaCard">
         <MangaCard
-          filteredData={mangaData.filter(
-            (manga) =>
-              manga.title.toLowerCase().includes(searchTerm.toLowerCase())
-
-            // manga.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            // manga.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            // manga.description.toLowerCase().includes(searchTerm.toLowerCase())
-          )}
+          filteredData={mangaData.filter((manga) => {
+            if (searchCategory === "Title") {
+              return manga.title
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase());
+            } else if (searchCategory === "Description") {
+              return manga.description
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase());
+            } else {
+              return false;
+            }
+          })}
         />
       </div>
     </div>
