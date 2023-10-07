@@ -9,7 +9,7 @@ import mangaData from "../../data/mangaData";
 
 const Hero = () => {
   return (
-    <div className="flex relative mt-20 mx-2 md:mx-20  h-[200px] md:h-[400px] overflow-hidden">
+    <div className="flex relative mt-20 mx-2 md:mx-16  h-[200px] md:h-[400px] overflow-hidden">
       {/* /////////// hero image //////////// */}
       <div className="relative h-[200px] md:h-[400px] w-full md:w-2/3 m-1">
         <Image

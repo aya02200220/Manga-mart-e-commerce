@@ -102,35 +102,38 @@ function Header(props: HeaderProps) {
   };
 
   return (
-    <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center  justify-between px-2 md:px-20 fixed top-0 z-10">
+    <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center  justify-between px-2 sm:px-3 md:px-16 fixed top-0 z-10">
       <div className="flex flex-row items-center ">
         <Image
           className="hidden sm:block"
           src={Logo}
           height={50}
           alt="Manga-mart Logo"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       </div>
 
       <div className="flex justify-between sm:justify-end items-center w-full">
-        <div className="flex items-center">
-          <TextField
-            className="bg-[#eaf6ff]"
-            size="small"
-            id="outlined-select-search-category"
-            select
-            label="Search category"
-            defaultValue="Title"
-            sx={{ width: "130px" }}
-            value={searchCategory}
-            onChange={(e) => setSearchCategory(e.target.value)}
-          >
-            {filterMenu.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+        <div className="flex items-center ">
+          <div className=" hidden sm:block">
+            <TextField
+              className="bg-[#eaf6ff]"
+              size="small"
+              id="outlined-select-search-category"
+              select
+              label="Search category"
+              defaultValue="Title"
+              style={{ width: "130px" }}
+              value={searchCategory}
+              onChange={(e) => setSearchCategory(e.target.value)}
+            >
+              {filterMenu.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
           <FormControl
             className="mr-4"
             sx={{ m: 1, width: { xs: "150px", sm: "200px" } }}
@@ -163,7 +166,7 @@ function Header(props: HeaderProps) {
         <div className="flex">
           {user ? (
             <div className="flex flex-row items-center">
-              <p className="flex flex-col leading-4 justify-center items-center mr-2 text-[15px] uppercase hidden sm:block">
+              <p className="flex flex-col leading-4 justify-center items-center mr-2 text-[15px] uppercase hidden md:block">
                 <p>HELLO!</p>
                 <p> {user.displayName}</p>
               </p>
