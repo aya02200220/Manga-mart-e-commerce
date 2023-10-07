@@ -16,11 +16,11 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
         >
           <div className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full">
             {/* <!-- Modal content --> */}
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-10 ">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8 ">
               {/* <!-- Modal header --> */}
               <div className="flex items-start justify-between p-2 sm:p-4 border-b rounded-t dark:border-gray-600">
                 <h3 className="text:sm sm:text-xl font-semibold text-gray-900 dark:text-white">
-                  Synopsis
+                  Synopsis of {manga.title}
                 </h3>
                 <button
                   type="button"
@@ -46,14 +46,26 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-6 space-y-6 ">
+              <div className="p-6 flex items-start">
+                <img
+                  className="hidden sm:block h-full sm:h-[28%] w-fyll sm:w-[32%] sm:object-cover rounded-sm mr-4"
+                  style={{
+                    boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
+                  }}
+                  src={manga.image}
+                  alt={manga.title}
+                />
                 <p
                   className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400 overflow-y-auto"
-                  style={{ maxHeight: "calc(80vh - 10rem)" }}
+                  style={{
+                    maxHeight: "calc(55vh)",
+                    whiteSpace: "pre-line",
+                  }}
                 >
                   {manga.description}
                 </p>
               </div>
+
               {/* <!-- Modal footer --> */}
               <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button

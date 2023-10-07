@@ -149,8 +149,9 @@ const mangaData = [
   },
   {
     id: 15,
-    title: "JoJo's Bizarre Adventure Part 5:",
-    image: "https://dw9to29mmj727.cloudfront.net/products/1974708101.jpg",
+    title: "JoJo's Bizarre Adventure Part 5",
+    image:
+      "https://dynamic.indigoimages.ca/v1/books/books/1974724131/1.jpg?width=810&maxHeight=810&quality=85",
     price: 12.99,
     description:
       "Naples, 2001. Giorno Giovanna is a small-time crook with one big dream—to become a 'Gang-Star.' No ordinary thief, Giorno has a connection to the remarkable Joestar bloodline, and possesses a Stand named Gold Experience. His dream starts to become reality when he meets Bruno Bucciarati, a mobster from the gang Passione and a fellow Stand user himself. Realizing that they share similar ideals, and both disagree with the gang's harmful affairs, Giorno reveals his goal to Bruno: with Bruno's help, he will reform Passione by overthrowing the boss.\n\nAs Giorno becomes a member of Passione, and is inducted into Bruno's squad, he discovers that it is no simple gang; its numbers are teeming with Stand users. Now confronted by other squads of differing loyalties and unpredictable caliber, their goal to change the gang from the inside out will be a tough one. Taking on these adversaries, Giorno attempts to rise through the ranks and inch closer to the boss, a man who is shrouded in mystery.",
