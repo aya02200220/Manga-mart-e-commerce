@@ -6,6 +6,7 @@ import { Rating, Button } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
 
 import CategoryFilter from "./CategoryFilter";
+import Modal from "./Modal";
 
 interface Image {
   id: number;
@@ -28,6 +29,7 @@ const MangaCard = () => {
 
   const handleMangaData = (id: number) => {
     const find = mangaData.find((item) => item?.id === id);
+    console.log("Found manga:", find); // これを追加
     if (find) {
       setSingleData(find);
     }
@@ -35,7 +37,11 @@ const MangaCard = () => {
   };
 
   const handleModal = (id: number) => {
+    console.log("handleModal is called with ID:", id); // これを追加
     handleMangaData(id);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
   };
 
   const handleSearch = (text: string) => {
@@ -96,6 +102,7 @@ const MangaCard = () => {
             >
               <div className="w-[100px] sm:w-[130px] flex-shrink-0">
                 <img
+                  onClick={() => handleModal(image?.id)}
                   className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm"
                   style={{
                     boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
@@ -166,6 +173,14 @@ const MangaCard = () => {
         ) : (
           <p className="text-3xl h-[400px]">No data</p>
         )}
+        <div className="relative">
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={handleModalClose}
+            // onRequestClose={() => setIsOpen(false)}
+            manga={singleData}
+          />
+        </div>
       </div>
     </>
   );
