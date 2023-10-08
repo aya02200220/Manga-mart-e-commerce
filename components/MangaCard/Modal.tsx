@@ -1,5 +1,17 @@
+import { Rating } from "@mui/material";
+
+type MangaData = {
+  id: number;
+  title: string;
+  image: string;
+  price: number;
+  description: string;
+  rate: number;
+  category: string;
+};
+
 interface ModalProps {
-  manga: singleData | null;
+  manga: MangaData | null;
   isOpen: boolean;
   onRequestClose: () => void;
 }
@@ -12,16 +24,28 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
         <div
           onClick={onRequestClose}
           aria-hidden="true"
-          className="fixed z-50 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full bg-[#0a0a0aa5]"
+          className="fixed z-50 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full bg-[#0a0a0ad5]"
         >
           <div className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full">
             {/* <!-- Modal content --> */}
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8 ">
               {/* <!-- Modal header --> */}
               <div className="flex items-start justify-between p-2 sm:p-4 border-b rounded-t dark:border-gray-600">
-                <h3 className="text:sm sm:text-xl font-semibold text-gray-900 dark:text-white">
-                  Synopsis of {manga.title}
-                </h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="flex text:sm sm:text-xl font-semibold text-gray-900 dark:text-white">
+                    Synopsis of {manga?.title}
+                  </h3>
+                  <div className="flex items-center justify-center ml-2">
+                    <Rating
+                      name="half-rating-read"
+                      defaultValue={manga?.rate ?? 0}
+                      precision={0.1}
+                      readOnly
+                      size="small"
+                    />{" "}
+                    <p className="ml-2 text-white">{manga?.rate}</p>
+                  </div>
+                </div>
                 <button
                   type="button"
                   className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -52,8 +76,8 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                   style={{
                     boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
                   }}
-                  src={manga.image}
-                  alt={manga.title}
+                  src={manga?.image}
+                  alt={manga?.title}
                 />
                 <p
                   className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400 overflow-y-auto"
@@ -62,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                     whiteSpace: "pre-line",
                   }}
                 >
-                  {manga.description}
+                  {manga?.description}
                 </p>
               </div>
 

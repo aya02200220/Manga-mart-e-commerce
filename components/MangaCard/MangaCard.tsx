@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-// import mangaData from "../../data/mangaData";
 import Image from "next/image";
 import { Rating, Button } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -150,7 +149,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                   <p className="text-md sm:text-[19px] leading-5 mb-1 sm:mb-3 ">
                     {image.title}
                   </p>
-                  {/* <p>{image.description}</p> */}
                   <p className="text-2xl sm:text-[28px] font-extrabold">
                     ${image.price.toFixed(2)}
                   </p>
@@ -189,7 +187,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
           <Modal
             isOpen={isOpen}
             onRequestClose={handleModalClose}
-            // onRequestClose={() => setIsOpen(false)}
             manga={singleData}
           />
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import bg from "../../public/bg-jojo.png";
 import bg2 from "../../public/onepice-1.jpg";
@@ -7,6 +7,7 @@ import bg4 from "../../public/onepice-3.jpeg";
 import bg5 from "../../public/onepice-4.jpg";
 import mangaData from "../../data/mangaData";
 import { FcIdea } from "react-icons/fc";
+import Modal from "../MangaCard/Modal";
 
 type MangaData = {
   id: number;
@@ -24,11 +25,31 @@ const getRandomItems = (arr: MangaData[], n: number) => {
 };
 
 const Hero = () => {
-  const [randomImage1, randomImage2, randomImage3] = getRandomItems(
-    mangaData,
-    3
-  );
+  const [isOpen, setIsOpen] = useState(false);
+  const [singleData, setSingleData] = useState({});
 
+  const [randomImages, setRandomImages] = useState<MangaData[]>([]);
+
+  useEffect(() => {
+    setRandomImages(getRandomItems(mangaData, 3));
+  }, []);
+  const [randomImage1, randomImage2, randomImage3] = randomImages;
+
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleMangaData = (id: number) => {
+    const find = mangaData.find((item) => item?.id === id);
+    if (find) {
+      setSingleData(find);
+    }
+    setIsOpen(true);
+  };
+
+  const handleModal = (id: number) => {
+    handleMangaData(id);
+  };
   return (
     <div className="flex relative mt-20 mx-2 md:mx-16  h-[200px] md:h-[400px] overflow-hidden justify-center">
       {/* /////////// hero image //////////// */}
@@ -49,49 +70,67 @@ const Hero = () => {
         </div>
       </div>
       {/* /////////// ad images //////////// */}
-      <div className="flex h-full w-1/3 m-1 bg-[#dedddc]">
-        <div className="flex-1 overflow-hidden">
-          <div className="text-xl font-semibold text-center flex justify-center text-[#636363] mt-2">
-            <p>Today's Pick Up</p>
-            <FcIdea />
+      <div className="hidden md:block h-full w-1/3 m-1 bg-[#e9e9e9]">
+        <div className="flex ">
+          <div className="flex-1 overflow-hidden hidden md:block">
+            <div className="text-xl font-semibold text-center flex justify-center text-[#636363] mt-2">
+              <p className="leading-5 text-center items-center justify-center">
+                Today's Pick Up
+              </p>
+              <FcIdea />
+            </div>
+            <img
+              onClick={() => handleModal(randomImage1?.id)}
+              className="m-2 slidy cursor-pointer"
+              src={randomImage1?.image}
+              alt="ad"
+              style={{
+                width: "97%",
+                height: "85%",
+                objectFit: "cover",
+                objectPosition: "top",
+              }}
+            />
           </div>
-          <img
-            className=" border border-[#686868] border-1 m-2"
-            src={randomImage1.image}
-            alt="ad"
-            style={{
-              width: "100%",
-              height: "85%",
-              objectFit: "cover",
-              objectPosition: "top",
-            }}
-          />
+          <div className="flex flex-col w-1/2 ">
+            <div className="hidden md:block">
+              <div className="flex-1 overflow-hidden ml-2 m-2 ">
+                <img
+                  onClick={() => handleModal(randomImage2?.id)}
+                  className="slide-up cursor-pointer"
+                  src={randomImage2?.image}
+                  alt="ad"
+                  style={{
+                    width: "100%",
+                    height: "200%",
+                    objectFit: "cover",
+                    objectPosition: "top",
+                  }}
+                />
+              </div>
+              <div className="flex-1 overflow-hidden ml-2 mr-2 mb-4">
+                <img
+                  onClick={() => handleModal(randomImage3?.id)}
+                  className="slide-up cursor-pointer"
+                  src={randomImage3?.image}
+                  alt="ad"
+                  style={{
+                    width: "100%",
+                    height: "200%",
+                    objectFit: "cover",
+                    objectPosition: "top",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col w-1/2">
-          <div className="flex-1 overflow-hidden border border-[#686868] border-1 ml-2 m-2">
-            <img
-              src={randomImage2.image}
-              alt="ad"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "top",
-              }}
-            />
-          </div>
-          <div className="flex-1 overflow-hidden border border-[#686868] border-1 ml-2 mr-2 mb-4">
-            <img
-              src={randomImage3.image}
-              alt="ad"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "top",
-              }}
-            />
-          </div>
+        <div className="relative">
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={handleModalClose}
+            manga={singleData}
+          />
         </div>
       </div>
     </div>
