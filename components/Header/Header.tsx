@@ -212,7 +212,7 @@ function Header(props: HeaderProps) {
             <button
               onClick={handleLogin}
               type="button"
-              className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-1 h-14 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 "
+              className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-3 py-1 h-10 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 leading-4"
             >
               <svg
                 className="w-4 h-4 mr-2"
