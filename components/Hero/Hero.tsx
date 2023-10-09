@@ -12,6 +12,7 @@ import bg9 from "../../public/124608.jpg";
 import bg10 from "../../public/22395020.jpg";
 import bg11 from "../../public/22336830.jpg";
 import bg12 from "../../public/22161049.jpg";
+import logo from "../../public/today.png";
 import mangaData from "../../data/mangaData";
 import { FcIdea } from "react-icons/fc";
 import Modal from "../MangaCard/Modal";
@@ -58,7 +59,7 @@ const Hero = () => {
     handleMangaData(id);
   };
   return (
-    <div className="flex relative mt-20 mx-2 md:mx-16  h-[200px] md:h-[400px] overflow-hidden justify-center">
+    <div className="flex relative mt-20 mx-2 h-[200px] md:h-[400px] overflow-hidden justify-center">
       {/* /////////// hero image //////////// */}
       <div className="relative h-[200px] md:h-[400px] w-full md:w-3/5 m-1 ">
         <Image
@@ -86,14 +87,17 @@ const Hero = () => {
           objectPosition="center"
           className="z-0"
         />
-        <div className="absolute top-0 left-0 w-full h-full z-10 flex flex-col justify-between">
-          <div className="text-xl font-semibold text-center flex justify-center content-center text-[#333] mt-5">
-            <p className="leading-5 text-center items-center justify-center text-2xl">
-              Today&apos;s Pick Up
-            </p>
-            <FcIdea />
+        <div className="absolute top-0 left-0 w-full z-10 flex flex-col justify-between">
+          <div className="text-xl font-semibold text-center flex justify-center content-center my-1">
+            <Image
+              src={logo}
+              alt="Today's Pick Up"
+              width={150}
+              height={90}
+              className="cursor-pointer"
+            />
           </div>
-          <div className="flex slid-images horizontal h-full justify-center items-center">
+          <div className="flex slid-images horizontal justify-center items-center h-full">
             {[
               randomImage1,
               randomImage2,
@@ -108,27 +112,26 @@ const Hero = () => {
               <img
                 key={index}
                 onClick={() => handleModal(image?.id)}
-                className="cursor-pointer m-2"
+                className="cursor-pointer m-1 mx-3 h-full"
                 src={image?.image}
                 alt="ad"
                 style={{
                   width: "auto",
-                  height: "70%",
-                  objectFit: "cover",
+                  height: "300px",
+                  objectFit: "contain",
                   objectPosition: "center",
                 }}
               />
             ))}
           </div>
         </div>
-
-        <div className="relative z-20">
-          <Modal
-            isOpen={isOpen}
-            onRequestClose={handleModalClose}
-            manga={singleData}
-          />
-        </div>
+      </div>
+      <div className="relative z-20">
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={handleModalClose}
+          manga={singleData}
+        />
       </div>
     </div>
   );
