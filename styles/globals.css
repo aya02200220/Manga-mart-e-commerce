@@ -23,15 +23,22 @@ body {
   background-color: #fff;
   color: #535353;
 }
-/* 
-@keyframes slideUp {
+@keyframes slideLeftEndless {
   0% {
-    transform: translateY(0);
+    transform: translateX(0);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateX(-33.33%);
   }
 }
-.slide-up {
-  animation: slideUp 10s infinite alternate;
-} */
+
+.slid-images.horizontal {
+  display: flex;
+  animation: slideLeftEndless 15s infinite linear;
+  align-items: center; /* これを追加して画像を上下中央に配置 */
+}
+
+/* ホバー時にアニメーションを一時停止 */
+.slid-images.horizontal:hover {
+  animation-play-state: paused;
+}

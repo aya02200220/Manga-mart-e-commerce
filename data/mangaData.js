@@ -56,7 +56,7 @@ const mangaData = [
     id: 6,
     title: "Death Note",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/6/6f/Death_Note_Vol_1.jpg/220px-Death_Note_Vol_1.jpg",
+      "https://m.media-amazon.com/images/I/81EJydt5sQL._AC_UF1000,1000_QL80_.jpg",
     price: 9.49,
     description:
       "Ryuk, a god of death, drops his Death Note into the human world for personal pleasure. In Japan, prodigious high school student Light Yagami stumbles upon it. Inside the notebook, he finds a chilling message: those whose names are written in it shall die.\n\nIts nonsensical nature amuses Light; but when he tests its power by writing the name of a criminal in it, they suddenly meet their demise.Realizing the Death Note's vast potential, Light commences a series of nefarious murders under the pseudonym 'Kira,' vowing to cleanse the world of corrupt individuals and create a perfect society where crime ceases to exist. \n\nHowever, the police quickly catch on, and they enlist the help of L—a mastermind detective—to uncover the culprit.Death Note tells the thrilling tale of Light and L as they clash in a great battle-of-minds, one that will determine the future of the world.",
@@ -569,7 +569,8 @@ const mangaData = [
   {
     id: 56,
     title: "Usagi Drop",
-    image: "https://cdn.myanimelist.net/images/manga/2/203854.jpg",
+    image:
+      "https://m.media-amazon.com/images/I/81fFsELKjML._AC_UF894,1000_QL80_.jpg",
     price: 9.99,
     description:
       "When bachelor Daikichi Kawachi attends his grandfather's funeral, he is surprised to find a mysterious young girl alone in the garden. To his astonishment, the shy and reserved girl, named Rin Kaga, is believed to be the illegitimate child of his late grandfather.\n\nDue to the shameful circumstances related to the little girl, no one in the family is willing to take her in following her father's death. Infuriated by the coldness extended to an innocent child, Daikichi announces that he will take care of Rin himself, despite his young age, single status, and lack of parental experience.\n\nUsagi Drop follows the story of Daikichi and Rin as they try to find happiness and purpose to their fateful meeting.",
@@ -578,8 +579,8 @@ const mangaData = [
   },
   {
     id: 57,
-    title: "Hachimitsu to Clover",
-    image: "https://cdn.myanimelist.net/images/manga/3/184591.jpg",
+    title: "Honey and Clover",
+    image: "https://m.media-amazon.com/images/I/61zgnrNNQnL.jpg",
     price: 9.99,
     description:
       "Takemoto lives in a run down student apartment, where his greatest worry is when he'll next be able to afford to eat meat and whether he'll get to class on time. Although he's away from home and living on his own, Takemoto is far from finished growing up. Along with his crazy cast of friends, Morita, Mayama, Yamada, and Hagumi, Takemoto sets out to discover life and his true self.",

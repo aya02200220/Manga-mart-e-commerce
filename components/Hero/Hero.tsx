@@ -5,6 +5,13 @@ import bg2 from "../../public/onepice-1.jpg";
 import bg3 from "../../public/onepice-2.jpg";
 import bg4 from "../../public/onepice-3.jpeg";
 import bg5 from "../../public/onepice-4.jpg";
+import bg6 from "../../public/1062.jpg";
+import bg7 from "../../public/8147361.jpg";
+import bg8 from "../../public/109650.jpg";
+import bg9 from "../../public/124608.jpg";
+import bg10 from "../../public/22395020.jpg";
+import bg11 from "../../public/22336830.jpg";
+import bg12 from "../../public/22161049.jpg";
 import mangaData from "../../data/mangaData";
 import { FcIdea } from "react-icons/fc";
 import Modal from "../MangaCard/Modal";
@@ -26,7 +33,7 @@ const getRandomItems = (arr: MangaData[], n: number) => {
 
 const Hero = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [singleData, setSingleData] = useState({});
+  const [singleData, setSingleData] = useState<MangaData | null>(null);
 
   const [randomImages, setRandomImages] = useState<MangaData[]>([]);
 
@@ -70,62 +77,52 @@ const Hero = () => {
         </div>
       </div>
       {/* /////////// ad images //////////// */}
-      <div className="hidden md:block h-full w-1/3 m-1 bg-[#e9e9e9]">
-        <div className="flex ">
-          <div className="flex-1 overflow-hidden hidden md:block">
-            <div className="text-xl font-semibold text-center flex justify-center text-[#636363] mt-2">
-              <p className="leading-5 text-center items-center justify-center">
-                Today's Pick Up
-              </p>
-              <FcIdea />
-            </div>
-            <img
-              onClick={() => handleModal(randomImage1?.id)}
-              className="m-2 slidy cursor-pointer"
-              src={randomImage1?.image}
-              alt="ad"
-              style={{
-                width: "97%",
-                height: "85%",
-                objectFit: "cover",
-                objectPosition: "top",
-              }}
-            />
+      <div className="relative hidden md:block w-1/3 m-1 overflow-hidden ">
+        <Image
+          layout="fill"
+          src={bg10}
+          alt="background"
+          objectFit="cover"
+          objectPosition="center"
+          className="z-0"
+        />
+        <div className="absolute top-0 left-0 w-full h-full z-10 flex flex-col justify-between">
+          <div className="text-xl font-semibold text-center flex justify-center content-center text-[#333] mt-5">
+            <p className="leading-5 text-center items-center justify-center text-2xl">
+              Today&apos;s Pick Up
+            </p>
+            <FcIdea />
           </div>
-          <div className="flex flex-col w-1/2 ">
-            <div className="hidden md:block">
-              <div className="flex-1 overflow-hidden ml-2 m-2 ">
-                <img
-                  onClick={() => handleModal(randomImage2?.id)}
-                  className="slide-up cursor-pointer"
-                  src={randomImage2?.image}
-                  alt="ad"
-                  style={{
-                    width: "100%",
-                    height: "200%",
-                    objectFit: "cover",
-                    objectPosition: "top",
-                  }}
-                />
-              </div>
-              <div className="flex-1 overflow-hidden ml-2 mr-2 mb-4">
-                <img
-                  onClick={() => handleModal(randomImage3?.id)}
-                  className="slide-up cursor-pointer"
-                  src={randomImage3?.image}
-                  alt="ad"
-                  style={{
-                    width: "100%",
-                    height: "200%",
-                    objectFit: "cover",
-                    objectPosition: "top",
-                  }}
-                />
-              </div>
-            </div>
+          <div className="flex slid-images horizontal h-full justify-center items-center">
+            {[
+              randomImage1,
+              randomImage2,
+              randomImage3,
+              randomImage1,
+              randomImage2,
+              randomImage3,
+              randomImage1,
+              randomImage2,
+              randomImage3,
+            ].map((image, index) => (
+              <img
+                key={index}
+                onClick={() => handleModal(image?.id)}
+                className="cursor-pointer m-2"
+                src={image?.image}
+                alt="ad"
+                style={{
+                  width: "auto",
+                  height: "70%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
+              />
+            ))}
           </div>
         </div>
-        <div className="relative">
+
+        <div className="relative z-20">
           <Modal
             isOpen={isOpen}
             onRequestClose={handleModalClose}

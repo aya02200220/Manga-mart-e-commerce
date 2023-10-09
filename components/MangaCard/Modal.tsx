@@ -43,7 +43,9 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                       readOnly
                       size="small"
                     />{" "}
-                    <p className="ml-2 text-white">{manga?.rate}</p>
+                    <p className="ml-2 text-gray-900 dark:text-white">
+                      {manga?.rate}
+                    </p>
                   </div>
                 </div>
                 <button
