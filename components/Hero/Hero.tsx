@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import bg from "../../public/bg-jojo.png";
 import bg2 from "../../public/onepice-1.jpg";
-import bg3 from "../../public/onepice-2.jpg";
-import bg4 from "../../public/onepice-3.jpeg";
-import bg5 from "../../public/onepice-4.jpg";
-import bg6 from "../../public/1062.jpg";
-import bg7 from "../../public/8147361.jpg";
-import bg8 from "../../public/109650.jpg";
-import bg9 from "../../public/124608.jpg";
 import bg10 from "../../public/22395020.jpg";
-import bg11 from "../../public/22336830.jpg";
-import bg12 from "../../public/22161049.jpg";
 import logo from "../../public/today.png";
 import mangaData from "../../data/mangaData";
-import { FcIdea } from "react-icons/fc";
 import Modal from "../MangaCard/Modal";
 
 type MangaData = {
