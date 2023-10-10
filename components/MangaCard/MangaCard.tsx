@@ -93,10 +93,6 @@ const MangaCard: React.FC<MangaCardProps> = ({
     setFavArr(favs);
   }, []);
 
-  const addToCart = (image: Image) => {
-    // ... (logic for adding/removing favorites)
-  };
-
   const categoryColors: { [key: string]: string } = {
     shonen: "#01a4ffc7",
     shoujo: "#e891a0b5",
@@ -106,7 +102,6 @@ const MangaCard: React.FC<MangaCardProps> = ({
 
   return (
     <>
-      {console.log("MangaCard isGoogleLoggedIn:", isGoogleLoggedIn)}
       <CategoryFilter
         activeCategory={category}
         onCategorySelect={handleSearch}
@@ -125,7 +120,6 @@ const MangaCard: React.FC<MangaCardProps> = ({
                   mangaData={image}
                   isGoogleLoggedIn={isGoogleLoggedIn}
                   onFavUpdated={() => {
-                    // ローカルストレージからお気に入りの更新版を取得
                     const updatedFavs = JSON.parse(
                       localStorage.getItem("favs") || "[]"
                     );

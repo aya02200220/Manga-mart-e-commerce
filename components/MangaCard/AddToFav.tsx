@@ -1,5 +1,5 @@
-import React from "react";
-import { GrFavorite } from "react-icons/gr";
+import React, { useEffect, useState } from "react";
+import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md";
 import { IconButton } from "@mui/material/";
 
 interface AddToFavProps {
@@ -23,7 +23,12 @@ const AddToFav: React.FC<AddToFavProps> = ({
   isGoogleLoggedIn,
   onFavUpdated,
 }) => {
-  // console.log("isGoogleLoggedIn::::", isGoogleLoggedIn);
+  const [isFavored, setIsFavored] = useState<boolean>(false);
+
+  useEffect(() => {
+    const favs = JSON.parse(localStorage.getItem("favs") || "[]");
+    setIsFavored(favs.some((fav: Data) => fav.id === mangaData.id));
+  }, [mangaData.id]);
 
   const handleFavClick = () => {
     console.log("isGoogleLoggedIn:", isGoogleLoggedIn);
@@ -35,9 +40,11 @@ const AddToFav: React.FC<AddToFavProps> = ({
     if (!isAlreadyFav) {
       favs.push(mangaData);
       localStorage.setItem("favs", JSON.stringify(favs));
+      setIsFavored(true);
     } else {
       const newFavs = favs.filter((fav: Data) => fav.id !== mangaData.id);
       localStorage.setItem("favs", JSON.stringify(newFavs));
+      setIsFavored(false);
     }
     onFavUpdated();
   };
@@ -48,7 +55,11 @@ const AddToFav: React.FC<AddToFavProps> = ({
       className="absolute top-1 left-1 bg-[#ffffffd4]"
       onClick={handleFavClick}
     >
-      <GrFavorite />
+      {isFavored && isGoogleLoggedIn ? (
+        <MdFavorite color="#EB1E6C" size="20px" />
+      ) : (
+        <MdOutlineFavoriteBorder />
+      )}
     </IconButton>
   );
 };
