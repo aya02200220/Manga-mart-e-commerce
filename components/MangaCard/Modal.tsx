@@ -17,6 +17,9 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
+  const handleContentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
   return (
     <>
       {/* <!-- Main modal --> */}
@@ -24,11 +27,14 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
         <div
           onClick={onRequestClose}
           aria-hidden="true"
-          className="fixed z-50 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full bg-[#0a0a0ad5]"
+          className="fixed z-40 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full bg-[#0a0a0ad5]"
         >
-          <div className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full">
+          <div
+            onClick={handleContentClick}
+            className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full"
+          >
             {/* <!-- Modal content --> */}
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8 ">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8">
               {/* <!-- Modal header --> */}
               <div className="flex items-start justify-between p-2 sm:p-4 border-b rounded-t dark:border-gray-600">
                 <div className="flex items-center gap-2">

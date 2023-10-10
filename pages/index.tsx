@@ -1,4 +1,3 @@
-import Home from "./home";
 import Header from "../components/Header/Header";
 import { useState } from "react";
 import mangaData from "@/data/mangaData";
@@ -8,6 +7,7 @@ import MangaCard from "@/components/MangaCard/MangaCard";
 const MainRoot = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
+  const [isGoogleLoggedIn, setIsGoogleLoggedIn] = useState(false);
 
   const handleSearch = (term: string, category: string) => {
     setSearchTerm(term);
@@ -17,15 +17,20 @@ const MainRoot = () => {
   return (
     <div>
       <div id="header">
-        <Header onSearch={handleSearch} />
+        <Header
+          onSearch={handleSearch}
+          isGoogleLoggedIn={isGoogleLoggedIn}
+          onGoogleLogin={() => setIsGoogleLoggedIn(true)}
+          onGoogleLogout={() => setIsGoogleLoggedIn(false)}
+        />
       </div>
-      {console.log(searchTerm)}
+      {console.log("MainRoot isGoogleLoggedIn:", isGoogleLoggedIn)}
       <div id="hero">
         <Hero />
       </div>
-
       <div id="mangaCard">
         <MangaCard
+          isGoogleLoggedIn={isGoogleLoggedIn}
           filteredData={mangaData.filter((manga) => {
             if (searchCategory === "Title") {
               return manga.title

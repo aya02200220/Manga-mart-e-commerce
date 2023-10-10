@@ -5,6 +5,9 @@ import { Rating, Button, IconButton } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
 import { GrFavorite } from "react-icons/gr";
 
+import mangaData from "../../data/mangaData";
+
+import AddToFav from "./AddToFav";
 import CategoryFilter from "./CategoryFilter";
 import Modal from "./Modal";
 import { log } from "console";
@@ -28,9 +31,13 @@ interface MangaCardProps {
     rate: number;
     category: string;
   }[];
+  isGoogleLoggedIn: boolean;
 }
 
-const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
+const MangaCard: React.FC<MangaCardProps> = ({
+  filteredData,
+  isGoogleLoggedIn,
+}) => {
   const [images, setImages] = useState<Image[]>([]);
   const [favArr, setFavArr] = useState<Image[]>([]);
 
@@ -38,7 +45,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);
-  const [isGoogleLoggedIn, setIsGoogleLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     setCategory("All");
@@ -87,46 +93,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
     setFavArr(favs);
   }, []);
 
-  const onGoogleLoginSuccess = () => {
-    setIsGoogleLoggedIn(true);
-  };
-
-  const onGoogleLogout = () => {
-    setIsGoogleLoggedIn(false);
-  };
-
-  const addToFav = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("Fav button clicked");
-
-    const imageId = parseInt(
-      event.currentTarget.getAttribute("data-image-id") || "0",
-      10
-    );
-    console.log("imageId:", imageId);
-
-    const image = filteredData.find((img) => img.id === imageId);
-    if (image && isGoogleLoggedIn) {
-      console.log("既にお気に入りに追加されているかどうかを確認します");
-
-      const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-      // 既にお気に入りに追加されているかどうかを確認します。
-      const isAlreadyFav = favs.some((fav: Image) => fav.id === image.id);
-      if (!isAlreadyFav) {
-        // お気に入りにない場合、追加します。
-        console.log("お気に入りにない場合、追加します");
-
-        favs.push(image);
-        localStorage.setItem("favs", JSON.stringify(favs));
-        setFavArr(favs);
-      } else {
-        // 既にお気に入りにある場合、削除します。
-        const newFavs = favs.filter((fav: Image) => fav.id !== image.id);
-        localStorage.setItem("favs", JSON.stringify(newFavs));
-        setFavArr(newFavs);
-      }
-    }
-  };
-
   const addToCart = (image: Image) => {
     // ... (logic for adding/removing favorites)
   };
@@ -140,11 +106,11 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
 
   return (
     <>
+      {console.log("MangaCard isGoogleLoggedIn:", isGoogleLoggedIn)}
       <CategoryFilter
         activeCategory={category}
         onCategorySelect={handleSearch}
       />
-
       <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-5 lg:mx-32 mt-10 justify-center gap-4 sm:gap-7">
         {data.length > 0 ? (
           data.map((image) => (
@@ -155,13 +121,17 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               className="flex w-[220px] sm:w-[300px] mb-2"
             >
               <div className="w-[100px] sm:w-[130px] flex-shrink-0 relative">
-                <IconButton
-                  size="small"
-                  className="absolute top-1 left-1 bg-[#ffffffd4]"
-                  onClick={addToFav}
-                >
-                  <GrFavorite />
-                </IconButton>
+                <AddToFav
+                  mangaData={image}
+                  isGoogleLoggedIn={isGoogleLoggedIn}
+                  onFavUpdated={() => {
+                    // ローカルストレージからお気に入りの更新版を取得
+                    const updatedFavs = JSON.parse(
+                      localStorage.getItem("favs") || "[]"
+                    );
+                    setFavArr(updatedFavs);
+                  }}
+                />
                 <img
                   onClick={() => handleModal(image?.id)}
                   className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm cursor-pointer"
@@ -212,18 +182,11 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
                     <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
                     <span className="relative text-white  flex items-center">
-                      {" "}
-                      {favArr.find((fav) => fav.id === image.id) ? (
-                        "Remove from Fav"
-                      ) : (
-                        <>
-                          <span className="text-sm sm:text-lg">Add to</span>
-                          <FaCartArrowDown
-                            size={"20px"}
-                            className="ml-1"
-                          />{" "}
-                        </>
-                      )}
+                      <>
+                        <span className="text-sm sm:text-lg">Add to</span>
+                        <FaCartArrowDown size={"20px"} className="ml-1" />{" "}
+                      </>
+                      )
                     </span>
                   </button>
                 </div>

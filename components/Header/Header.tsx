@@ -27,6 +27,9 @@ import Logo from "../../public/Manga.png";
 
 interface HeaderProps {
   onSearch?: (term: string, category: string) => void;
+  isGoogleLoggedIn?: boolean;
+  onGoogleLogin?: () => void;
+  onGoogleLogout?: () => void;
 }
 
 const filterMenu = [
@@ -39,7 +42,6 @@ const filterMenu = [
     label: "Description",
   },
 ];
-
 function Header(props: HeaderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -59,6 +61,30 @@ function Header(props: HeaderProps) {
     };
   }, [searchInput, searchCategory]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        props.onGoogleLogin && props.onGoogleLogin();
+      } else {
+        props.onGoogleLogout && props.onGoogleLogout();
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = () => {
+    signOut(auth).catch((error) => {
+      console.error("Logout error:", error.message);
+    });
+  };
+
+  const handleLogin = () => {
+    signInWithRedirect(auth, provider).catch((error) => {
+      console.error("Login error:", error.message);
+    });
+  };
+
   const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -71,19 +97,6 @@ function Header(props: HeaderProps) {
   const id = open ? "simple-popover" : undefined;
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleLogout = () => {
-    signOut(auth).catch((error) => {
-      console.error("Logout error:", error.message);
-    });
-  };
-
-  useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {
         if (result && result.user) {
@@ -94,12 +107,6 @@ function Header(props: HeaderProps) {
         console.error("Login error:", error.message);
       });
   }, []);
-
-  const handleLogin = () => {
-    signInWithRedirect(auth, provider).catch((error) => {
-      console.error("Login error:", error.message);
-    });
-  };
 
   return (
     <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center  justify-between px-2 sm:px-3 md:px-16 fixed top-0 z-40">
