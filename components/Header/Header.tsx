@@ -102,7 +102,7 @@ function Header(props: HeaderProps) {
   };
 
   return (
-    <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center  justify-between px-2 sm:px-3 md:px-16 fixed top-0 z-10">
+    <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center  justify-between px-2 sm:px-3 md:px-16 fixed top-0 z-40">
       <div className="flex flex-row items-center ">
         <Image
           className="hidden sm:block"

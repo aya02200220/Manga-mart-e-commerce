@@ -115,7 +115,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="relative z-20">
+      <div className="relative z-50">
         <Modal
           isOpen={isOpen}
           onRequestClose={handleModalClose}
