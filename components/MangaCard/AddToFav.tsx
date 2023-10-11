@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md";
 import { IconButton } from "@mui/material/";
 import { useAppContext } from "../providers/AppContext";
+import toast from "react-hot-toast";
 
 interface AddToFavProps {
   mangaData: Data;
@@ -28,15 +29,46 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
   }, [mangaData.id]);
 
   const handleFavClick = () => {
-    if (!isGoogleLoggedIn) return;
+    if (!isGoogleLoggedIn) {
+      toast.success("Please log in to add to your favorites.", {
+        style: {
+          border: "1px solid #8bb4df",
+          padding: "20px",
+          color: "#4385cb",
+          backgroundColor: "#cbddf1",
+        },
+        iconTheme: {
+          primary: "#4385cb",
+          secondary: "#FFFAEE",
+        },
+      });
+
+      return;
+    }
 
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
     const isAlreadyFav = favs.some((fav: Data) => fav.id === mangaData.id);
     if (!isAlreadyFav) {
+      toast(`${mangaData.title}\nhas been added to your favorite.`, {
+        icon: "♥️",
+        style: {
+          borderRadius: "10px",
+          background: "#e297bb",
+          color: "#333",
+        },
+      });
       favs.push(mangaData);
       localStorage.setItem("favs", JSON.stringify(favs));
       setIsFavored(true);
     } else {
+      toast(`${mangaData.title}\nhas been removed from your favorite.`, {
+        // icon: "♥️",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       const newFavs = favs.filter((fav: Data) => fav.id !== mangaData.id);
       localStorage.setItem("favs", JSON.stringify(newFavs));
       setIsFavored(false);

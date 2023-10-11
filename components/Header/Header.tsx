@@ -29,9 +29,6 @@ import { useAppContext } from "../providers/AppContext";
 
 interface HeaderProps {
   onSearch?: (term: string, category: string) => void;
-  isGoogleLoggedIn?: boolean;
-  onGoogleLogin?: () => void;
-  onGoogleLogout?: () => void;
 }
 
 const filterMenu = [
@@ -51,9 +48,9 @@ function Header(props: HeaderProps) {
   const [searchInput, setSearchInput] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
 
-  const isGoogleLoggedIn = useAppContext();
-  const favs = useAppContext();
-  const itemsInCart = useAppContext();
+  const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
+  const favs = useAppContext().favs;
+  const itemsInCart = useAppContext().itemsInCart;
 
   // debounced検索処理
   const debouncedSearch = debounce((term: string, category: string) => {
@@ -67,28 +64,16 @@ function Header(props: HeaderProps) {
     };
   }, [searchInput, searchCategory]);
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     setUser(currentUser);
-  //     console.log("login check");
-  //     console.log("currentUser:", currentUser);
-  //     {
-  //       console.log("user:", user);
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
   useEffect(() => {
-    console.log("auth.currentUser:", auth.currentUser);
-    console.log("isGoogleLoggedIn:", isGoogleLoggedIn);
+    // console.log("auth.currentUser:", auth.currentUser);
+    // console.log("isGoogleLoggedIn:", isGoogleLoggedIn);
 
     if (auth.currentUser) {
       setUser(auth.currentUser);
     } else {
       setUser(null);
     }
-  }, []);
+  }, [isGoogleLoggedIn]);
 
   const handleLogout = () => {
     signOut(auth).catch((error) => {
@@ -119,11 +104,11 @@ function Header(props: HeaderProps) {
     getRedirectResult(auth)
       .then((result) => {
         if (result && result.user) {
-          console.log("Logged in as:", result.user.displayName);
+          // console.log("Logged in as:", result.user.displayName);
         }
       })
       .catch((error) => {
-        console.error("Login error:", error.message);
+        // console.error("Login error:", error.message);
       });
   }, []);
 
@@ -227,12 +212,12 @@ function Header(props: HeaderProps) {
               </Popover>
 
               <IconButton className="ml-2">
-                <Badge badgeContent={0} color="secondary">
+                <Badge badgeContent={favs} color="secondary">
                   <GrFavorite size={20} />
                 </Badge>
               </IconButton>
               <IconButton className="ml-2">
-                <Badge badgeContent={0} color="primary">
+                <Badge badgeContent={itemsInCart} color="primary">
                   <GrCart size={20} />
                 </Badge>
               </IconButton>

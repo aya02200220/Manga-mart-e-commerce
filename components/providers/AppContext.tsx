@@ -19,11 +19,14 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [favs, setFavs] = useState<number>(0);
 
   useEffect(() => {
+    // console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
+  }, [isGoogleLoggedIn]);
+
+  useEffect(() => {
     // Googleのログイン状態を取得
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      // console.log("Logged user:", user);
       setIsGoogleLoggedIn(!!user);
-      console.log("Context:", unsubscribe);
-      console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
     });
 
     // favsとitemsInCartをローカルストレージから取得
