@@ -31,13 +31,9 @@ interface MangaCardProps {
     rate: number;
     category: string;
   }[];
-  isGoogleLoggedIn: boolean;
 }
 
-const MangaCard: React.FC<MangaCardProps> = ({
-  filteredData,
-  isGoogleLoggedIn,
-}) => {
+const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [images, setImages] = useState<Image[]>([]);
   const [favArr, setFavArr] = useState<Image[]>([]);
 
@@ -118,7 +114,6 @@ const MangaCard: React.FC<MangaCardProps> = ({
               <div className="w-[100px] sm:w-[130px] flex-shrink-0 relative">
                 <AddToFav
                   mangaData={image}
-                  isGoogleLoggedIn={isGoogleLoggedIn}
                   onFavUpdated={() => {
                     const updatedFavs = JSON.parse(
                       localStorage.getItem("favs") || "[]"
@@ -170,7 +165,7 @@ const MangaCard: React.FC<MangaCardProps> = ({
 
                 <div className="flex ">
                   <button
-                    onClick={() => addToCart(image)}
+                    // onClick={() => addToCart(image)}
                     className="relative inline-flex items-center justify-center p-4 px-5 py-1.5 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500 "
                   >
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>

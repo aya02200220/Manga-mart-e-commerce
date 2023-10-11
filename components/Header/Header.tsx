@@ -10,6 +10,7 @@ import {
   IconButton,
   TextField,
   MenuItem,
+  Badge,
 } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import { GrFavorite, GrCart } from "react-icons/gr";
@@ -24,6 +25,7 @@ import {
 } from "firebase/auth";
 import Image from "next/image";
 import Logo from "../../public/Manga.png";
+import { useAppContext } from "../providers/AppContext";
 
 interface HeaderProps {
   onSearch?: (term: string, category: string) => void;
@@ -43,11 +45,15 @@ const filterMenu = [
   },
 ];
 function Header(props: HeaderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState(auth.currentUser);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const imageUrl = user?.photoURL ?? "default-image-url";
   const [searchInput, setSearchInput] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
+
+  const isGoogleLoggedIn = useAppContext();
+  const favs = useAppContext();
+  const itemsInCart = useAppContext();
 
   // debounced検索処理
   const debouncedSearch = debounce((term: string, category: string) => {
@@ -61,16 +67,27 @@ function Header(props: HeaderProps) {
     };
   }, [searchInput, searchCategory]);
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     console.log("login check");
+  //     console.log("currentUser:", currentUser);
+  //     {
+  //       console.log("user:", user);
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        props.onGoogleLogin && props.onGoogleLogin();
-      } else {
-        props.onGoogleLogout && props.onGoogleLogout();
-      }
-    });
-    return () => unsubscribe();
+    console.log("auth.currentUser:", auth.currentUser);
+    console.log("isGoogleLoggedIn:", isGoogleLoggedIn);
+
+    if (auth.currentUser) {
+      setUser(auth.currentUser);
+    } else {
+      setUser(null);
+    }
   }, []);
 
   const handleLogout = () => {
@@ -80,6 +97,8 @@ function Header(props: HeaderProps) {
   };
 
   const handleLogin = () => {
+    console.log("Login clicked");
+
     signInWithRedirect(auth, provider).catch((error) => {
       console.error("Login error:", error.message);
     });
@@ -169,9 +188,8 @@ function Header(props: HeaderProps) {
           </FormControl>
         </div>
 
-        {/* <div className="flex-grow"></div> */}
         <div className="flex">
-          {user ? (
+          {user === undefined ? null : user ? (
             <div className="flex flex-row items-center">
               <p className="flex flex-col leading-4 justify-center items-center mr-2 text-[15px] uppercase hidden md:block">
                 <p>HELLO!</p>
@@ -209,10 +227,14 @@ function Header(props: HeaderProps) {
               </Popover>
 
               <IconButton className="ml-2">
-                <GrFavorite size={20} />
+                <Badge badgeContent={0} color="secondary">
+                  <GrFavorite size={20} />
+                </Badge>
               </IconButton>
               <IconButton className="ml-2">
-                <GrCart size={20} />
+                <Badge badgeContent={0} color="primary">
+                  <GrCart size={20} />
+                </Badge>
               </IconButton>
             </div>
           ) : (

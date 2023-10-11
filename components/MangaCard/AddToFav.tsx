@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md";
 import { IconButton } from "@mui/material/";
+import { useAppContext } from "../providers/AppContext";
 
 interface AddToFavProps {
   mangaData: Data;
-  isGoogleLoggedIn: boolean;
   onFavUpdated: () => void;
 }
 
@@ -18,12 +18,9 @@ interface Data {
   rate?: number;
 }
 
-const AddToFav: React.FC<AddToFavProps> = ({
-  mangaData,
-  isGoogleLoggedIn,
-  onFavUpdated,
-}) => {
+const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
   const [isFavored, setIsFavored] = useState<boolean>(false);
+  const { isGoogleLoggedIn } = useAppContext();
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
@@ -31,8 +28,6 @@ const AddToFav: React.FC<AddToFavProps> = ({
   }, [mangaData.id]);
 
   const handleFavClick = () => {
-    console.log("isGoogleLoggedIn:", isGoogleLoggedIn);
-    console.log("mangaData:", mangaData);
     if (!isGoogleLoggedIn) return;
 
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
