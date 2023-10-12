@@ -6,15 +6,7 @@ import logo from "../../public/today.png";
 import mangaData from "../../data/mangaData";
 import Modal from "../MangaCard/Modal";
 
-type MangaData = {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  description: string;
-  rate: number;
-  category: string;
-};
+import { MangaData } from "@/types";
 
 const getRandomItems = (arr: MangaData[], n: number) => {
   const shuffled = arr.slice().sort(() => 0.5 - Math.random());

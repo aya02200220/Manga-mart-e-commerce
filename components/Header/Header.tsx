@@ -26,6 +26,7 @@ import {
 import Image from "next/image";
 import Logo from "../../public/Manga.png";
 import { useAppContext } from "../providers/AppContext";
+import FavModal from "../Favorite/FavModal";
 
 interface HeaderProps {
   onSearch?: (term: string, category: string) => void;

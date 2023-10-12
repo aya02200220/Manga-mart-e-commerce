@@ -7,7 +7,7 @@ interface ModalProps {
   onRequestClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
+const FavModal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -114,4 +114,4 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
   );
 };
 
-export default Modal;
+export default FavModal;
