@@ -48,6 +48,7 @@ function Header(props: HeaderProps) {
   const imageUrl = user?.photoURL ?? "default-image-url";
   const [searchInput, setSearchInput] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
+  const [isOpen, setIsOpen] = useState(false);
 
   const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const favs = useAppContext().favs;
@@ -96,6 +97,13 @@ function Header(props: HeaderProps) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleModalOpen = () => {
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
   };
 
   const open = Boolean(anchorEl);
@@ -212,7 +220,7 @@ function Header(props: HeaderProps) {
                 </Button>
               </Popover>
 
-              <IconButton className="ml-2">
+              <IconButton className="ml-2" onClick={() => handleModalOpen()}>
                 <Badge badgeContent={favs} color="secondary">
                   <GrFavorite size={20} />
                 </Badge>
@@ -246,6 +254,9 @@ function Header(props: HeaderProps) {
             </button>
           )}
         </div>
+      </div>
+      <div className="relative">
+        <FavModal isOpen={isOpen} onRequestClose={handleModalClose} />
       </div>
     </nav>
   );

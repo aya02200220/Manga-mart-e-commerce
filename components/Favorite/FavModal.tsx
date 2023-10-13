@@ -1,13 +1,18 @@
+import { useState } from "react";
 import { Rating } from "@mui/material";
 import { MangaData } from "@/types";
+import { useAppContext } from "../providers/AppContext";
 
 interface ModalProps {
-  manga: MangaData | null;
-  isOpen: boolean;
   onRequestClose: () => void;
+  isOpen: boolean;
 }
 
-const FavModal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
+const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
+  // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
+  const favs = useAppContext().favs;
+  const itemsInCart = useAppContext().itemsInCart;
+
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -22,7 +27,7 @@ const FavModal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
         >
           <div
             onClick={handleContentClick}
-            className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full"
+            className="relative w-[92%] md:w-[80%] sm:max-h-full"
           >
             {/* <!-- Modal content --> */}
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8">
@@ -30,20 +35,11 @@ const FavModal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
               <div className="flex items-start justify-between p-2 sm:p-4 border-b rounded-t dark:border-gray-600">
                 <div className="flex items-center gap-2">
                   <h3 className="flex text:sm sm:text-xl font-semibold text-gray-900 dark:text-white">
-                    Synopsis of {manga?.title}
+                    Your Favorites ( {favs} )
                   </h3>
-                  <div className="flex items-center justify-center ml-2">
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={manga?.rate ?? 0}
-                      precision={0.1}
-                      readOnly
-                      size="small"
-                    />{" "}
-                    <p className="ml-2 text-gray-900 dark:text-white">
-                      {manga?.rate}
-                    </p>
-                  </div>
+                  {/* <div className="flex items-center justify-center ml-2">
+                    <p className="ml-2 text-gray-900 dark:text-white"></p>
+                  </div> */}
                 </div>
                 <button
                   type="button"
@@ -69,24 +65,26 @@ const FavModal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-6 flex items-start">
-                <img
-                  className="hidden sm:block h-full sm:h-[28%] w-fyll sm:w-[32%] sm:object-cover rounded-sm mr-4"
-                  style={{
-                    boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
-                  }}
-                  src={manga?.image}
-                  alt={manga?.title}
-                />
-                <p
-                  className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400 overflow-y-auto"
-                  style={{
-                    maxHeight: "calc(55vh)",
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {manga?.description}
-                </p>
+              <div className="m-3 text-gray-900 dark:text-white">
+                {favs >= 0 ? (
+                  <p className="text-center">No Favorites</p>
+                ) : (
+                  <div className="p-6 flex items-start">
+                    <img
+                      className="hidden sm:block h-full sm:h-[28%] w-fyll sm:w-[32%] sm:object-cover rounded-sm mr-4"
+                      style={{
+                        boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
+                      }}
+                    />
+                    <p
+                      className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400 overflow-y-auto"
+                      style={{
+                        maxHeight: "calc(55vh)",
+                        whiteSpace: "pre-line",
+                      }}
+                    ></p>
+                  </div>
+                )}
               </div>
 
               {/* <!-- Modal footer --> */}
