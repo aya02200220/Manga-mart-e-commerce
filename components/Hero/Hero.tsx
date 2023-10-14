@@ -44,7 +44,7 @@ const Hero = () => {
       {/* /////////// hero image //////////// */}
       <div className="relative h-[200px] md:h-[400px] w-full md:w-3/5 m-1 ">
         <Image
-          layout="fill"
+          fill={true}
           src={bg2}
           alt="hero"
           objectFit="cover"
@@ -61,10 +61,10 @@ const Hero = () => {
       {/* /////////// ad images //////////// */}
       <div className="relative hidden md:block w-1/3 m-1 overflow-hidden ">
         <Image
-          layout="fill"
+          fill={true}
           src={bg10}
           alt="background"
-          objectFit="cover"
+          object-fit="cover"
           objectPosition="center"
           className="z-0"
         />

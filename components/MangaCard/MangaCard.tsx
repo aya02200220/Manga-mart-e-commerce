@@ -3,9 +3,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Rating, Button, IconButton } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
-import { GrFavorite } from "react-icons/gr";
-
-import mangaData from "../../data/mangaData";
 
 import AddToFav from "../Favorite/AddToFav";
 import CategoryFilter from "./CategoryFilter";
