@@ -7,37 +7,22 @@ import { GrFavorite } from "react-icons/gr";
 
 import mangaData from "../../data/mangaData";
 
-import AddToFav from "./AddToFav";
+import AddToFav from "../Favorite/AddToFav";
 import CategoryFilter from "./CategoryFilter";
 import Modal from "./Modal";
 import { log } from "console";
 
-interface Image {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  description: string;
-  category: string;
-  rate?: number;
-}
+import { MangaData } from "@/types";
+
 interface MangaCardProps {
-  filteredData: {
-    id: number;
-    title: string;
-    image: string;
-    price: number;
-    description: string;
-    rate: number;
-    category: string;
-  }[];
+  filteredData: MangaData[];
 }
 
 const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
-  const [images, setImages] = useState<Image[]>([]);
-  const [favArr, setFavArr] = useState<Image[]>([]);
+  const [images, setImages] = useState<MangaData[]>([]);
+  const [favArr, setFavArr] = useState<MangaData[]>([]);
 
-  const [singleData, setSingleData] = useState({});
+  const [singleData, setSingleData] = useState<MangaData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);

@@ -3,20 +3,13 @@ import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md";
 import { IconButton } from "@mui/material/";
 import { useAppContext } from "../providers/AppContext";
 import toast from "react-hot-toast";
+import FavoriteToast from "../Notifications/FavoriteToast";
+
+import { MangaData } from "@/types";
 
 interface AddToFavProps {
-  mangaData: Data;
+  mangaData: MangaData;
   onFavUpdated: () => void;
-}
-
-interface Data {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  description: string;
-  category: string;
-  rate?: number;
 }
 
 const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
@@ -25,7 +18,7 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-    setIsFavored(favs.some((fav: Data) => fav.id === mangaData.id));
+    setIsFavored(favs.some((fav: MangaData) => fav.id === mangaData.id));
   }, [mangaData.id]);
 
   const handleFavClick = () => {
@@ -47,29 +40,19 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
     }
 
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-    const isAlreadyFav = favs.some((fav: Data) => fav.id === mangaData.id);
+    const isAlreadyFav = favs.some((fav: MangaData) => fav.id === mangaData.id);
     if (!isAlreadyFav) {
-      toast(`${mangaData.title}\nhas been added to your favorite.`, {
-        icon: "♥️",
-        style: {
-          borderRadius: "10px",
-          background: "#e297bb",
-          color: "#333",
-        },
-      });
+      toast.custom((t) => (
+        <FavoriteToast mangaData={mangaData} actionType="Add" />
+      ));
       favs.push(mangaData);
       localStorage.setItem("favs", JSON.stringify(favs));
       setIsFavored(true);
     } else {
-      toast(`${mangaData.title}\nhas been removed from your favorite.`, {
-        // icon: "♥️",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-      const newFavs = favs.filter((fav: Data) => fav.id !== mangaData.id);
+      toast.custom((t) => (
+        <FavoriteToast mangaData={mangaData} actionType="Remove" />
+      ));
+      const newFavs = favs.filter((fav: MangaData) => fav.id !== mangaData.id);
       localStorage.setItem("favs", JSON.stringify(newFavs));
       setIsFavored(false);
     }
