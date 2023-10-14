@@ -68,7 +68,7 @@ const Hero = () => {
           objectPosition="center"
           className="z-0"
         />
-        <div className="absolute top-0 left-0 w-full z-10 flex flex-col justify-between">
+        <div className="absolute top-0 left-0 w-full z-1 flex flex-col justify-between">
           <div className="text-xl font-semibold text-center flex justify-center content-center my-1">
             <Image
               src={logo}
