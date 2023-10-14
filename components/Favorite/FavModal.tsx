@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Rating } from "@mui/material";
 import { MangaData } from "@/types";
 import { useAppContext } from "../providers/AppContext";
+import NoFavImage from "../../public/NoFavorites.png";
+import Image from "next/image";
 
 interface ModalProps {
   onRequestClose: () => void;
@@ -10,8 +12,13 @@ interface ModalProps {
 
 const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
-  const favs = useAppContext().favs;
-  const itemsInCart = useAppContext().itemsInCart;
+  const { favs, itemsInCart } = useAppContext();
+
+  const [favData, setFavData] = useState<MangaData[]>([]);
+
+  useEffect(() => {
+    setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
+  }, [favs]);
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -37,9 +44,6 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                   <h3 className="flex text:sm sm:text-xl font-semibold text-gray-900 dark:text-white">
                     Your Favorites ( {favs} )
                   </h3>
-                  {/* <div className="flex items-center justify-center ml-2">
-                    <p className="ml-2 text-gray-900 dark:text-white"></p>
-                  </div> */}
                 </div>
                 <button
                   type="button"
@@ -66,16 +70,34 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               </div>
               {/* <!-- Modal body --> */}
               <div className="m-3 text-gray-900 dark:text-white">
-                {favs >= 0 ? (
-                  <p className="text-center">No Favorites</p>
+                {favs <= 0 ? (
+                  <div className="flex flex-col sm:flex-row justify-center items-center">
+                    <p className="text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
+                      No Favorites!
+                    </p>
+                    <Image
+                      className="h-40 sm:h-40 w-auto"
+                      src={NoFavImage}
+                      alt="hero"
+                      objectFit="cover"
+                      objectPosition="top"
+                    />
+                  </div>
                 ) : (
                   <div className="p-6 flex items-start">
-                    <img
-                      className="hidden sm:block h-full sm:h-[28%] w-fyll sm:w-[32%] sm:object-cover rounded-sm mr-4"
-                      style={{
-                        boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
-                      }}
-                    />
+                    {favData.map((data: MangaData) => (
+                      <>
+                        <p key={data.id}>{data.title}</p>
+                        <img
+                          src={data.image}
+                          className="hidden sm:block h-full sm:h-[28%] w-fyll sm:w-[32%] sm:object-cover rounded-sm mr-4"
+                          style={{
+                            boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
+                          }}
+                        />
+                      </>
+                    ))}
+
                     <p
                       className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 dark:text-gray-400 overflow-y-auto"
                       style={{

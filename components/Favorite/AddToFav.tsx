@@ -14,7 +14,7 @@ interface AddToFavProps {
 
 const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
   const [isFavored, setIsFavored] = useState<boolean>(false);
-  const { isGoogleLoggedIn } = useAppContext();
+  const { isGoogleLoggedIn, updateFavs } = useAppContext();
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favs") || "[]");
@@ -56,6 +56,7 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
       localStorage.setItem("favs", JSON.stringify(newFavs));
       setIsFavored(false);
     }
+    updateFavs();
     onFavUpdated();
   };
 
