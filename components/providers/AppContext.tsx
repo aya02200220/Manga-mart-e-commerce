@@ -5,6 +5,7 @@ interface AppContextType {
   isGoogleLoggedIn: boolean;
   itemsInCart: number;
   favs: number;
+  updateFavs: () => void; // 更新関数を追加
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -18,15 +19,22 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [itemsInCart, setItemsInCart] = useState<number>(0);
   const [favs, setFavs] = useState<number>(0);
 
-  useEffect(() => {
-    // console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
-  }, [isGoogleLoggedIn]);
+  // useEffect(() => {
+  //   // console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
+  // }, [isGoogleLoggedIn]);
+
+  // favsを更新する関数
+  const updateFavs = () => {
+    const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
+    setFavs(favItems.length);
+  };
 
   useEffect(() => {
     // Googleのログイン状態を取得
     const unsubscribe = auth.onAuthStateChanged((user) => {
       // console.log("Logged user:", user);
       setIsGoogleLoggedIn(!!user);
+      updateFavs();
     });
 
     // favsとitemsInCartをローカルストレージから取得
@@ -48,6 +56,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         isGoogleLoggedIn,
         itemsInCart,
         favs,
+        updateFavs,
       }}
     >
       {children}

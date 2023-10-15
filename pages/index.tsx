@@ -1,4 +1,5 @@
-import Header from "../components/Header/Header";
+// import Header from "../components/Header/Header";
+import Header from "../components/Header/Header2";
 import { useState } from "react";
 import mangaData from "@/data/mangaData";
 import Hero from "@/components/Hero/Hero";
