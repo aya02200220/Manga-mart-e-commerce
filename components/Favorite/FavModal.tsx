@@ -83,21 +83,21 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                     />
                   </div>
                 ) : (
-                  <div className="p-6 flex gap-8 flex-wrap pl-14">
+                  <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
                     {favData.map((data: MangaData) => (
                       <>
-                        <div className="flex flex-col w-[170px]">
+                        <div className="flex flex-col w-[100px] sm:w-[170px] border border-black">
                           <img
                             src={data.image}
-                            className="hidden sm:block h-full sm:h-[200px] w-full sm:w-[170px] sm:object-cover rounded-sm"
+                            className="block h-[150px] sm:h-[200px] w-[100px] sm:w-[170px] sm:object-cover rounded-sm"
                           />
                           <p
-                            className="text-sm flex justify-center items-start break-normal h-[32px] leading-4 mt-1"
+                            className="text-[13px] sm:text-sm flex justify-center items-start break-normal h-[28px] sm:h-[32px] leading-3 sm:leading-4 mt-1"
                             key={data.id}
                           >
                             {data.title}
                           </p>
-                          <p className="text-md  flex justify-center items-start break-normal leading-4">
+                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4">
                             ${data.price.toFixed(2)}
                           </p>
                         </div>
