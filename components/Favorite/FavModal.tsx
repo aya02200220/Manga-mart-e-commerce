@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Dialog, DialogTitle, ListItemText, Rating } from "@mui/material";
 import { MangaData } from "@/types";
 import { useAppContext } from "../providers/AppContext";
 import NoFavImage from "../../public/NoFavorites.png";
 import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
+
+import { DialogModal } from "./DialogModal";
 
 interface ModalProps {
   onRequestClose: () => void;
@@ -50,12 +51,9 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
             className="relative w-[92%] md:w-[80%] "
           >
             {/* <!-- Modal content --> */}
-            <div
-              className="relative bg-white rounded-lg shadow
-              top-8 h-[85vh]"
-            >
+            <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden top-8">
               {/* <!-- Modal header --> */}
-              <div className="flex items-start justify-between p-2 sm:p-4 border-b rounded-t ">
+              <div className="flex flex-shrink-0  items-start justify-between p-2 sm:p-2 ml-2 border-b rounded-t ">
                 <div className="flex items-center gap-2 ">
                   <h3 className="flex text:sm sm:text-xl font-semibold text-[#333] ">
                     My Favorites ( {favs} )
@@ -70,7 +68,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-3 text-[#333] h-[63vh] overflow-y-auto ">
+              <div className="p-3 text-[#333] flex-grow overflow-auto h-[80vh]">
                 {favs <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
                     <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
@@ -85,7 +83,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                     />
                   </div>
                 ) : (
-                  <div className="p-6 flex gap-8 flex-wrap">
+                  <div className="p-6 flex gap-8 flex-wrap pl-14">
                     {favData.map((data: MangaData) => (
                       <>
                         <div className="flex flex-col w-[170px]">
@@ -105,66 +103,26 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                         </div>
                       </>
                     ))}
-
-                    <p
-                      className="text-sm sm:text-base leading-[17px] sm:leading-relaxed text-gray-500 overflow-y-auto"
-                      style={{
-                        maxHeight: "calc(55vh)",
-                        whiteSpace: "pre-line",
-                      }}
-                    ></p>
                   </div>
                 )}
               </div>
               {/* <!-- Modal footer --> */}
-              <div className="flex justify-end items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
+              <div className="flex flex-shrink-0 justify-end items-center pr-4 space-x-2 border-t border-gray-200 h-14">
                 <button
                   onClick={handleDeleteClick}
                   type="button"
                   className="text-[#dedede] bg-[#c14242] hover:bg-[#9f3737] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-1.5 hover:text-[#fff] focus:z-10"
                 >
-                  Delete All
+                  Remove All
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
-      <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
-        <FavDialog handleCloseDialog={handleCloseDialog} />
-      </Dialog>
+      <DialogModal open={isDialogOpen} onClose={handleCloseDialog} />
     </>
   );
 };
 
 export default FavModal;
-
-export const FavDialog = ({ handleCloseDialog }) => {
-  return (
-    <div>
-      <DialogTitle sx={{ textAlign: "center" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <NewReleasesIcon sx={{ fontSize: "40px", color: "#a31919" }} /> */}
-          <div style={{ fontSize: "20px", lineHeight: "21px", marginLeft: 1 }}>
-            Are you sure you want to delete this post?
-          </div>
-        </div>
-      </DialogTitle>
-      <div className="flex">
-        <button onClick={handleCloseDialog} className="flex-grow bg-[#9b3636]">
-          <ListItemText primary={"NO"} />
-        </button>
-
-        <button onClick={handleCloseDialog} className="flex-grow">
-          <ListItemText primary={"YES"} />
-        </button>
-      </div>
-    </div>
-  );
-};
