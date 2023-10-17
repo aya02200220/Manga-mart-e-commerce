@@ -86,13 +86,13 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                   <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
                     {favData.map((data: MangaData) => (
                       <>
-                        <div className="flex flex-col w-[100px] sm:w-[170px] border border-black">
+                        <div className="flex flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg">
                           <img
                             src={data.image}
                             className="block h-[150px] sm:h-[200px] w-[100px] sm:w-[170px] sm:object-cover rounded-sm"
                           />
                           <p
-                            className="text-[13px] sm:text-sm flex justify-center items-start break-normal h-[28px] sm:h-[32px] leading-3 sm:leading-4 mt-1"
+                            className="text-[13px] sm:text-sm flex justify-center items-start break-normal h-[28px] sm:h-[32px] leading-3 sm:leading-4 mt-1 mx-1.5"
                             key={data.id}
                           >
                             {data.title}
