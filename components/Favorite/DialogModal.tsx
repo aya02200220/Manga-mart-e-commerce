@@ -17,6 +17,10 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
   const handleClick = () => {
     onClose();
   };
+  const handleRemoveAll = () => {
+    localStorage.removeItem("favs");
+    onClose();
+  };
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -34,8 +38,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
         <div className="fixed top-100">
           <div
             data-aos="fade-down"
-            open={open}
-            handler={onClose}
+            data-aos-duration="900"
             className="bg-white rounded-md max-w-[390px] top-50 "
             onClick={handleContentClick}
           >
@@ -58,7 +61,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
               <Button
                 className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#d36b6b] px-2 py-1"
                 variant="text"
-                onClick={handleClick}
+                onClick={handleRemoveAll}
               >
                 Remove All
               </Button>
