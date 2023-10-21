@@ -15,13 +15,16 @@ interface DialogModalProps {
 }
 
 export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
-  const { removeAllFavs } = useAppContext();
+  const { removeAllFavs, updateFavs } = useAppContext();
 
   const handleClick = () => {
     onClose();
   };
   const handleRemoveAll = () => {
+    console.log("remove all ");
+
     removeAllFavs();
+    updateFavs();
     onClose();
   };
 

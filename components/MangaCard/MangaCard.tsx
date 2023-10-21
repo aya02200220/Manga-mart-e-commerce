@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import { log } from "console";
 
 import { MangaData } from "@/types";
+import { useAppContext } from "../providers/AppContext";
 
 interface MangaCardProps {
   filteredData: MangaData[];
@@ -23,6 +24,8 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);
+
+  const { favs, updateFavs } = useAppContext();
 
   useEffect(() => {
     setCategory("All");
@@ -71,6 +74,15 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
     setFavArr(favs);
   }, []);
 
+  useEffect(() => {
+    console.log("MangaCard fav update");
+
+    const favsFromLocalStorage = JSON.parse(
+      localStorage.getItem("favs") || "[]"
+    );
+    setFavArr(favsFromLocalStorage);
+  }, [favs]);
+
   const categoryColors: { [key: string]: string } = {
     shonen: "#01a4ffc7",
     shoujo: "#e891a0b5",
@@ -101,6 +113,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                       localStorage.getItem("favs") || "[]"
                     );
                     setFavArr(updatedFavs);
+                    updateFavs();
                   }}
                 />
                 <img
@@ -157,7 +170,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                         <span className="text-sm sm:text-lg">Add to</span>
                         <FaCartArrowDown size={"20px"} className="ml-1" />{" "}
                       </>
-                      )
                     </span>
                   </button>
                 </div>

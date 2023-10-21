@@ -16,6 +16,8 @@ interface ModalProps {
 const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [favData, setFavData] = useState<MangaData[]>([]);
+  const { favs, updateFavs } = useAppContext();
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
@@ -26,10 +28,6 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
   };
-
-  const { favs, itemsInCart } = useAppContext();
-
-  const [favData, setFavData] = useState<MangaData[]>([]);
 
   useEffect(() => {
     setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
@@ -49,7 +47,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         >
           <div
             onClick={handleContentClick}
-            className="relative w-[92%] md:w-[80%] "
+            className="relative w-[92%] md:w-[80%] h-[380px]"
           >
             {/* <!-- Modal content --> */}
             <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden top-8">
