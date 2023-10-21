@@ -16,6 +16,7 @@ interface ModalProps {
 const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
     setIsDialogOpen(true);
@@ -68,7 +69,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-3 text-[#333] flex-grow overflow-auto h-[80vh]">
+              <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[80vh] min-h-[30vh]">
                 {favs <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
                     <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">

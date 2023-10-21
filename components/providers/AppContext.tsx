@@ -5,7 +5,9 @@ interface AppContextType {
   isGoogleLoggedIn: boolean;
   itemsInCart: number;
   favs: number;
-  updateFavs: () => void; // 更新関数を追加
+  updateFavs: () => void;
+  removeAllFavs: () => void;
+  setFavChanged: (changed: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -22,12 +24,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   // useEffect(() => {
   //   // console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
   // }, [isGoogleLoggedIn]);
-
-  // favsを更新する関数
-  const updateFavs = () => {
-    const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
-    setFavs(favItems.length);
-  };
 
   useEffect(() => {
     // Googleのログイン状態を取得
@@ -50,6 +46,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
   }, []);
 
+  // favsを更新する関数
+  const updateFavs = () => {
+    const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
+    setFavs(favItems.length);
+  };
+  // 全てのお気に入りを削除する関数
+  const removeAllFavs = () => {
+    localStorage.removeItem("favs"); // ローカルストレージからお気に入りを削除
+    setFavs(0); // お気に入りの数を0にリセット
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -57,6 +64,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         itemsInCart,
         favs,
         updateFavs,
+        removeAllFavs,
       }}
     >
       {children}

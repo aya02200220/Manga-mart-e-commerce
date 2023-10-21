@@ -7,6 +7,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { CSSTransition } from "react-transition-group";
+import { useAppContext } from "../providers/AppContext";
 
 interface DialogModalProps {
   open: boolean;
@@ -14,11 +15,13 @@ interface DialogModalProps {
 }
 
 export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
+  const { removeAllFavs } = useAppContext();
+
   const handleClick = () => {
     onClose();
   };
   const handleRemoveAll = () => {
-    localStorage.removeItem("favs");
+    removeAllFavs();
     onClose();
   };
 
