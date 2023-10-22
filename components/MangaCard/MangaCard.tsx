@@ -64,7 +64,9 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
     }
 
     // レート順にデータをソート
-    const sortedData = [...targetData].sort((a, b) => b.rate - a.rate);
+    const sortedData = [...targetData].sort(
+      (a, b) => (b.rate ?? 0) - (a.rate ?? 0)
+    );
     setData(sortedData);
   };
 
