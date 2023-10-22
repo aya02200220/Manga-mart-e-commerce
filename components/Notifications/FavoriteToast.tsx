@@ -14,7 +14,7 @@ const FavoriteToast: React.FC<Props> = ({ mangaData, actionType }) => {
   return (
     <div data-aos="fade-right" data-aos-duration="400">
       <div
-        className={`max-w-md w-[350px] ${bgColor} shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        className={`max-w-md w-[240px] ${bgColor} shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
       >
         <div className="flex-1  py-6 px-2">
           <div className="flex items-start">
@@ -25,11 +25,11 @@ const FavoriteToast: React.FC<Props> = ({ mangaData, actionType }) => {
                 alt={mangaData.title}
               />
             </div>
-            <div className="ml-3 flex-1">
-              <p className={`text-sm font-medium ${textColor}`}>
+            <div className="ml-3 flex-1 leading-4 mr-2">
+              <p className={`text-med font-bold ${textColor}`}>
                 {mangaData.title}
               </p>
-              <p className={`mt-1 text-sm ${textColor}`}>
+              <p className={`mt-2 text-sm leading-4 ${textColor}`}>
                 {actionType === "Add"
                   ? "has been added to your favorite."
                   : "has been removed from your favorite."}
