@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
         >
           <div
             onClick={handleContentClick}
-            className="relative w-[80%] md:w-full sm:max-w-2xl sm:max-h-full"
+            className="relative w-[80%] md:w-full sm:max-w-2xl h-[200px] sm:max-h-full"
           >
             {/* <!-- Modal content --> */}
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8">

@@ -16,6 +16,9 @@ interface ModalProps {
 const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [favData, setFavData] = useState<MangaData[]>([]);
+  const { favs, updateFavs } = useAppContext();
+
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
     setIsDialogOpen(true);
@@ -25,10 +28,6 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
   };
-
-  const { favs, itemsInCart } = useAppContext();
-
-  const [favData, setFavData] = useState<MangaData[]>([]);
 
   useEffect(() => {
     setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
@@ -48,7 +47,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         >
           <div
             onClick={handleContentClick}
-            className="relative w-[92%] md:w-[80%] "
+            className="relative w-[92%] md:w-[80%] h-[380px]"
           >
             {/* <!-- Modal content --> */}
             <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden top-8">
@@ -68,7 +67,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-3 text-[#333] flex-grow overflow-auto h-[80vh]">
+              <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[80vh] min-h-[30vh]">
                 {favs <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
                     <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
