@@ -10,7 +10,6 @@ import { DialogModal } from "./DialogModal";
 interface ModalProps {
   onRequestClose: () => void;
   isOpen: boolean;
-  handleCloseDialog: () => void;
 }
 
 const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
@@ -119,7 +118,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
           </div>
         </div>
       )}
-      <DialogModal open={isDialogOpen} onClose={handleCloseDialog} />
+      <DialogModal open={isDialogOpen} onClose={onRequestClose} />
     </>
   );
 };
