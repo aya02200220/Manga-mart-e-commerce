@@ -105,7 +105,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               key={image.id}
               data-aos="fade-up"
               data-aos-duration="700"
-              className="flex w-[220px] sm:w-[300px] mb-2"
+              className="flex w-[220px] sm:w-[300px] h-[160px] sm:h-[210px] mb-2"
             >
               <div className="w-[100px] sm:w-[130px] flex-shrink-0 relative">
                 <AddToFav

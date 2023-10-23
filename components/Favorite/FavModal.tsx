@@ -4,8 +4,10 @@ import { useAppContext } from "../providers/AppContext";
 import NoFavImage from "../../public/NoFavorites.png";
 import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
+import FavoriteToast from "../Notifications/FavoriteToast";
 
 import { DialogModal } from "./DialogModal";
+import toast from "react-hot-toast";
 
 interface ModalProps {
   onRequestClose: () => void;
@@ -16,7 +18,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [favData, setFavData] = useState<MangaData[]>([]);
-  const { favs, updateFavs } = useAppContext();
+  const { favCounts, updateFavs } = useAppContext();
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
@@ -32,11 +34,20 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
 
   useEffect(() => {
     setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
-  }, [favs]);
+  }, [favCounts]);
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
+
+  const handleRemoveFav = (data: MangaData) => {
+    toast.custom((t) => <FavoriteToast mangaData={data} actionType="Remove" />);
+    const newFavs = favData.filter((fav: MangaData) => fav.id !== data.id);
+    localStorage.setItem("favs", JSON.stringify(newFavs));
+    updateFavs();
+    // onFavUpdated();
+  };
+
   return (
     <>
       {/* <!-- Main modal --> */}
@@ -56,7 +67,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               <div className="flex flex-shrink-0  items-start justify-between p-2 sm:p-2 ml-2 border-b rounded-t ">
                 <div className="flex items-center gap-2 ">
                   <h3 className="flex text:sm sm:text-xl font-semibold text-[#333] ">
-                    My Favorites ( {favs} )
+                    My Favorites ( {favCounts} )
                   </h3>
                 </div>
                 <button
@@ -69,7 +80,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               </div>
               {/* <!-- Modal body --> */}
               <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[70vh] min-h-[30vh]">
-                {favs <= 0 ? (
+                {favCounts <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
                     <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
                       No Favorites!
@@ -97,7 +108,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                           >
                             {data.title}
                           </p>
-                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4">
+                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
                             ${data.price.toFixed(2)}
                           </p>
                         </div>
@@ -108,7 +119,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               </div>
               {/* <!-- Modal footer --> */}
               <div className="flex flex-shrink-0 justify-end items-center pr-4 space-x-2 border-t border-gray-200 h-14">
-                {favs > 0 && (
+                {favCounts > 0 && (
                   <button
                     onClick={handleDeleteClick}
                     type="button"

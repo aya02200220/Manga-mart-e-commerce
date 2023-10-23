@@ -4,7 +4,7 @@ import { auth } from "../firebase";
 interface AppContextType {
   isGoogleLoggedIn: boolean;
   itemsInCart: number;
-  favs: number;
+  favCounts: number;
   updateFavs: () => void;
   removeAllFavs: () => void;
 }
@@ -18,7 +18,7 @@ interface AppProviderProps {
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [isGoogleLoggedIn, setIsGoogleLoggedIn] = useState(false);
   const [itemsInCart, setItemsInCart] = useState<number>(0);
-  const [favs, setFavs] = useState<number>(0);
+  const [favCounts, setFavCounts] = useState<number>(0);
 
   // useEffect(() => {
   //   // console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
@@ -34,7 +34,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     // favsとitemsInCartをローカルストレージから取得
     const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
-    setFavs(favItems.length);
+    setFavCounts(favItems.length);
 
     const cartItems = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
     setItemsInCart(cartItems.length);
@@ -45,17 +45,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
   }, []);
 
-  // favsを更新する関数
+  // favCountsを更新する関数
   const updateFavs = () => {
-    console.log("updateFavs ");
+    console.log("updateFavCounts ");
 
     const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
-    setFavs(favItems.length);
+    setFavCounts(favItems.length);
   };
   // 全てのお気に入りを削除する関数
   const removeAllFavs = () => {
     localStorage.removeItem("favs"); // ローカルストレージからお気に入りを削除
-    setFavs(0); // お気に入りの数を0にリセット
+    setFavCounts(0); // お気に入りの数を0にリセット
   };
 
   return (
@@ -63,7 +63,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       value={{
         isGoogleLoggedIn,
         itemsInCart,
-        favs,
+        favCounts,
         updateFavs,
         removeAllFavs,
       }}

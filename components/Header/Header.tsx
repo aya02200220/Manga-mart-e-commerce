@@ -52,9 +52,7 @@ function Header(props: HeaderProps) {
   const [searchCategory, setSearchCategory] = useState("Title");
   const [isOpen, setIsOpen] = useState(false);
 
-  const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
-  const favs = useAppContext().favs;
-  const itemsInCart = useAppContext().itemsInCart;
+  const {isGoogleLoggedIn,favCounts,itemsInCart} = useAppContext();
 
   // debounced検索処理
   const debouncedSearch = debounce((term: string, category: string) => {
