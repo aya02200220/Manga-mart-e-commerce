@@ -20,6 +20,8 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
+    console.log("Remove all dialog");
+
     setIsDialogOpen(true);
   };
 
@@ -46,10 +48,10 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
         >
           <div
             onClick={handleContentClick}
-            className="relative w-[92%] md:w-[80%] h-[380px]"
+            className="relative w-[92%] md:w-[80%] h-[300px] top-10"
           >
             {/* <!-- Modal content --> */}
-            <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden top-8">
+            <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden ">
               {/* <!-- Modal header --> */}
               <div className="flex flex-shrink-0  items-start justify-between p-2 sm:p-2 ml-2 border-b rounded-t ">
                 <div className="flex items-center gap-2 ">
@@ -66,7 +68,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                 </button>
               </div>
               {/* <!-- Modal body --> */}
-              <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[80vh] min-h-[30vh]">
+              <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[70vh] min-h-[30vh]">
                 {favs <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
                     <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
@@ -106,19 +108,21 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
               </div>
               {/* <!-- Modal footer --> */}
               <div className="flex flex-shrink-0 justify-end items-center pr-4 space-x-2 border-t border-gray-200 h-14">
-                <button
-                  onClick={handleDeleteClick}
-                  type="button"
-                  className="text-[#dedede] bg-[#c14242] hover:bg-[#9f3737] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-1.5 hover:text-[#fff] focus:z-10"
-                >
-                  Remove All
-                </button>
+                {favs > 0 && (
+                  <button
+                    onClick={handleDeleteClick}
+                    type="button"
+                    className="text-[#dedede] bg-[#c14242] hover:bg-[#9f3737] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-1.5 hover:text-[#fff] focus:z-10"
+                  >
+                    Remove All
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
       )}
-      <DialogModal open={isDialogOpen} onClose={onRequestClose} />
+      <DialogModal open={isDialogOpen} onClose={handleCloseDialog} />
     </>
   );
 };
