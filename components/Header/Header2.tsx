@@ -52,7 +52,7 @@ function Header(props: HeaderProps) {
   const [searchCategory, setSearchCategory] = useState("Title");
   const [isOpen, setIsOpen] = useState(false);
 
-  const { isGoogleLoggedIn, favs, itemsInCart } = useAppContext();
+  const { isGoogleLoggedIn, favCounts, itemsInCart } = useAppContext();
 
   // debounced検索処理
   const debouncedSearch = debounce((term: string, category: string) => {
@@ -213,7 +213,7 @@ function Header(props: HeaderProps) {
               </Popover>
 
               <IconButton className="ml-2" onClick={() => handleModalOpen()}>
-                <Badge badgeContent={favs} color="secondary">
+                <Badge badgeContent={favCounts} color="secondary">
                   <GrFavorite size={20} />
                 </Badge>
               </IconButton>
