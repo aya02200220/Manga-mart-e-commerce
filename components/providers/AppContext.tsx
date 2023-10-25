@@ -47,19 +47,23 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
   }, []);
 
-  // favsを更新する関数
+  // favCountsを更新する関数
   const updateFavs = () => {
-    console.log("updateFavs ");
+    console.log("updateFavCounts ");
 
     const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
     setFavCounts(favItems.length);
+
     console.log("favItems.length:", favItems.length);
+
   };
   // 全てのお気に入りを削除する関数
   const removeAllFavs = () => {
     localStorage.removeItem("favs"); // ローカルストレージからお気に入りを削除
     setFavCounts(0); // お気に入りの数を0にリセット
+
     updateFavs();
+
   };
 
   return (

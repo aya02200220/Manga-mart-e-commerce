@@ -40,6 +40,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     e.stopPropagation();
   };
 
+
   const handleRemoveFav = (dataToRemove: MangaData) => {
     toast.custom((t) => (
       <FavoriteToast mangaData={dataToRemove} actionType="Remove" />
@@ -55,6 +56,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     // ステートとお気に入りカウントを更新
     setFavData(updatedFavData);
     updateFavs();
+
   };
 
   return (
@@ -125,7 +127,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                           >
                             {data.title}
                           </p>
-                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4">
+                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
                             ${data.price.toFixed(2)}
                           </p>
                         </div>
