@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
+import { MangaData } from "@/types";
 
 interface AppContextType {
   isGoogleLoggedIn: boolean;
   itemsInCart: number;
   favCounts: number;
-  updateFavs: () => void;
+  updateFavs: (mangaData: MangaData[]) => void;
   removeAllFavs: () => void;
 }
 
@@ -29,7 +30,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       // console.log("Logged user:", user);
       setIsGoogleLoggedIn(!!user);
-      updateFavs();
+      const favs = JSON.parse(localStorage.getItem("favs") || "[]");
+      updateFavs(favs);
     });
 
     // favsとitemsInCartをローカルストレージから取得
@@ -46,7 +48,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   }, []);
 
   // favsを更新する関数
-  const updateFavs = () => {
+  const updateFavs = (mangaData: MangaData[]) => {
     console.log("updateFavs ");
 
     const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
