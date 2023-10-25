@@ -25,7 +25,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);
 
-  const { favs, updateFavs } = useAppContext();
+  const { favCounts, updateFavs } = useAppContext();
 
   useEffect(() => {
     setCategory("All");
@@ -83,7 +83,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
       localStorage.getItem("favs") || "[]"
     );
     setFavArr(favsFromLocalStorage);
-  }, [favs]);
+  }, [favCounts]);
 
   const categoryColors: { [key: string]: string } = {
     shonen: "#01a4ffc7",

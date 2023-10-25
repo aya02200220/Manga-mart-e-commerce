@@ -56,8 +56,9 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
       localStorage.setItem("favs", JSON.stringify(newFavs));
       setIsFavored(false);
     }
-    updateFavs();
+
     onFavUpdated();
+    updateFavs();
   };
 
   return (

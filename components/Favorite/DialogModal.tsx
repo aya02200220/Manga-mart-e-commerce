@@ -21,7 +21,6 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
 
   const handleRemoveAll = () => {
     removeAllFavs();
-    updateFavs();
     onClose();
   };
 

@@ -40,12 +40,23 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     e.stopPropagation();
   };
 
-  const handleRemoveFav = (data: MangaData) => {
-    toast.custom((t) => <FavoriteToast mangaData={data} actionType="Remove" />);
-    const newFavs = favData.filter((fav: MangaData) => fav.id !== data.id);
-    localStorage.setItem("favs", JSON.stringify(newFavs));
+
+  const handleRemoveFav = (dataToRemove: MangaData) => {
+    toast.custom((t) => (
+      <FavoriteToast mangaData={dataToRemove} actionType="Remove" />
+    ));
+    // 選択されたアイテムを削除
+    const updatedFavData = favData.filter(
+      (item) => item.id !== dataToRemove.id
+    );
+
+    // Local storageを更新
+    localStorage.setItem("favs", JSON.stringify(updatedFavData));
+
+    // ステートとお気に入りカウントを更新
+    setFavData(updatedFavData);
     updateFavs();
-    // onFavUpdated();
+
   };
 
   return (
@@ -97,7 +108,15 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                   <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
                     {favData.map((data: MangaData) => (
                       <>
-                        <div className="flex flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg">
+                        <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg">
+                          {/* 追加：削除ボタン */}
+                          <button
+                            onClick={() => handleRemoveFav(data)}
+                            className="absolute top-0 right-0 h-6 w-6 rounded-full bg-red-600 text-white flex items-center justify-center hover:bg-red-700"
+                            aria-label="Remove item"
+                          >
+                            × {/* ここには他のアイコンも使用できます */}
+                          </button>
                           <img
                             src={data.image}
                             className="block h-[150px] sm:h-[200px] w-[100px] sm:w-[170px] sm:object-cover rounded-sm"
