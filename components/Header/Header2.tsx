@@ -103,6 +103,7 @@ function Header(props: HeaderProps) {
   }, []);
 
   const handleLogin = () => {
+    console.log("Login clicked");
     signInWithRedirect(auth, provider).catch((error) => {
       console.error("Login error:", error.message);
     });
