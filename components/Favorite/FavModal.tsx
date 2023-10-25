@@ -54,7 +54,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
 
     // ステートとお気に入りカウントを更新
     setFavData(updatedFavData);
-    updateFavs(updatedFavData);
+    updateFavs();
   };
 
   return (

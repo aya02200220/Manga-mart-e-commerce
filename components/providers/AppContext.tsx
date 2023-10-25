@@ -6,7 +6,7 @@ interface AppContextType {
   isGoogleLoggedIn: boolean;
   itemsInCart: number;
   favCounts: number;
-  updateFavs: (mangaData: MangaData[]) => void;
+  updateFavs: () => void;
   removeAllFavs: () => void;
 }
 
@@ -31,7 +31,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       // console.log("Logged user:", user);
       setIsGoogleLoggedIn(!!user);
       const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-      updateFavs(favs);
+      updateFavs();
     });
 
     // favsとitemsInCartをローカルストレージから取得
@@ -48,7 +48,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   }, []);
 
   // favsを更新する関数
-  const updateFavs = (mangaData: MangaData[]) => {
+  const updateFavs = () => {
     console.log("updateFavs ");
 
     const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
@@ -59,6 +59,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const removeAllFavs = () => {
     localStorage.removeItem("favs"); // ローカルストレージからお気に入りを削除
     setFavCounts(0); // お気に入りの数を0にリセット
+    updateFavs();
   };
 
   return (
