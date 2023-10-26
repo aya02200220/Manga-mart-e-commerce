@@ -18,7 +18,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [favData, setFavData] = useState<MangaData[]>([]);
-  const { favCounts, updateFavs } = useAppContext();
+  const { favItems, favCounts, updateFavs } = useAppContext();
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
@@ -33,13 +33,13 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   };
 
   useEffect(() => {
-    setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
+    // setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
+    setFavData(favItems);
   }, [favCounts]);
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
-
 
   const handleRemoveFav = (dataToRemove: MangaData) => {
     toast.custom((t) => (
@@ -56,7 +56,6 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     // ステートとお気に入りカウントを更新
     setFavData(updatedFavData);
     updateFavs();
-
   };
 
   return (
