@@ -18,7 +18,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [favData, setFavData] = useState<MangaData[]>([]);
-  const { favCounts, updateFavs } = useAppContext();
+  const { favItems, favCounts, updateFavs } = useAppContext();
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
@@ -33,7 +33,8 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   };
 
   useEffect(() => {
-    setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
+    // setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
+    setFavData(favItems);
   }, [favCounts]);
 
   const handleContentClick = (e: React.MouseEvent) => {
@@ -125,7 +126,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
                           >
                             {data.title}
                           </p>
-                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4">
+                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
                             ${data.price.toFixed(2)}
                           </p>
                         </div>

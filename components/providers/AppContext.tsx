@@ -6,6 +6,7 @@ interface AppContextType {
   isGoogleLoggedIn: boolean;
   itemsInCart: number;
   favCounts: number;
+  favItems: MangaData[];
   updateFavs: () => void;
   removeAllFavs: () => void;
 }
@@ -20,6 +21,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [isGoogleLoggedIn, setIsGoogleLoggedIn] = useState(false);
   const [itemsInCart, setItemsInCart] = useState<number>(0);
   const [favCounts, setFavCounts] = useState<number>(0);
+  const [favItems, setFavItems] = useState<MangaData[]>([]);
 
   // useEffect(() => {
   //   // console.log("context isGoogleLoggedIn:", isGoogleLoggedIn);
@@ -30,13 +32,13 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       // console.log("Logged user:", user);
       setIsGoogleLoggedIn(!!user);
-      const favs = JSON.parse(localStorage.getItem("favs") || "[]");
       updateFavs();
     });
 
     // favsとitemsInCartをローカルストレージから取得
-    const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
-    setFavCounts(favItems.length);
+    const favs = JSON.parse(localStorage.getItem("favs") || "[]");
+    setFavItems(favs);
+    setFavCounts(favs.length);
 
     const cartItems = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
     setItemsInCart(cartItems.length);
@@ -47,14 +49,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
   }, []);
 
-  // favsを更新する関数
+  // favoritesを更新する関数
   const updateFavs = () => {
-    console.log("updateFavs ");
-
-    const favItems = JSON.parse(localStorage.getItem("favs") || "[]");
-    setFavCounts(favItems.length);
-    console.log("favItems.length:", favItems.length);
+    const favs = JSON.parse(localStorage.getItem("favs") || "[]");
+    setFavItems(favs);
+    setFavCounts(favs.length);
   };
+
+  // console.log("Context favs", favs);
+  console.log("favItems:", favItems);
+  console.log("updated FavItems and Counts ");
+
   // 全てのお気に入りを削除する関数
   const removeAllFavs = () => {
     localStorage.removeItem("favs"); // ローカルストレージからお気に入りを削除
@@ -70,6 +75,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         favCounts,
         updateFavs,
         removeAllFavs,
+        favItems,
       }}
     >
       {children}

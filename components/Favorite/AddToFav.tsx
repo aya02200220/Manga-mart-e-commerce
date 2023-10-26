@@ -14,12 +14,13 @@ interface AddToFavProps {
 
 const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
   const [isFavored, setIsFavored] = useState<boolean>(false);
-  const { isGoogleLoggedIn, updateFavs } = useAppContext();
+  const { isGoogleLoggedIn, updateFavs, favItems } = useAppContext();
 
   useEffect(() => {
-    const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-    setIsFavored(favs.some((fav: MangaData) => fav.id === mangaData.id));
-  }, [mangaData.id]);
+    setIsFavored(favItems.some((fav: MangaData) => fav.id === mangaData.id));
+  }, [mangaData.id, favItems]);
+
+  console.log("Add to Fav favItems:", favItems);
 
   const handleFavClick = () => {
     if (!isGoogleLoggedIn) {
@@ -39,20 +40,23 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
       return;
     }
 
-    const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-    const isAlreadyFav = favs.some((fav: MangaData) => fav.id === mangaData.id);
+    const isAlreadyFav = favItems.some(
+      (fav: MangaData) => fav.id === mangaData.id
+    );
     if (!isAlreadyFav) {
       toast.custom((t) => (
         <FavoriteToast mangaData={mangaData} actionType="Add" />
       ));
-      favs.push(mangaData);
-      localStorage.setItem("favs", JSON.stringify(favs));
+      favItems.push(mangaData);
+      localStorage.setItem("favs", JSON.stringify(favItems));
       setIsFavored(true);
     } else {
       toast.custom((t) => (
         <FavoriteToast mangaData={mangaData} actionType="Remove" />
       ));
-      const newFavs = favs.filter((fav: MangaData) => fav.id !== mangaData.id);
+      const newFavs = favItems.filter(
+        (fav: MangaData) => fav.id !== mangaData.id
+      );
       localStorage.setItem("favs", JSON.stringify(newFavs));
       setIsFavored(false);
     }
