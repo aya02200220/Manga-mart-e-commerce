@@ -20,7 +20,7 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
     setIsFavored(favItems.some((fav: MangaData) => fav.id === mangaData.id));
   }, [mangaData.id, favItems]);
 
-  console.log("Add to Fav favItems:", favItems);
+  // console.log("Add to Fav favItems:", favItems);
 
   const handleFavClick = () => {
     if (!isGoogleLoggedIn) {

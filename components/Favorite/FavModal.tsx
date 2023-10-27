@@ -22,8 +22,6 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
-    console.log("Remove all dialog");
-
     setIsDialogOpen(true);
   };
 
@@ -33,7 +31,6 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   };
 
   useEffect(() => {
-    // setFavData(JSON.parse(localStorage.getItem("favs") || "[]"));
     setFavData(favItems);
   }, [favCounts]);
 
@@ -49,10 +46,8 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     const updatedFavData = favData.filter(
       (item) => item.id !== dataToRemove.id
     );
-
     // Local storageを更新
     localStorage.setItem("favs", JSON.stringify(updatedFavData));
-
     // ステートとお気に入りカウントを更新
     setFavData(updatedFavData);
     updateFavs();

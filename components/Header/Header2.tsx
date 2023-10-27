@@ -28,6 +28,7 @@ import Image from "next/image";
 import Logo from "../../public/Manga.png";
 import { useAppContext } from "../providers/AppContext";
 import FavModal from "../Favorite/FavModal";
+import Link from "next/link";
 
 interface HeaderProps {
   onSearch?: (term: string, category: string) => void;
@@ -119,12 +120,14 @@ function Header(props: HeaderProps) {
   return (
     <nav className="w-full bg-[#ffffffaf] h-[70px] flex items-center  justify-between px-2 md:px-20 fixed top-0 z-10">
       <div className="flex flex-row items-center ">
-        <Image
-          className="hidden sm:block"
-          src={Logo}
-          height={50}
-          alt="Manga-mart Logo"
-        />
+        <Link href="/">
+          <Image
+            className="hidden sm:block"
+            src={Logo}
+            height={50}
+            alt="Manga-mart Logo"
+          />
+        </Link>
       </div>
 
       <div className="flex justify-between sm:justify-end items-center w-full">
@@ -218,7 +221,7 @@ function Header(props: HeaderProps) {
                   <GrFavorite size={20} />
                 </Badge>
               </IconButton>
-              <IconButton className="ml-2">
+              <IconButton href={"/cart"} className="ml-2">
                 <Badge badgeContent={itemsInCart} color="primary">
                   <GrCart size={20} />
                 </Badge>

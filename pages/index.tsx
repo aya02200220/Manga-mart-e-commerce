@@ -4,6 +4,8 @@ import { useState } from "react";
 import mangaData from "@/data/mangaData";
 import Hero from "@/components/Hero/Hero";
 import MangaCard from "@/components/MangaCard/MangaCard";
+import Cart from "./cart";
+import Link from "next/link";
 
 const MainRoot = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,6 +40,9 @@ const MainRoot = () => {
             }
           })}
         />
+      </div>
+      <div id="cart">
+        <Cart />
       </div>
     </div>
   );
