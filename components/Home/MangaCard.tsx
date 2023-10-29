@@ -72,25 +72,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
 
   useEffect(() => {
     setMangaData(filteredData);
-    // const favs = JSON.parse(localStorage.getItem("favs") || "[]");
-
-    // setFavArr(favItems);
   }, []);
-
-  // useEffect(() => {
-  //   console.log("MangaCard fav update");
-
-  //   // const favsFromLocalStorage = JSON.parse(
-  //   //   localStorage.getItem("favs") || "[]"
-  //   // );
-  //   setFavArr(favItems);
-  // }, [favItems]);
-
-  // useEffect(() => {
-  //   console.log("Manga card favArr", favArr);
-  // }, [favItems]);
-
-  console.log("Mnaga card favItems:", favItems);
 
   const categoryColors: { [key: string]: string } = {
     shonen: "#01a4ffc7",

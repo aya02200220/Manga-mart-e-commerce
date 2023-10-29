@@ -14,7 +14,7 @@ interface ModalProps {
   isOpen: boolean;
 }
 
-const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
+const CartModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [favData, setFavData] = useState<MangaData[]>([]);
@@ -151,4 +151,4 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   );
 };
 
-export default FavModal;
+export default CartModal;

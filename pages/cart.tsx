@@ -1,7 +1,13 @@
 import React from "react";
+import dynamic from "next/dynamic";
+import Cart from "@/components/Cart/CartModal";
 
-const cart = () => {
-  return <div>cart</div>;
+const index = () => {
+  return (
+    <>
+      <Cart />
+    </>
+  );
 };
 
-export default cart;
+export default dynamic(() => Promise.resolve(index), { ssr: false });

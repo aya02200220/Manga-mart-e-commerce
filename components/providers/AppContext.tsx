@@ -30,7 +30,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   useEffect(() => {
     // Googleのログイン状態を取得
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      // console.log("Logged user:", user);
       setIsGoogleLoggedIn(!!user);
       updateFavs();
     });
@@ -55,10 +54,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setFavItems(favs);
     setFavCounts(favs.length);
   };
-
-  // console.log("Context favs", favs);
-  console.log("favItems:", favItems);
-  console.log("updated FavItems and Counts ");
 
   // 全てのお気に入りを削除する関数
   const removeAllFavs = () => {
