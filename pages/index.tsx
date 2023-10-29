@@ -1,5 +1,5 @@
 // import Header from "../components/Header/Header";
-import Header from "../components/Header/Header2";
+import Header from "../components/Header/Header";
 import { useState } from "react";
 import mangaData from "@/data/mangaData";
 import Hero from "@/components/Hero/Hero";
@@ -11,16 +11,21 @@ const MainRoot = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
 
+  // const handleSearch = (term: string, category: string) => {
+  //   setSearchTerm(term);
+  //   setSearchCategory(category);
+  // };
+
   const handleSearch = (term: string, category: string) => {
+    console.log("Handle search in MainRoot:", term, category);
     setSearchTerm(term);
     setSearchCategory(category);
   };
 
+  console.log("searchTerm:", searchTerm);
+
   return (
     <div>
-      <div id="header">
-        <Header onSearch={handleSearch} />
-      </div>
       <div id="hero">
         <Hero />
       </div>
