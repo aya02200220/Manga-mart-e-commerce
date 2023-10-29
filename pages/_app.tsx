@@ -26,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Toaster position="bottom-left" reverseOrder={false} />
       <AppProvider>
-        <Header onSearch={handleSearch} />
         <Component {...pageProps} />
       </AppProvider>
     </>

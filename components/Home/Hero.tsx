@@ -4,7 +4,7 @@ import bg2 from "../../public/onepice-1.jpg";
 import bg10 from "../../public/22395020.jpg";
 import logo from "../../public/today.png";
 import mangaData from "../../data/mangaData";
-import Modal from "../MangaCard/Modal";
+import Modal from "./Modal";
 
 import { MangaData } from "@/types";
 
