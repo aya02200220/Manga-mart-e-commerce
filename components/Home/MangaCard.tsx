@@ -6,7 +6,7 @@ import { FaCartArrowDown } from "react-icons/fa";
 
 import AddToFav from "../Favorite/AddToFav";
 import CategoryFilter from "./CategoryFilter";
-import Modal from "./Modal2";
+import Modal from "./Modal";
 import { log } from "console";
 
 import { MangaData } from "@/types";

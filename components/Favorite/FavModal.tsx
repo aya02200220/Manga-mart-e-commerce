@@ -5,9 +5,34 @@ import NoFavImage from "../../public/NoFavorites.png";
 import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
 import FavoriteToast from "../Notifications/FavoriteToast";
+import { motion } from "framer-motion";
 
 import { DialogModal } from "../Cart/DialogModal";
 import toast from "react-hot-toast";
+
+const modalVariant = {
+  hidden: {
+    opacity: 0,
+    scaleY: 0.5,
+    transformOrigin: "center bottom",
+  },
+  visible: {
+    opacity: 1,
+    scaleY: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    scaleY: 0.5,
+    transition: {
+      duration: 0.3,
+      ease: "easeIn",
+    },
+  },
+};
 
 interface ModalProps {
   onRequestClose: () => void;
@@ -62,10 +87,18 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
           aria-hidden="true"
           className="fixed z-40 flex justify-center w-full p-4 overflow-x-hidden inset-0 h-full bg-[#0a0a0ad5]"
         >
-          <div
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalVariant}
             onClick={handleContentClick}
             className="relative w-[92%] md:w-[80%] h-[300px] top-10"
           >
+            {/* <div
+              onClick={handleContentClick}
+              className="relative w-[92%] md:w-[80%] h-[300px] top-10"
+            > */}
             {/* <!-- Modal content --> */}
             <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden ">
               {/* <!-- Modal header --> */}
@@ -143,7 +176,8 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                 )}
               </div>
             </div>
-          </div>
+            {/* </div> */}
+          </motion.div>
         </div>
       )}
       <DialogModal open={isDialogOpen} onClose={handleCloseDialog} />
