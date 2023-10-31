@@ -5,6 +5,7 @@ import { Rating, Button, IconButton } from "@mui/material/";
 import { FaCartArrowDown } from "react-icons/fa";
 
 import AddToFav from "../Favorite/AddToFav";
+import AddToCart from "../Cart/AddToCart";
 import CategoryFilter from "./CategoryFilter";
 import Modal from "./Modal";
 import { log } from "console";
@@ -18,14 +19,13 @@ interface MangaCardProps {
 
 const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [mangaData, setMangaData] = useState<MangaData[]>([]);
-  const [favArr, setFavArr] = useState<MangaData[]>([]);
 
   const [singleData, setSingleData] = useState<MangaData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);
 
-  const { favItems, favCounts, updateFavs } = useAppContext();
+  const { updateFavs, updateCart } = useAppContext();
 
   useEffect(() => {
     setCategory("All");
@@ -149,19 +149,15 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                 </div>
 
                 <div className="flex ">
-                  <button
-                    // onClick={() => addToCart(image)}
-                    className="relative inline-flex items-center justify-center p-4 px-5 py-1.5 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500 "
-                  >
-                    <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
-                    <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
-                    <span className="relative text-white  flex items-center">
-                      <>
-                        <span className="text-sm sm:text-lg">Add to</span>
-                        <FaCartArrowDown size={"20px"} className="ml-1" />{" "}
-                      </>
-                    </span>
-                  </button>
+                  <AddToCart
+                    mangaData={manga}
+                    onCartUpdated={() => {
+                      const updatedCart = JSON.parse(
+                        localStorage.getItem("cartItems") || "[]"
+                      );
+                      updateCart();
+                    }}
+                  />
                 </div>
               </div>
             </div>

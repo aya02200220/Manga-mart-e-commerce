@@ -65,8 +65,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   // 全てのお気に入りを削除する関数
   const removeAllFavs = () => {
-    localStorage.removeItem("favs"); // ローカルストレージからお気に入りを削除
-    setFavCounts(0); // お気に入りの数を0にリセット
+    localStorage.removeItem("favs");
+    setFavCounts(0);
     updateFavs();
   };
 
@@ -74,7 +74,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const updateCart = () => {
     const Cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
     setCartItems(Cart);
-    setFavCounts(Cart.length);
+    setCartItemsCounts(Cart.length);
   };
 
   // 全てのカート内のアイテムを削除する関数

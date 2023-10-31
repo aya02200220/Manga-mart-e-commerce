@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md";
+import { FaCartArrowDown } from "react-icons/fa";
+
 import { IconButton } from "@mui/material/";
 import { useAppContext } from "../providers/AppContext";
 import toast from "react-hot-toast";
@@ -9,74 +11,54 @@ import { MangaData } from "@/types";
 
 interface AddToCartProps {
   mangaData: MangaData;
-  onFavUpdated: () => void;
+  onCartUpdated: () => void;
 }
 
-const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onFavUpdated }) => {
+const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const { isGoogleLoggedIn, updateCart, cartItems } = useAppContext();
 
   useEffect(() => {
-    setIsInCart(favItems.some((fav: MangaData) => fav.id === mangaData.id));
-  }, [mangaData.id, favItems]);
+    setIsInCart(cartItems.some((item: MangaData) => item.id === mangaData.id));
+  }, [mangaData.id, cartItems]);
 
-  // console.log("Add to Fav favItems:", favItems);
+  console.log("Add to Cart cartItems:", cartItems);
 
-  const handleFavClick = () => {
-    if (!isGoogleLoggedIn) {
-      toast.success("Please log in to add to your favorites.", {
-        style: {
-          border: "1px solid #8bb4df",
-          padding: "20px",
-          color: "#4385cb",
-          backgroundColor: "#cbddf1",
-        },
-        iconTheme: {
-          primary: "#4385cb",
-          secondary: "#FFFAEE",
-        },
-      });
+  const handleAddToCartClick = () => {
+    toast.custom((t) => (
+      <FavoriteToast mangaData={mangaData} actionType="Add" />
+    ));
+    cartItems.push(mangaData);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    setIsInCart(true);
 
-      return;
-    }
-
-    const isAlreadyFav = favItems.some(
-      (fav: MangaData) => fav.id === mangaData.id
-    );
-    if (!isAlreadyFav) {
-      toast.custom((t) => (
-        <FavoriteToast mangaData={mangaData} actionType="Add" />
-      ));
-      favItems.push(mangaData);
-      localStorage.setItem("favs", JSON.stringify(favItems));
-      setIsInCart(true);
-    } else {
-      toast.custom((t) => (
-        <FavoriteToast mangaData={mangaData} actionType="Remove" />
-      ));
-      const newFavs = favItems.filter(
-        (fav: MangaData) => fav.id !== mangaData.id
-      );
-      localStorage.setItem("favs", JSON.stringify(newFavs));
-      setIsInCart(false);
-    }
-
-    onFavUpdated();
-    updateFavs();
+    onCartUpdated();
+    updateCart();
   };
 
   return (
-    <IconButton
-      size="small"
-      className="absolute top-1 left-1 bg-[#ffffffd4]"
-      onClick={handleFavClick}
-    >
-      {isInCart && isGoogleLoggedIn ? (
-        <MdFavorite color="#EB1E6C" size="20px" />
-      ) : (
-        <MdOutlineFavoriteBorder />
-      )}
-    </IconButton>
+    <>
+      <button
+        onClick={handleAddToCartClick}
+        className="relative inline-flex items-center justify-center p-4 px-5 py-1.5 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500 "
+      >
+        <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+        <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+        <span className="relative text-white  flex items-center">
+          {isInCart ? (
+            <>
+              <span className="text-sm sm:text-lg">Added</span>
+              {/* <FaCartArrowDown size={"20px"} className="ml-1" />{" "} */}
+            </>
+          ) : (
+            <>
+              <span className="text-sm sm:text-lg">Add to</span>
+              <FaCartArrowDown size={"20px"} className="ml-1" />{" "}
+            </>
+          )}
+        </span>
+      </button>
+    </>
   );
 };
 

@@ -55,7 +55,7 @@ function Header(props: HeaderProps) {
   const [isFavOpen, setFavIsOpen] = useState(false);
   const [isCartOpen, setCartIsOpen] = useState(false);
 
-  const { isGoogleLoggedIn, favCounts, itemsInCart } = useAppContext();
+  const { isGoogleLoggedIn, favCounts, cartItemsCounts } = useAppContext();
 
   useEffect(() => {
     console.log(
@@ -241,7 +241,7 @@ function Header(props: HeaderProps) {
                 onClick={() => handleCartModalOpen()}
                 className="ml-2"
               >
-                <Badge badgeContent={itemsInCart} color="primary">
+                <Badge badgeContent={cartItemsCounts} color="primary">
                   <GrCart size={20} />
                 </Badge>
               </IconButton>
