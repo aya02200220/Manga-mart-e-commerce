@@ -28,6 +28,7 @@ import Image from "next/image";
 import Logo from "../../public/Manga.png";
 import { useAppContext } from "../providers/AppContext";
 import FavModal from "../Favorite/FavModal";
+import CartModal from "../Cart/CartModal";
 import Link from "next/link";
 
 interface HeaderProps {
@@ -67,16 +68,6 @@ function Header(props: HeaderProps) {
   const debouncedSearch = debounce((term: string, category: string) => {
     props.onSearch && props.onSearch(term, category);
   }, 300);
-
-  // const debouncedSearch = debounce((term: string, category: string) => {
-  //   console.log("Debounced search triggered:", term, category);
-  //   if (props.onSearch) {
-  //     console.log("onSearch prop is available, calling it.");
-  //     props.onSearch(term, category);
-  //   } else {
-  //     console.error("onSearch prop is not available.");
-  //   }
-  // }, 300);
 
   useEffect(() => {
     debouncedSearch(searchInput, searchCategory);
@@ -203,7 +194,7 @@ function Header(props: HeaderProps) {
 
         {/* <div className="flex-grow"></div> */}
         <div className="flex">
-          {user ? (
+          {isGoogleLoggedIn !== null && user ? (
             <div className="flex flex-row items-center">
               <p className="flex flex-col leading-4 justify-center items-center mr-2 text-[15px] uppercase hidden sm:block">
                 <p>HELLO!</p>
@@ -246,7 +237,10 @@ function Header(props: HeaderProps) {
                 </Badge>
               </IconButton>
 
-              <IconButton onClick={() => handleFavModalOpen()} className="ml-2">
+              <IconButton
+                onClick={() => handleCartModalOpen()}
+                className="ml-2"
+              >
                 <Badge badgeContent={itemsInCart} color="primary">
                   <GrCart size={20} />
                 </Badge>
@@ -266,6 +260,12 @@ function Header(props: HeaderProps) {
       </div>
       <div className="relative">
         <FavModal isFavOpen={isFavOpen} onRequestClose={handleFavModalClose} />
+      </div>
+      <div className="relative">
+        <CartModal
+          isCartOpen={isCartOpen}
+          onRequestClose={handleCartModalClose}
+        />
       </div>
     </nav>
   );
