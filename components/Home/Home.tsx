@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import MangaCard from "./MangaCard";
+// import MangaCard from "./MangaCard2";
 import Hero from "./Hero";
 import mangaData from "@/data/mangaData";
 import Header from "../Header/Header";

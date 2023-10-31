@@ -6,15 +6,15 @@ import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
 import FavoriteToast from "../Notifications/FavoriteToast";
 
-import { DialogModal } from "./DialogModal";
+import { DialogModal } from "../Cart/DialogModal";
 import toast from "react-hot-toast";
 
 interface ModalProps {
   onRequestClose: () => void;
-  isOpen: boolean;
+  isFavOpen: boolean;
 }
 
-const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
+const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
   // const isGoogleLoggedIn = useAppContext().isGoogleLoggedIn;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [favData, setFavData] = useState<MangaData[]>([]);
@@ -56,7 +56,7 @@ const FavModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
   return (
     <>
       {/* <!-- Main modal --> */}
-      {isOpen && (
+      {isFavOpen && (
         <div
           onClick={onRequestClose}
           aria-hidden="true"

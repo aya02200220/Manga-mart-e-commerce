@@ -51,7 +51,8 @@ function Header(props: HeaderProps) {
   const imageUrl = user?.photoURL ?? "default-image-url";
   const [searchInput, setSearchInput] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFavOpen, setFavIsOpen] = useState(false);
+  const [isCartOpen, setCartIsOpen] = useState(false);
 
   const { isGoogleLoggedIn, favCounts, itemsInCart } = useAppContext();
 
@@ -62,20 +63,20 @@ function Header(props: HeaderProps) {
     );
   }, []);
 
-  // debounced検索処理
-  // const debouncedSearch = debounce((term: string, category: string) => {
-  //   props.onSearch && props.onSearch(term, category);
-  // }, 300);
-
+  // debounced検索処理;
   const debouncedSearch = debounce((term: string, category: string) => {
-    console.log("Debounced search triggered:", term, category);
-    if (props.onSearch) {
-      console.log("onSearch prop is available, calling it.");
-      props.onSearch(term, category);
-    } else {
-      console.error("onSearch prop is not available.");
-    }
+    props.onSearch && props.onSearch(term, category);
   }, 300);
+
+  // const debouncedSearch = debounce((term: string, category: string) => {
+  //   console.log("Debounced search triggered:", term, category);
+  //   if (props.onSearch) {
+  //     console.log("onSearch prop is available, calling it.");
+  //     props.onSearch(term, category);
+  //   } else {
+  //     console.error("onSearch prop is not available.");
+  //   }
+  // }, 300);
 
   useEffect(() => {
     debouncedSearch(searchInput, searchCategory);
@@ -127,11 +128,17 @@ function Header(props: HeaderProps) {
     });
   };
 
-  const handleModalOpen = () => {
-    setIsOpen(true);
+  const handleFavModalOpen = () => {
+    setFavIsOpen(true);
   };
-  const handleModalClose = () => {
-    setIsOpen(false);
+  const handleFavModalClose = () => {
+    setFavIsOpen(false);
+  };
+  const handleCartModalOpen = () => {
+    setCartIsOpen(true);
+  };
+  const handleCartModalClose = () => {
+    setCartIsOpen(false);
   };
 
   return (
@@ -233,12 +240,13 @@ function Header(props: HeaderProps) {
                 </Button>
               </Popover>
 
-              <IconButton className="ml-2" onClick={() => handleModalOpen()}>
+              <IconButton className="ml-2" onClick={() => handleFavModalOpen()}>
                 <Badge badgeContent={favCounts} color="secondary">
                   <GrFavorite size={20} />
                 </Badge>
               </IconButton>
-              <IconButton href={"/cart"} className="ml-2">
+
+              <IconButton onClick={() => handleFavModalOpen()} className="ml-2">
                 <Badge badgeContent={itemsInCart} color="primary">
                   <GrCart size={20} />
                 </Badge>
@@ -257,7 +265,7 @@ function Header(props: HeaderProps) {
         </div>
       </div>
       <div className="relative">
-        <FavModal isOpen={isOpen} onRequestClose={handleModalClose} />
+        <FavModal isFavOpen={isFavOpen} onRequestClose={handleFavModalClose} />
       </div>
     </nav>
   );
