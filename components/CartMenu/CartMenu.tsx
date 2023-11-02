@@ -5,50 +5,27 @@ import { useDimensions } from "./use-dimensions";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./Navigation";
 
-// const sidebar = {
-//   open: (height = 1000) => ({
-//     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-//     transition: {
-//       type: "spring",
-//       stiffness: 20,
-//       restDelta: 2,
-//     },
-//   }),
-//   closed: {
-//     clipPath: "circle(30px at 40px 40px)",
-//     transition: {
-//       delay: 0.5,
-//       type: "spring",
-//       stiffness: 400,
-//       damping: 40,
-//     },
-//   },
-// };
-
 const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-    backgroundColor: "#FFFFFF", // 背景色を白にするなど、好みの色を設定します
-    scaleY: 1, // Y軸方向のスケールを1に設定
-    originY: 0, // 変形の原点を上端に設定
+    backgroundColor: "#FFFFFF",
+    scaleY: 1,
+    originY: 0,
     transition: {
-      type: "spring",
+      type: "tween",
       stiffness: 20,
       restDelta: 2,
-      when: "beforeChildren", // 子要素より先にアニメーション
-      staggerChildren: 0.1, // 子要素のアニメーションにスタガーを設定
+      when: "beforeChildren",
+      staggerChildren: 0.1,
     },
   }),
   closed: {
     clipPath: "circle(30px at 40px 40px)",
-    backgroundColor: "rgba(255,255,255,0)", // 透明な背景色に設定
-    scaleY: 0, // Y軸方向のスケールを0に設定
     transition: {
       delay: 0.5,
       type: "spring",
       stiffness: 400,
       damping: 40,
-      when: "afterChildren", // 子要素より後にアニメーション
     },
   },
 };
@@ -66,7 +43,7 @@ export const CartMenu = () => {
       ref={containerRef}
     >
       <motion.div
-        className="background"
+        className="background-cartMenu"
         variants={sidebar}
         initial={false}
         animate={isOpen ? "open" : "closed"}

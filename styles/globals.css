@@ -24,7 +24,7 @@ body {
   /* font-family: "Onest", sans-serif; */
   font-family: "Mohave", sans-serif;
   font-family: "Roboto Condensed", sans-serif;
-  background-color: #fff;
+  background-color: #f3f3f3;
   color: #535353;
 }
 @keyframes slideLeftEndless {
@@ -49,14 +49,14 @@ body {
 
 /* ///////////////////////////////////////////// */
 
-.background {
+.background-cartMenu {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 36px;
   right: 0;
   bottom: 0;
-  transform-origin: top center; /* アニメーションの原点を上中央に設定 */
-  background-color: rgba(255, 255, 255, 0); /* 初期状態では透明な背景色 */
+  width: 350px;
+  height: 400px;
+  border: solid 1px black;
 }
 
 .button-cartMenu {
