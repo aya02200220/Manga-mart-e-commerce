@@ -24,6 +24,7 @@ export const MenuItem = ({ i }) => {
   const style = { border: `2px solid ${colors[i]}` };
   return (
     <motion.li
+      className="li-cartMenu"
       variants={variants}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
