@@ -1,6 +1,31 @@
 import { Rating } from "@mui/material";
 import { MangaData } from "@/types";
 import { RxCrossCircled } from "react-icons/rx";
+import { motion } from "framer-motion";
+
+const modalVariant = {
+  hidden: {
+    opacity: 0,
+    scaleY: 0.5,
+    transformOrigin: "center bottom",
+  },
+  visible: {
+    opacity: 1,
+    scaleY: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    scaleY: 0.5,
+    transition: {
+      duration: 0.3,
+      ease: "easeIn",
+    },
+  },
+};
 
 interface ModalProps {
   manga: MangaData | null;
@@ -8,7 +33,7 @@ interface ModalProps {
   onRequestClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
+const Modal2: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -21,10 +46,18 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
           aria-hidden="true"
           className="fixed z-40 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full bg-[#0a0a0ad5]"
         >
-          <div
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalVariant}
             onClick={handleContentClick}
             className="relative w-[80%] md:w-full sm:max-w-2xl h-[200px] sm:max-h-full"
           >
+            {/* <div
+              onClick={handleContentClick}
+              className="relative w-[80%] md:w-full sm:max-w-2xl h-[200px] sm:max-h-full"
+            > */}
             {/* <!-- Modal content --> */}
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 top-8">
               {/* <!-- Modal header --> */}
@@ -94,11 +127,12 @@ const Modal: React.FC<ModalProps> = ({ manga, isOpen, onRequestClose }) => {
                 </button>
               </div>
             </div>
-          </div>
+            {/* </div> */}
+          </motion.div>
         </div>
       )}
     </>
   );
 };
 
-export default Modal;
+export default Modal2;

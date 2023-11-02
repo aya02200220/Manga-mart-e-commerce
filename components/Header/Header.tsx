@@ -28,6 +28,7 @@ import Image from "next/image";
 import Logo from "../../public/Manga.png";
 import { useAppContext } from "../providers/AppContext";
 import FavModal from "../Favorite/FavModal";
+import CartModal from "../Cart/CartModal";
 import Link from "next/link";
 
 interface HeaderProps {
@@ -51,9 +52,10 @@ function Header(props: HeaderProps) {
   const imageUrl = user?.photoURL ?? "default-image-url";
   const [searchInput, setSearchInput] = useState("");
   const [searchCategory, setSearchCategory] = useState("Title");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFavOpen, setFavIsOpen] = useState(false);
+  const [isCartOpen, setCartIsOpen] = useState(false);
 
-  const { isGoogleLoggedIn, favCounts, itemsInCart } = useAppContext();
+  const { isGoogleLoggedIn, favCounts, cartItemsCounts } = useAppContext();
 
   useEffect(() => {
     console.log(
@@ -62,19 +64,9 @@ function Header(props: HeaderProps) {
     );
   }, []);
 
-  // debounced検索処理
-  // const debouncedSearch = debounce((term: string, category: string) => {
-  //   props.onSearch && props.onSearch(term, category);
-  // }, 300);
-
+  // debounced検索処理;
   const debouncedSearch = debounce((term: string, category: string) => {
-    console.log("Debounced search triggered:", term, category);
-    if (props.onSearch) {
-      console.log("onSearch prop is available, calling it.");
-      props.onSearch(term, category);
-    } else {
-      console.error("onSearch prop is not available.");
-    }
+    props.onSearch && props.onSearch(term, category);
   }, 300);
 
   useEffect(() => {
@@ -127,11 +119,17 @@ function Header(props: HeaderProps) {
     });
   };
 
-  const handleModalOpen = () => {
-    setIsOpen(true);
+  const handleFavModalOpen = () => {
+    setFavIsOpen(true);
   };
-  const handleModalClose = () => {
-    setIsOpen(false);
+  const handleFavModalClose = () => {
+    setFavIsOpen(false);
+  };
+  const handleCartModalOpen = () => {
+    setCartIsOpen(true);
+  };
+  const handleCartModalClose = () => {
+    setCartIsOpen(false);
   };
 
   return (
@@ -196,7 +194,7 @@ function Header(props: HeaderProps) {
 
         {/* <div className="flex-grow"></div> */}
         <div className="flex">
-          {user ? (
+          {isGoogleLoggedIn !== null && user ? (
             <div className="flex flex-row items-center">
               <p className="flex flex-col leading-4 justify-center items-center mr-2 text-[15px] uppercase hidden sm:block">
                 <p>HELLO!</p>
@@ -233,13 +231,17 @@ function Header(props: HeaderProps) {
                 </Button>
               </Popover>
 
-              <IconButton className="ml-2" onClick={() => handleModalOpen()}>
+              <IconButton className="ml-2" onClick={() => handleFavModalOpen()}>
                 <Badge badgeContent={favCounts} color="secondary">
                   <GrFavorite size={20} />
                 </Badge>
               </IconButton>
-              <IconButton href={"/cart"} className="ml-2">
-                <Badge badgeContent={itemsInCart} color="primary">
+
+              <IconButton
+                onClick={() => handleCartModalOpen()}
+                className="ml-2"
+              >
+                <Badge badgeContent={cartItemsCounts} color="primary">
                   <GrCart size={20} />
                 </Badge>
               </IconButton>
@@ -257,7 +259,13 @@ function Header(props: HeaderProps) {
         </div>
       </div>
       <div className="relative">
-        <FavModal isOpen={isOpen} onRequestClose={handleModalClose} />
+        <FavModal isFavOpen={isFavOpen} onRequestClose={handleFavModalClose} />
+      </div>
+      <div className="relative">
+        <CartModal
+          isCartOpen={isCartOpen}
+          onRequestClose={handleCartModalClose}
+        />
       </div>
     </nav>
   );
