@@ -51,8 +51,8 @@ body {
 
 .background-cartMenu {
   position: absolute;
-  top: 36px;
-  right: -80px;
+  top: 46px;
+  right: -85px;
   bottom: 0;
   width: 300px;
   height: 400px;
@@ -82,11 +82,11 @@ body {
 }
 
 .ul-cartMenu {
-  padding: 25px;
+  padding: 15px;
   position: absolute;
-  top: 40px;
-  right: -60px;
-  width: 230px;
+  top: 75px;
+  right: -50px;
+  width: 240px;
 
   border-radius: 0 0 7px 7px;
 }
