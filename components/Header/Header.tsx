@@ -246,6 +246,9 @@ function Header(props: HeaderProps) {
                   <GrCart size={20} />
                 </Badge>
               </IconButton>
+              <IconButton>
+                <CartMenu />
+              </IconButton>
             </div>
           ) : (
             <button
@@ -267,9 +270,6 @@ function Header(props: HeaderProps) {
           isCartOpen={isCartOpen}
           onRequestClose={handleCartModalClose}
         />
-      </div>
-      <div className="relative">
-        <CartMenu />
       </div>
     </nav>
   );

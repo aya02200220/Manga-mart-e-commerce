@@ -7,7 +7,7 @@ import { Navigation } from "./Navigation";
 
 const sidebar = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    clipPath: `circle(${height * 2 + 800}px at 40px 40px)`,
     backgroundColor: "#FFFFFF",
     scaleY: 1,
     originY: 0,
@@ -23,7 +23,7 @@ const sidebar = {
     clipPath: "circle(30px at 40px 40px)",
     transition: {
       delay: 0.5,
-      type: "spring",
+      type: "tween",
       stiffness: 400,
       damping: 40,
     },
@@ -43,7 +43,9 @@ export const CartMenu = () => {
       ref={containerRef}
     >
       <motion.div
-        className="background-cartMenu"
+        className="background-cartMenu
+  
+        "
         variants={sidebar}
         initial={false}
         animate={isOpen ? "open" : "closed"}
