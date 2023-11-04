@@ -93,7 +93,7 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
             exit="exit"
             variants={modalVariant}
             onClick={handleContentClick}
-            className="relative w-[92%] md:w-[80%] h-[300px] top-10"
+            className="relative w-[92%] md:w-[60%] h-[300px] top-10"
           >
             {/* <div
               onClick={handleContentClick}

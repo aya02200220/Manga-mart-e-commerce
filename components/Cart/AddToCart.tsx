@@ -89,15 +89,17 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
           <button
             onClick={handleDecrease}
             className="text-white px-3 py-[40px] rounded-l-full
-  bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700 bg-black hover:bg-[#fff]"
+            bg-[#546aaa] hover:bg-[#90a1e4] 
+            "
           >
+            {/* bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700 */}
             <AiOutlineMinus />
           </button>
           <span className="px-2 text-[#333] text-lg">{itemCount}</span>
           <button
             onClick={handleIncrease}
             className="bg-black text-white px-3 py-[40px] rounded-r-full
-            bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700  hover:bg-[#fff]"
+            bg-[#546aaa] hover:bg-[#90a1e4] "
           >
             <AiOutlinePlus />
           </button>
