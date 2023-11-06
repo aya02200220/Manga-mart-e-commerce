@@ -3,7 +3,7 @@ import { auth } from "../firebase";
 import { MangaData } from "@/types";
 
 interface AppContextType {
-  isGoogleLoggedIn: boolean;
+  isGoogleLoggedIn: boolean | null;
   cartItems: MangaData[];
   cartItemsCounts: number;
   favCounts: number;
