@@ -48,7 +48,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setFavCounts(favs.length);
 
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    setCartItems(cartItems.length);
+    setCartItems(cartItems);
 
     // クリーンアップ関数
     return () => {
