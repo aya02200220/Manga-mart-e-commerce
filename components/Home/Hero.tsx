@@ -75,7 +75,7 @@ const Hero = () => {
               alt="Today's Pick Up"
               width={150}
               height={90}
-              className="cursor-pointer"
+              // className="cursor-pointer"
             />
           </div>
           <div className="flex slid-images horizontal justify-center items-center h-full">
