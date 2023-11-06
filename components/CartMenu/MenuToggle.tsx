@@ -1,7 +1,14 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 
-const Path = (props) => (
+type PathProps = {
+  fill?: string;
+  strokeWidth?: string;
+  stroke?: string;
+  [x: string]: any;
+};
+
+const Path: React.FC<PathProps> = (props) => (
   <motion.path
     fill="transparent"
     strokeWidth="2"
@@ -11,7 +18,11 @@ const Path = (props) => (
   />
 );
 
-export const MenuToggle = ({ toggle }) => (
+type MenuToggleProps = {
+  toggle: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+export const MenuToggle: React.FC<MenuToggleProps> = ({ toggle }) => (
   <button onClick={toggle} className="button-cartMenu">
     <svg
       xmlns="http://www.w3.org/2000/svg"
