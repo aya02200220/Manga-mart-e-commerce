@@ -1,7 +1,9 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { MenuItem } from "./MenuItem";
-import { CartMenu } from "./CartMenu";
+// import { CartMenu } from "./CartMenu";
+import { useAppContext } from "../providers/AppContext";
+import { MangaData } from "@/types";
 
 const variants = {
   open: {
@@ -12,12 +14,19 @@ const variants = {
   },
 };
 
-export const Navigation = () => (
-  <motion.ul className="ul-cartMenu" variants={variants}>
-    {itemIds.map((i) => (
-      <MenuItem i={i} key={i} />
-    ))}
-  </motion.ul>
-);
+export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
+  const { updateFavs, updateCart, cartItems } = useAppContext();
 
-const itemIds = [0, 1, 2, 3, 4];
+  return (
+    <motion.ul
+      className={`overflow-y-auto  h-[400px]  p-[15px] absolute top-[75px] right-[-50px] w-[240px]  ${
+        !isOpen ? "closed-menu" : ""
+      } `}
+      variants={variants}
+    >
+      {cartItems.map((manga: MangaData, index: number) => (
+        <MenuItem manga={manga} index={index} key={index} />
+      ))}
+    </motion.ul>
+  );
+};

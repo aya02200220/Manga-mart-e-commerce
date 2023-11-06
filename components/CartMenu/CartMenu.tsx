@@ -8,7 +8,7 @@ import { Navigation } from "./Navigation";
 const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 800}px at 40px 40px)`,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFf",
     scaleY: 1,
     originY: 0,
     transition: {
@@ -43,15 +43,14 @@ export const CartMenu = () => {
       ref={containerRef}
     >
       <motion.div
-        className="background-cartMenu
-  
+        className="overflow-auto absolute top-[36px] right-[-80px] border border-[#333] h-[400px] w-[300px] 
         "
         variants={sidebar}
         initial={false}
         animate={isOpen ? "open" : "closed"}
       />
 
-      <Navigation />
+      <Navigation isOpen={isOpen} />
       <MenuToggle toggle={() => toggleOpen()} />
     </motion.div>
   );
