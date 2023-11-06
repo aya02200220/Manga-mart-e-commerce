@@ -98,7 +98,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
           <span className="px-2 text-[#333] text-lg">{itemCount}</span>
           <button
             onClick={handleIncrease}
-            className="bg-black text-white px-3 py-[40px] rounded-r-full
+            className=" text-white px-3 py-[40px] rounded-r-full
             bg-[#546aaa] hover:bg-[#90a1e4] "
           >
             <AiOutlinePlus />
