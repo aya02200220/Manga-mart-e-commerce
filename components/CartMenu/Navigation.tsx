@@ -19,7 +19,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
 
   return (
     <div className={` ${!isOpen ? "closed-menu" : ""} `}>
-      <div className="absolute top-[36px] left-[-196px]  border border-[#333] w-[300px] h-[50px] items-center flex">
+      <div className="absolute top-0 left-0  border border-[#333] w-full h-[50px] items-center flex">
         <p className="pl-[10px] font-bold">My Cart ,</p>
         <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
@@ -33,7 +33,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
           <MenuItem manga={manga} index={index} key={index} />
         ))}
       </motion.ul>
-      <div className="absolute  top-[486px] left-[-196px]  border border-[#333] w-[300px] h-[50px] items-center flex justify-between">
+      <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[50px] items-center flex justify-between">
         <p className="pl-[10px] font-bold">Sub-total</p>
         <p className="pr-[10px] font-medium">
           $ {cartItemsCounts?.toFixed(2) ?? 0}
