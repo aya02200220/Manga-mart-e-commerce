@@ -24,7 +24,7 @@ type MenuToggleProps = {
 
 export const MenuToggle: React.FC<MenuToggleProps> = ({ toggle }) => (
   <button onClick={toggle} className="button-cartMenu">
-    <svg
+    {/* <svg
       xmlns="http://www.w3.org/2000/svg"
       width="23"
       height="23"
@@ -60,8 +60,8 @@ export const MenuToggle: React.FC<MenuToggleProps> = ({ toggle }) => (
           open: { d: "M 3 2.5 L 17 16.346", strokeWidth: "6", y: 7, x: 7 },
         }}
       />
-    </svg>
-    {/* <svg width="23" height="23" viewBox="0 0 23 23">
+    </svg> */}
+    <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{
           closed: { d: "M 2 2.5 L 20 2.5" },
@@ -82,6 +82,6 @@ export const MenuToggle: React.FC<MenuToggleProps> = ({ toggle }) => (
           open: { d: "M 3 2.5 L 17 16.346" },
         }}
       />
-    </svg> */}
+    </svg>
   </button>
 );

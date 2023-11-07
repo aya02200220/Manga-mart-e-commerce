@@ -15,20 +15,16 @@ const variants = {
 };
 
 export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
-  const { updateFavs, updateCart, cartItems } = useAppContext();
+  const { cartItemsCounts, updateCart, cartItems } = useAppContext();
 
   return (
-    <div>
-      {" "}
-      <div
-        className={`absolute  top-[36px] left-[-100px]  border border-[#333]  ${
-          !isOpen ? "closed-menu" : ""
-        } `}
-      >
-        <p>My Cart</p>
+    <div className={` ${!isOpen ? "closed-menu" : ""} `}>
+      <div className="absolute top-[36px] left-[-196px]  border border-[#333] w-[300px] h-[50px] items-center flex">
+        <p className="pl-[10px] font-bold">My Cart ,</p>
+        <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
       <motion.ul
-        className={`overflow-y-auto  h-[400px]  p-[15px] absolute top-[75px] right-[-50px] w-[240px]  ${
+        className={`overflow-y-auto  h-[400px]  p-[15px] absolute top-[88px] right-[-50px] w-[240px]  ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
@@ -37,6 +33,12 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
           <MenuItem manga={manga} index={index} key={index} />
         ))}
       </motion.ul>
+      <div className="absolute  top-[486px] left-[-196px]  border border-[#333] w-[300px] h-[50px] items-center flex justify-between">
+        <p className="pl-[10px] font-bold">Sub-total</p>
+        <p className="pr-[10px] font-medium">
+          $ {cartItemsCounts?.toFixed(2) ?? 0}
+        </p>
+      </div>
     </div>
   );
 };
