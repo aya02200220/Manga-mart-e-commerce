@@ -43,7 +43,7 @@ export const CartMenu = () => {
       ref={containerRef}
     >
       <motion.div
-        className="overflow-auto absolute top-[36px] right-[-80px] border border-[#333] h-[400px] w-[300px] 
+        className="overflow-auto absolute top-[36px] right-[-80px] border border-[#333] h-[100vh] sm:h-[500px] w-[300px] 
         "
         variants={sidebar}
         initial={false}

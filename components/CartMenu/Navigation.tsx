@@ -18,15 +18,25 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
   const { updateFavs, updateCart, cartItems } = useAppContext();
 
   return (
-    <motion.ul
-      className={`overflow-y-auto  h-[400px]  p-[15px] absolute top-[75px] right-[-50px] w-[240px]  ${
-        !isOpen ? "closed-menu" : ""
-      } `}
-      variants={variants}
-    >
-      {cartItems.map((manga: MangaData, index: number) => (
-        <MenuItem manga={manga} index={index} key={index} />
-      ))}
-    </motion.ul>
+    <div>
+      {" "}
+      <div
+        className={`absolute  top-[36px] left-[-100px]  border border-[#333]  ${
+          !isOpen ? "closed-menu" : ""
+        } `}
+      >
+        <p>My Cart</p>
+      </div>
+      <motion.ul
+        className={`overflow-y-auto  h-[400px]  p-[15px] absolute top-[75px] right-[-50px] w-[240px]  ${
+          !isOpen ? "closed-menu" : ""
+        } `}
+        variants={variants}
+      >
+        {cartItems.map((manga: MangaData, index: number) => (
+          <MenuItem manga={manga} index={index} key={index} />
+        ))}
+      </motion.ul>
+    </div>
   );
 };
