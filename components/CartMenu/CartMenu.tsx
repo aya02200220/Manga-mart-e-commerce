@@ -15,14 +15,13 @@ const sidebar = {
       type: "tween",
       stiffness: 20,
       restDelta: 2,
-      when: "beforeChildren",
+      // when: "beforeChildren",
       staggerChildren: 0.1,
     },
   }),
   closed: {
     clipPath: "circle(30px at 40px 40px)",
     transition: {
-      delay: 0.5,
       type: "tween",
       stiffness: 400,
       damping: 40,
@@ -30,28 +29,36 @@ const sidebar = {
   },
 };
 
-export const CartMenu = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
+type CartMenuProps = {
+  isOpen: boolean;
+  toggleOpen: () => void;
+};
+
+export const CartMenu: React.FC<CartMenuProps> = ({ isOpen, toggleOpen }) => {
+  // const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
 
   return (
-    <motion.div
-      initial={false}
-      animate={isOpen ? "open" : "closed"}
-      custom={height}
-      ref={containerRef}
-    >
+    <div className="relative">
       <motion.div
-        className="overflow-auto absolute top-[36px] right-[-80px] border border-[#333] h-[400px] w-[300px] 
-        "
-        variants={sidebar}
         initial={false}
         animate={isOpen ? "open" : "closed"}
-      />
+        custom={height}
+        ref={containerRef}
+        className="absolute top-[36px] right-[-30px] "
+      >
+        <motion.div
+          className="overflow-auto border border-[#333] h-[100vh] sm:h-[500px] w-[300px] 
+        "
+          variants={sidebar}
+          initial={false}
+          animate={isOpen ? "open" : "closed"}
+        />
 
-      <Navigation isOpen={isOpen} />
-      <MenuToggle toggle={() => toggleOpen()} />
-    </motion.div>
+        <Navigation isOpen={isOpen} />
+        <MenuToggle toggle={toggleOpen} isOpen={isOpen} />
+      </motion.div>
+    </div>
   );
 };

@@ -31,6 +31,7 @@ import FavModal from "../Favorite/FavModal";
 import CartModal from "../Cart/CartModal";
 import Link from "next/link";
 import { CartMenu } from "../CartMenu/CartMenu";
+import { useCycle } from "framer-motion";
 
 interface HeaderProps {
   onSearch?: (term: string, category: string) => void;
@@ -55,6 +56,7 @@ function Header(props: HeaderProps) {
   const [searchCategory, setSearchCategory] = useState("Title");
   const [isFavOpen, setFavIsOpen] = useState(false);
   const [isCartOpen, setCartIsOpen] = useState(false);
+  const [isOpen, toggleOpen] = useCycle(false, true);
 
   const { isGoogleLoggedIn, favCounts, cartItemsCounts } = useAppContext();
 
@@ -127,7 +129,8 @@ function Header(props: HeaderProps) {
     setFavIsOpen(false);
   };
   const handleCartModalOpen = () => {
-    setCartIsOpen(true);
+    toggleOpen();
+    // setCartIsOpen(true);
   };
   const handleCartModalClose = () => {
     setCartIsOpen(false);
@@ -238,6 +241,15 @@ function Header(props: HeaderProps) {
                 </Badge>
               </IconButton>
 
+              <IconButton
+                onClick={() => handleCartModalOpen()}
+                className="ml-2"
+              >
+                <Badge badgeContent={cartItemsCounts} color="primary">
+                  <GrCart size={20} />
+                </Badge>
+              </IconButton>
+
               {/* <IconButton
                 onClick={() => handleCartModalOpen()}
                 className="ml-2"
@@ -246,11 +258,12 @@ function Header(props: HeaderProps) {
                   <GrCart size={20} />
                 </Badge>
               </IconButton> */}
-              <IconButton size="small" className="mt-2">
+
+              {/* <IconButton size="small" className="mt-2">
                 <Badge badgeContent={cartItemsCounts} color="primary">
                   <CartMenu />{" "}
                 </Badge>
-              </IconButton>
+              </IconButton> */}
             </div>
           ) : (
             <button
@@ -272,6 +285,9 @@ function Header(props: HeaderProps) {
           isCartOpen={isCartOpen}
           onRequestClose={handleCartModalClose}
         />
+      </div>
+      <div>
+        <CartMenu isOpen={isOpen} toggleOpen={toggleOpen} />
       </div>
     </nav>
   );
