@@ -33,7 +33,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
       <motion.ul
-        className={`overflow-y-auto  h-[320px]  pl-[20px] pr-[20px] absolute top-[60px] left-0 w-full  ${
+        className={`overflow-y-auto  h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-1 left-0 w-full  ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
