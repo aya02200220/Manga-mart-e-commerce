@@ -29,10 +29,24 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
     setItemCount(count);
   }, [cartItems, mangaData.id]);
 
+  // const handleAddToCartClick = () => {
+  //   setItemCount((prev) => prev + 1);
+  //   toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />);
+  //   cartItems.push(mangaData);
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  //   setIsInCart(true);
+
+  //   onCartUpdated();
+  //   updateCart();
+  // };
+
   const handleAddToCartClick = () => {
+    const timestamp = new Date().toISOString(); // 現在のタイムスタンプ
+    const newItem = { ...mangaData, timestamp }; // アイテムにタイムスタンプを追加
+
     setItemCount((prev) => prev + 1);
     toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />);
-    cartItems.push(mangaData);
+    cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     setIsInCart(true);
 
@@ -40,9 +54,20 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
     updateCart();
   };
 
+  // const handleIncrease = () => {
+  //   setItemCount((prev) => prev + 1);
+  //   cartItems.push(mangaData);
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  //   onCartUpdated();
+  //   updateCart();
+  // };
+
   const handleIncrease = () => {
+    const timestamp = new Date().toISOString(); // 現在のタイムスタンプ
+    const newItem = { ...mangaData, timestamp }; // アイテムにタイムスタンプを追加
+
     setItemCount((prev) => prev + 1);
-    cartItems.push(mangaData);
+    cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     onCartUpdated();
     updateCart();
