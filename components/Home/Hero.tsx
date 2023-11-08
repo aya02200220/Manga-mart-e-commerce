@@ -5,6 +5,7 @@ import bg10 from "../../public/22395020.jpg";
 import logo from "../../public/today.png";
 import mangaData from "../../data/mangaData";
 import Modal from "./Modal";
+import HeroLogo from "./HeroLogo";
 
 import { MangaData } from "@/types";
 
@@ -53,7 +54,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[#4a4a4a56]">
           <div className="absolute inset-0 flex items-center justify-center">
             <p className="text-white text-2xl font-semibold">
-              Welcome to Manga Mart
+              <HeroLogo />
             </p>
           </div>
         </div>
