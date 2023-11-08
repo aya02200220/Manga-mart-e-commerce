@@ -24,7 +24,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
       <motion.ul
-        className={`overflow-y-auto  h-[400px]  p-[15px] absolute top-[88px] right-[-50px] w-[240px]  ${
+        className={`overflow-y-auto  h-[400px]  pl-[15px] pr-[15px] absolute top-[60px] left-0 w-full  ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
@@ -33,11 +33,21 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
           <MenuItem manga={manga} index={index} key={index} />
         ))}
       </motion.ul>
-      <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[50px] items-center flex justify-between">
-        <p className="pl-[10px] font-bold">Sub-total</p>
-        <p className="pr-[10px] font-medium">
-          $ {cartItemsCounts?.toFixed(2) ?? 0}
-        </p>
+      <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[140px] items-center justify-center flex flex-col divide-y-2">
+        <div className="flex flex-1  w-full justify-between items-center">
+          <p className="pl-[10px] font-bold text-lg">Sub-total</p>
+          <p className="pr-[10px] font-medium text-lg">
+            $ {cartItemsCounts?.toFixed(2) ?? 0}
+          </p>
+        </div>
+        <div className="flex flex-1 w-full gap-8 justify-center items-center">
+          <button className="border border-black py-2 w-[120px]">
+            Empty cart
+          </button>
+          <button className="border border-black py-2 w-[120px]">
+            checkout
+          </button>
+        </div>
       </div>
     </div>
   );
