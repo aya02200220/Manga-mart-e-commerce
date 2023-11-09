@@ -41,8 +41,8 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
   // };
 
   const handleAddToCartClick = () => {
-    const timestamp = new Date().toISOString(); // 現在のタイムスタンプ
-    const newItem = { ...mangaData, timestamp }; // アイテムにタイムスタンプを追加
+    const timestamp = new Date().toISOString();
+    const newItem = { ...mangaData, timestamp };
 
     setItemCount((prev) => prev + 1);
     toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />);
@@ -63,8 +63,8 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
   // };
 
   const handleIncrease = () => {
-    const timestamp = new Date().toISOString(); // 現在のタイムスタンプ
-    const newItem = { ...mangaData, timestamp }; // アイテムにタイムスタンプを追加
+    const timestamp = new Date().toISOString();
+    const newItem = { ...mangaData, timestamp };
 
     setItemCount((prev) => prev + 1);
     cartItems.push(newItem);

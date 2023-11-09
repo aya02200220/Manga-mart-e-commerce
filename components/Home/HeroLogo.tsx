@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTrail, a } from "@react-spring/web";
 
 const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
@@ -23,6 +23,17 @@ const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
 
 export default function HeroLogo() {
   const [open, set] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // コンポーネントがマウントされたときにクライアントであることを設定
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    // サーバーサイドでは何もレンダリングしない
+    return null;
+  }
   return (
     <div
       className="hero-container text-white text-opacity-70"
@@ -31,8 +42,6 @@ export default function HeroLogo() {
       <Trail open={open}>
         <span>Welcome</span>
         <span>to</span>
-
-        {/* <span>Manga mart</span> */}
 
         <span>Manga</span>
         <span>Mart</span>

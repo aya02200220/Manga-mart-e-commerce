@@ -26,6 +26,27 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
   // 合計金額を計算します。
   const total = cartItems.reduce((acc, item) => acc + item.price, 0);
 
+  // cartItemsをtimestampで逆順にソートします。
+  const sortedCartItems = [...cartItems].sort(
+    (a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp)
+  );
+
+  // ソートされたアイテムからユニークなアイテムのみを抽出
+  const uniqueItemsWithLatestTimestamp = sortedCartItems.reduce((acc, item) => {
+    // すでに同じIDを持つアイテムが配列に存在しない場合にのみ追加
+    if (!acc.find((i) => i.id === item.id)) {
+      acc.push(item);
+    }
+    return acc;
+  }, []);
+
+  console.log("Original cart items:", cartItems);
+  console.log("Sorted cart items:", sortedCartItems);
+  console.log(
+    "Unique items with latest timestamp:",
+    uniqueItemsWithLatestTimestamp
+  );
+
   return (
     <div className={` ${!isOpen ? "closed-menu" : ""} `}>
       <div className="absolute top-0 left-0  border border-[#333] w-full h-[50px] items-center flex">
@@ -38,12 +59,9 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         } `}
         variants={variants}
       >
-        {Object.entries(itemsCount).map(([id, quantity]) => {
-          const item = cartItems.find((manga) => manga.id.toString() === id);
-          if (item) {
-            return <MenuItem manga={item} quantity={quantity} key={id} />;
-          }
-          return null;
+        {uniqueItemsWithLatestTimestamp.map((item) => {
+          const quantity = itemsCount[item.id];
+          return <MenuItem manga={item} quantity={quantity} key={item.id} />;
         })}
       </motion.ul>
       <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[110px] items-center justify-center flex flex-col divide-y-2">
