@@ -6,4 +6,5 @@ export interface MangaData {
   description: string;
   category: string;
   rate?: number;
+  timestamp?: string;
 }

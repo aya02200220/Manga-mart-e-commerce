@@ -23,28 +23,24 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
     return acc;
   }, {});
 
-  // 合計金額を計算します。
+  // 合計金額を計算
   const total = cartItems.reduce((acc, item) => acc + item.price, 0);
 
-  // cartItemsをtimestampで逆順にソートします。
-  const sortedCartItems = [...cartItems].sort(
-    (a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp)
+  // cartItemsをtimestampで逆順にソート
+  const sortedCartItems = [...cartItems].sort((a, b) =>
+    (b.timestamp ?? "").localeCompare(a.timestamp ?? "")
   );
 
   // ソートされたアイテムからユニークなアイテムのみを抽出
-  const uniqueItemsWithLatestTimestamp = sortedCartItems.reduce((acc, item) => {
-    // すでに同じIDを持つアイテムが配列に存在しない場合にのみ追加
-    if (!acc.find((i) => i.id === item.id)) {
-      acc.push(item);
-    }
-    return acc;
-  }, []);
-
-  console.log("Original cart items:", cartItems);
-  console.log("Sorted cart items:", sortedCartItems);
-  console.log(
-    "Unique items with latest timestamp:",
-    uniqueItemsWithLatestTimestamp
+  const uniqueItemsWithLatestTimestamp = sortedCartItems.reduce<MangaData[]>(
+    (acc, item) => {
+      // すでに同じIDを持つアイテムが配列に存在しない場合にのみ追加
+      if (!acc.find((i) => i.id === item.id)) {
+        acc.push(item);
+      }
+      return acc;
+    },
+    []
   );
 
   return (
