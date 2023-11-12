@@ -25,7 +25,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);
 
-  const { updateFavs, updateCart } = useAppContext();
+  const { updateFavs } = useAppContext();
 
   useEffect(() => {
     setCategory("All");
@@ -150,15 +150,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
 
                 <div className="flex ">
                   <AddToCart mangaData={manga} />
-                  {/* <AddToCart
-                    mangaData={manga}
-                    onCartUpdated={() => {
-                      const updatedCart = JSON.parse(
-                        localStorage.getItem("cartItems") || "[]"
-                      );
-                      updateCart();
-                    }}
-                  /> */}
                 </div>
               </div>
             </div>

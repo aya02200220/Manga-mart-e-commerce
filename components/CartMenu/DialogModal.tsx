@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, DialogBody } from "@material-tailwind/react";
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 import { CSSTransition } from "react-transition-group";
 import { useAppContext } from "../providers/AppContext";
 
