@@ -280,12 +280,12 @@ function Header(props: HeaderProps) {
       <div className="relative">
         <FavModal isFavOpen={isFavOpen} onRequestClose={handleFavModalClose} />
       </div>
-      <div className="relative">
+      {/* <div className="relative">
         <CartModal
           isCartOpen={isCartOpen}
           onRequestClose={handleCartModalClose}
         />
-      </div>
+      </div> */}
       <div>
         <CartMenu isOpen={isOpen} toggleOpen={toggleOpen} />
       </div>

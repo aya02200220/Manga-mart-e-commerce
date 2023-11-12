@@ -2,12 +2,13 @@ import { useAppContext } from "../providers/AppContext";
 import CartToast from "../Notifications/CartToast";
 import toast from "react-hot-toast";
 
-export const useCartActions = (mangaData, updateItemCount, onCartUpdated) => {
+export const useCartActions = (mangaData, setItemCount, itemCount) => {
   const { updateCart, cartItems } = useAppContext();
 
+  //////////// Decrease an item ////////////////////
   const handleDecrease = (itemCount) => {
-    updateItemCount((prev) => prev - 1);
-    // setItemCount((prev) => prev - 1);
+    setItemCount((prev) => prev - 1);
+
     if (itemCount === 1) {
       console.log("toast remove2");
       toast.custom((t) => (
@@ -18,24 +19,26 @@ export const useCartActions = (mangaData, updateItemCount, onCartUpdated) => {
     if (index !== -1) {
       cartItems.splice(index, 1);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      onCartUpdated();
       updateCart();
     }
   };
 
+  //////////// Increase an item ////////////////////
   const handleIncrease = (itemCount) => {
     const timestamp = new Date().toISOString();
     const newItem = { ...mangaData, timestamp };
 
-    updateItemCount((prev) => prev + 1);
+    setItemCount((prev) => prev + 1);
     cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    onCartUpdated();
     updateCart();
   };
 
-  const removeItem = (mangaData) => {
-    // ...handleRemove ロジック
+  //////////// Remove an item ////////////////////
+  const removeItem = () => {
+    cartItems.splice(index, 1);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateCart();
   };
 
   return { handleIncrease, handleDecrease, removeItem };
