@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
-import { IconButton } from "@mui/material/";
 import { useAppContext } from "../providers/AppContext";
 import toast from "react-hot-toast";
 import CartToast from "../Notifications/CartToast";
 
 import { MangaData } from "@/types";
-import { log } from "console";
+import { useCartActions } from "../hooks/ useCartActions";
 
 interface AddToCartProps {
   mangaData: MangaData;
@@ -18,7 +17,12 @@ interface AddToCartProps {
 const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
   const [itemCount, setItemCount] = useState<number>(0);
   const [isInCart, setIsInCart] = useState<boolean>(false);
-  const { isGoogleLoggedIn, updateCart, cartItems } = useAppContext();
+  const { updateCart, cartItems } = useAppContext();
+  const { handleIncrease, handleDecrease } = useCartActions(
+    mangaData,
+    setItemCount,
+    onCartUpdated
+  );
 
   useEffect(() => {
     setIsInCart(cartItems.some((item: MangaData) => item.id === mangaData.id));
@@ -30,9 +34,12 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
   }, [cartItems, mangaData.id]);
 
   const handleAddToCartClick = () => {
+    const timestamp = new Date().toISOString();
+    const newItem = { ...mangaData, timestamp };
+
     setItemCount((prev) => prev + 1);
     toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />);
-    cartItems.push(mangaData);
+    cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     setIsInCart(true);
 
@@ -40,34 +47,37 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
     updateCart();
   };
 
-  const handleIncrease = () => {
-    setItemCount((prev) => prev + 1);
-    cartItems.push(mangaData);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    onCartUpdated();
-    updateCart();
-  };
+  // const handleIncrease = () => {
+  //   const timestamp = new Date().toISOString();
+  //   const newItem = { ...mangaData, timestamp };
 
-  const handleDecrease = () => {
-    setItemCount((prev) => prev - 1);
+  //   setItemCount((prev) => prev + 1);
+  //   cartItems.push(newItem);
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  //   onCartUpdated();
+  //   updateCart();
+  // };
 
-    if (itemCount === 1) {
-      console.log("toast remove2");
+  // const handleDecrease = () => {
+  //   setItemCount((prev) => prev - 1);
 
-      toast.custom((t) => (
-        <CartToast mangaData={mangaData} actionType="Remove" />
-      ));
-    }
+  //   if (itemCount === 1) {
+  //     console.log("toast remove2");
 
-    const index = cartItems.findIndex((item) => item.id === mangaData.id);
+  //     toast.custom((t) => (
+  //       <CartToast mangaData={mangaData} actionType="Remove" />
+  //     ));
+  //   }
 
-    if (index !== -1) {
-      cartItems.splice(index, 1);
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      onCartUpdated();
-      updateCart();
-    }
-  };
+  //   const index = cartItems.findIndex((item) => item.id === mangaData.id);
+
+  //   if (index !== -1) {
+  //     cartItems.splice(index, 1);
+  //     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  //     onCartUpdated();
+  //     updateCart();
+  //   }
+  // };
 
   return (
     <>
@@ -87,7 +97,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
       ) : (
         <div className="relative inline-flex justify-between items-center overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500 w-[120px] h-[40px]">
           <button
-            onClick={handleDecrease}
+            onClick={() => handleDecrease(itemCount)}
             className="text-white px-3 py-[40px] rounded-l-full
             bg-[#546aaa] hover:bg-[#90a1e4] 
             "
@@ -97,7 +107,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
           </button>
           <span className="px-2 text-[#333] text-lg">{itemCount}</span>
           <button
-            onClick={handleIncrease}
+            onClick={() => handleIncrease(itemCount)}
             className=" text-white px-3 py-[40px] rounded-r-full
             bg-[#546aaa] hover:bg-[#90a1e4] "
           >
