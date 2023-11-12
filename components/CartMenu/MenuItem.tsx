@@ -1,9 +1,11 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MangaData } from "@/types";
 import { useAppContext } from "../providers/AppContext";
 import { ImBin } from "react-icons/im";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { useCartActions } from "../hooks/ useCartActions";
 
 interface MenuItemProps {
   manga: MangaData;
@@ -27,16 +29,20 @@ const variants = {
   },
 };
 
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
+// const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 
 export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
-  const handleIncrement = (id) => {
-    // アイテムの数量を増やすロジック
-  };
+  const [itemCount, setItemCount] = useState<number>(0);
+  const { updateCart, cartItems } = useAppContext();
+  const { handleIncrease, handleDecrease } = useCartActions(
+    manga,
+    setItemCount
+  );
 
-  const handleDecrement = (id) => {
-    // アイテムの数量を減らすロジック、ただし数量が1より大きい場合のみ
-  };
+  useEffect(() => {
+    const count = cartItems.filter((item) => item.id === manga.id).length;
+    setItemCount(count);
+  }, [cartItems]);
 
   const handleRemove = (id) => {
     // アイテムをリストから削除するロジック
@@ -60,14 +66,14 @@ export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
           <div className="flex items-center mt-2">
             <button
               className="w-[27px] h-[27px] px-2 py-1 border rounded-md bg-gray-200 hover:bg-gray-300"
-              onClick={() => handleDecrement(manga.id)}
+              onClick={() => handleDecrease(itemCount)}
             >
               <AiOutlineMinus size="12px" />
             </button>
             <span className="mx-2">{quantity}</span>
             <button
               className="w-[27px] h-[27px] px-2 py-1 border rounded-md bg-gray-200 hover:bg-gray-300"
-              onClick={() => handleIncrement(manga.id)}
+              onClick={() => handleIncrease(itemCount)}
             >
               <AiOutlinePlus size="12px" />
             </button>

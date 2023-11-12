@@ -149,7 +149,8 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                 </div>
 
                 <div className="flex ">
-                  <AddToCart
+                  <AddToCart mangaData={manga} />
+                  {/* <AddToCart
                     mangaData={manga}
                     onCartUpdated={() => {
                       const updatedCart = JSON.parse(
@@ -157,7 +158,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                       );
                       updateCart();
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

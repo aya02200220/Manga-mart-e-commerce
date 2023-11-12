@@ -11,17 +11,15 @@ import { useCartActions } from "../hooks/ useCartActions";
 
 interface AddToCartProps {
   mangaData: MangaData;
-  onCartUpdated: () => void;
 }
 
-const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
+const AddToCart: React.FC<AddToCartProps> = ({ mangaData }) => {
   const [itemCount, setItemCount] = useState<number>(0);
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const { updateCart, cartItems } = useAppContext();
   const { handleIncrease, handleDecrease } = useCartActions(
     mangaData,
-    setItemCount,
-    onCartUpdated
+    setItemCount
   );
 
   useEffect(() => {
@@ -42,42 +40,8 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData, onCartUpdated }) => {
     cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     setIsInCart(true);
-
-    onCartUpdated();
     updateCart();
   };
-
-  // const handleIncrease = () => {
-  //   const timestamp = new Date().toISOString();
-  //   const newItem = { ...mangaData, timestamp };
-
-  //   setItemCount((prev) => prev + 1);
-  //   cartItems.push(newItem);
-  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  //   onCartUpdated();
-  //   updateCart();
-  // };
-
-  // const handleDecrease = () => {
-  //   setItemCount((prev) => prev - 1);
-
-  //   if (itemCount === 1) {
-  //     console.log("toast remove2");
-
-  //     toast.custom((t) => (
-  //       <CartToast mangaData={mangaData} actionType="Remove" />
-  //     ));
-  //   }
-
-  //   const index = cartItems.findIndex((item) => item.id === mangaData.id);
-
-  //   if (index !== -1) {
-  //     cartItems.splice(index, 1);
-  //     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  //     onCartUpdated();
-  //     updateCart();
-  //   }
-  // };
 
   return (
     <>
