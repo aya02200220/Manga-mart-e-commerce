@@ -45,7 +45,7 @@ export const EmptyCartDialogModal: React.FC<DialogModalProps> = ({
           >
             {" "}
             <div className="text-lg ml-4 py-2 font-semibold">
-              Confirm Removal
+              Confirm Empty Cart
             </div>
             <DialogBody divider className="mx-3">
               Are you sure you want to empty your cart? This action cannot be
@@ -60,7 +60,7 @@ export const EmptyCartDialogModal: React.FC<DialogModalProps> = ({
                 Cancel
               </Button>
               <Button
-                className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#0e0b0b] px-2 py-1"
+                className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#b96767] px-2 py-1"
                 variant="text"
                 onClick={handleRemoveAll}
               >

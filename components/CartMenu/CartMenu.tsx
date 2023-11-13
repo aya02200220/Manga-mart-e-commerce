@@ -46,8 +46,6 @@ export const CartMenu: React.FC<CartMenuProps> = ({ isOpen, toggleOpen }) => {
         animate={isOpen ? "open" : "closed"}
         custom={height}
         ref={containerRef}
-        // className="absolute top-[36px] right-[-30px] "
-
         className={`absolute top-[36px] right-[-30px] ${
           !isOpen ? "closed-menu" : ""
         } `}

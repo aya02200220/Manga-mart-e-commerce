@@ -57,7 +57,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
                 Cancel
               </Button>
               <Button
-                className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#0e0b0b] px-2 py-1"
+                className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#b96767] px-2 py-1"
                 variant="text"
                 onClick={handleRemoveAll}
               >

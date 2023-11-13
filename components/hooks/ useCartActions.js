@@ -5,6 +5,18 @@ import toast from "react-hot-toast";
 export const useCartActions = (mangaData, setItemCount, itemCount) => {
   const { updateCart, cartItems } = useAppContext();
 
+  //////////// Add an item ////////////////////
+  const handleAddToCart = () => {
+    const timestamp = new Date().toISOString();
+    const newItem = { ...mangaData, timestamp };
+
+    setItemCount((prev) => prev + 1);
+    toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />);
+    cartItems.push(newItem);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateCart();
+  };
+
   //////////// Decrease an item ////////////////////
   const handleDecrease = (itemCount) => {
     setItemCount((prev) => prev - 1);
@@ -43,5 +55,5 @@ export const useCartActions = (mangaData, setItemCount, itemCount) => {
     updateCart();
   };
 
-  return { handleIncrease, handleDecrease, handleRemoveItem };
+  return { handleAddToCart, handleIncrease, handleDecrease, handleRemoveItem };
 };
