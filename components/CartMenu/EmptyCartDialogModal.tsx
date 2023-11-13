@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
+import { Button, DialogBody } from "@material-tailwind/react";
 import { CSSTransition } from "react-transition-group";
 import { useAppContext } from "../providers/AppContext";
 
@@ -14,11 +8,14 @@ interface DialogModalProps {
   onClose: () => void;
 }
 
-export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
-  const { removeAllFavs, updateFavs } = useAppContext();
+export const EmptyCartDialogModal: React.FC<DialogModalProps> = ({
+  open,
+  onClose,
+}) => {
+  const { removeAllItems } = useAppContext();
 
   const handleRemoveAll = () => {
-    removeAllFavs();
+    removeAllItems();
     onClose();
   };
 
@@ -48,11 +45,11 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
           >
             {" "}
             <div className="text-lg ml-4 py-2 font-semibold">
-              Confirm Removal
+              Confirm Empty Cart
             </div>
             <DialogBody divider className="mx-3">
-              Are you sure you want to remove all favorites? This action cannot
-              be undone.
+              Are you sure you want to empty your cart? This action cannot be
+              undone.
             </DialogBody>
             <div className="flex justify-end gap-1 p-2 mr-2">
               <Button
@@ -63,11 +60,11 @@ export const DialogModal: React.FC<DialogModalProps> = ({ open, onClose }) => {
                 Cancel
               </Button>
               <Button
-                className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#0e0b0b] px-2 py-1"
+                className="text-white text-[11px] rounded-md font-thin bg-[#af5050] hover:bg-[#b96767] px-2 py-1"
                 variant="text"
                 onClick={handleRemoveAll}
               >
-                Remove All
+                Empty Cart
               </Button>
             </div>
           </div>
