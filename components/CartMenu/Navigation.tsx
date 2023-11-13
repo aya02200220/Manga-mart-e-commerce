@@ -49,16 +49,26 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         <p className="pl-[10px] font-bold">My Cart ,</p>
         <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
+
       <motion.ul
         className={`overflow-y-auto  h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-1 left-0 w-full  ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
       >
-        {uniqueItemsWithLatestTimestamp.map((item) => {
-          const quantity = itemsCount[item.id];
-          return <MenuItem manga={item} quantity={quantity} key={item.id} />;
-        })}
+        {uniqueItemsWithLatestTimestamp.length > 0 ? (
+          uniqueItemsWithLatestTimestamp.map((item) => {
+            const quantity = itemsCount[item.id];
+            return <MenuItem manga={item} quantity={quantity} key={item.id} />;
+          })
+        ) : (
+          <div className="text-center">
+            <video autoPlay loop muted className="w-full h-auto pt-6">
+              <source src="/NoItem-Pop.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        )}
       </motion.ul>
       <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[110px] items-center justify-center flex flex-col divide-y-2">
         <div className="flex flex-1  w-full justify-between items-center">

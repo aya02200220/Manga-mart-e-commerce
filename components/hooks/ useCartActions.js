@@ -35,11 +35,13 @@ export const useCartActions = (mangaData, setItemCount, itemCount) => {
   };
 
   //////////// Remove an item ////////////////////
-  const removeItem = () => {
-    cartItems.splice(index, 1);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  const handleRemoveItem = () => {
+    const updatedCartItems = cartItems.filter(
+      (item) => item.id !== mangaData.id
+    );
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     updateCart();
   };
 
-  return { handleIncrease, handleDecrease, removeItem };
+  return { handleIncrease, handleDecrease, handleRemoveItem };
 };

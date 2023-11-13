@@ -34,7 +34,7 @@ const variants = {
 export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
   const [itemCount, setItemCount] = useState<number>(0);
   const { updateCart, cartItems } = useAppContext();
-  const { handleIncrease, handleDecrease } = useCartActions(
+  const { handleIncrease, handleDecrease, handleRemoveItem } = useCartActions(
     manga,
     setItemCount
   );
@@ -44,13 +44,9 @@ export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
     setItemCount(count);
   }, [cartItems]);
 
-  const handleRemove = (id) => {
-    // アイテムをリストから削除するロジック
-  };
-
   return (
     <motion.li
-      className="flex  border-b border-b-1"
+      className="flex border-b border-b-1"
       variants={variants}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
@@ -81,7 +77,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
         </div>
         <button
           className="mt-2 w-[30px] h-[30px] flex ml-4 px-2 py-1 text-red-600 border border-red-600 rounded-md hover:bg-red-600 hover:text-white"
-          onClick={() => handleRemove(manga.id)}
+          onClick={() => handleRemoveItem()}
         >
           <ImBin />
         </button>
