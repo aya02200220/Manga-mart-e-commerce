@@ -1,9 +1,12 @@
 import * as React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MenuItem } from "./MenuItem";
 // import { CartMenu } from "./CartMenu";
 import { useAppContext } from "../providers/AppContext";
 import { MangaData } from "@/types";
+
+import { EmptyCartDialogModal } from "./EmptyCartDialogModal";
 
 const variants = {
   open: {
@@ -15,6 +18,18 @@ const variants = {
 };
 
 export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  // ダイアログを開くハンドラ
+  const handleEmptyButtonClick = () => {
+    setIsDialogOpen(true);
+  };
+
+  // ダイアログを閉じるハンドラ
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
+
   const { cartItemsCounts, updateCart, cartItems } = useAppContext();
 
   // アイテムとその数量のマップを作成します。
@@ -25,22 +40,24 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
 
   // 合計金額を計算
   const total = cartItems.reduce((acc, item) => acc + item.price, 0);
-
-  // cartItemsをtimestampで逆順にソート
-  const sortedCartItems = [...cartItems].sort((a, b) =>
-    (b.timestamp ?? "").localeCompare(a.timestamp ?? "")
+  // cartItemsをtimestampで昇順にソート
+  const ascendingCartItems = [...cartItems].sort((a, b) =>
+    (a.timestamp ?? "").localeCompare(b.timestamp ?? "")
   );
 
-  // ソートされたアイテムからユニークなアイテムのみを抽出
-  const uniqueItemsWithLatestTimestamp = sortedCartItems.reduce<MangaData[]>(
-    (acc, item) => {
-      // すでに同じIDを持つアイテムが配列に存在しない場合にのみ追加
-      if (!acc.find((i) => i.id === item.id)) {
-        acc.push(item);
-      }
-      return acc;
-    },
-    []
+  // ソートされたアイテムからユニークなアイテムを抽出（最も古いものを残す）
+  const uniqueItemsWithEarliestTimestamp = ascendingCartItems.reduce<
+    MangaData[]
+  >((acc, item) => {
+    // 同じIDを持つアイテムがまだ追加されていない場合にのみ追加
+    if (!acc.some((i) => i.id === item.id)) {
+      acc.push(item);
+    }
+    return acc;
+  }, []);
+
+  const descendingCartItems = [...uniqueItemsWithEarliestTimestamp].sort(
+    (a, b) => (b.timestamp ?? "").localeCompare(a.timestamp ?? "")
   );
 
   return (
@@ -56,8 +73,8 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         } `}
         variants={variants}
       >
-        {uniqueItemsWithLatestTimestamp.length > 0 ? (
-          uniqueItemsWithLatestTimestamp.map((item) => {
+        {descendingCartItems.length > 0 ? (
+          descendingCartItems.map((item) => {
             const quantity = itemsCount[item.id];
             return <MenuItem manga={item} quantity={quantity} key={item.id} />;
           })
@@ -78,14 +95,18 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
           </p>
         </div>
         <div className="flex flex-1 w-full gap-4 justify-center items-center">
-          <button className="border border-black py-1 w-[120px]">
+          <button
+            onClick={handleEmptyButtonClick}
+            className="py-1 w-[120px] bg-[#c56c6c] hover:bg-[#dd7e7e] text-[#fff] rounded-md transition duration-300 ease-in-out"
+          >
             Empty cart
           </button>
-          <button className="border border-black py-1 w-[120px]">
+          <button className="py-1 w-[120px] bg-[#537aa2] hover:bg-[#62b2c2] text-[#fff] rounded-md transition duration-300 ease-in-out">
             Checkout
           </button>
         </div>
       </div>
+      <EmptyCartDialogModal open={isDialogOpen} onClose={handleCloseDialog} />
     </div>
   );
 };
