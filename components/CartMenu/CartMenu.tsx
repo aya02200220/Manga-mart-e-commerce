@@ -46,7 +46,11 @@ export const CartMenu: React.FC<CartMenuProps> = ({ isOpen, toggleOpen }) => {
         animate={isOpen ? "open" : "closed"}
         custom={height}
         ref={containerRef}
-        className="absolute top-[36px] right-[-30px] "
+        // className="absolute top-[36px] right-[-30px] "
+
+        className={`absolute top-[36px] right-[-30px] ${
+          !isOpen ? "closed-menu" : ""
+        } `}
       >
         <motion.div
           className="overflow-auto border border-[#333] h-[100vh] sm:h-[500px] w-[300px] 
