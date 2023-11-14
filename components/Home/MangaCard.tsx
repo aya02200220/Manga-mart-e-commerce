@@ -25,8 +25,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
   const [category, setCategory] = useState("All");
   const [data, setData] = useState(filteredData);
 
-  const { updateFavs } = useAppContext();
-
   useEffect(() => {
     setCategory("All");
     handleData("All");
@@ -97,15 +95,9 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               className="flex w-[220px] sm:w-[300px] h-[160px] sm:h-[210px] mb-2"
             >
               <div className="w-[100px] sm:w-[130px] flex-shrink-0 relative">
-                <AddToFav
-                  mangaData={manga}
-                  onFavUpdated={() => {
-                    const updatedFavs = JSON.parse(
-                      localStorage.getItem("favs") || "[]"
-                    );
-                    updateFavs();
-                  }}
-                />
+                <div className="absolute top-1 left-1 bg-[#ffffffd4] rounded-full">
+                  <AddToFav mangaData={manga} />
+                </div>
                 <img
                   onClick={() => handleModal(manga?.id)}
                   className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm cursor-pointer"
@@ -161,7 +153,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
           <Modal
             isOpen={isOpen}
             onRequestClose={handleModalClose}
-            manga={singleData}
+            mangaData={singleData}
           />
         </div>
       </div>

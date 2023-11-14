@@ -112,7 +112,7 @@ const Hero = () => {
         <Modal
           isOpen={isOpen}
           onRequestClose={handleModalClose}
-          manga={singleData}
+          mangaData={singleData}
         />
       </div>
     </div>

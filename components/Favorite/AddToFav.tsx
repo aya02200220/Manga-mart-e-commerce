@@ -9,10 +9,9 @@ import { MangaData } from "@/types";
 
 interface AddToFavProps {
   mangaData: MangaData;
-  onFavUpdated: () => void;
 }
 
-const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
+const AddToFav: React.FC<AddToFavProps> = ({ mangaData }) => {
   const [isFavored, setIsFavored] = useState<boolean>(false);
   const { isGoogleLoggedIn, updateFavs, favItems } = useAppContext();
 
@@ -61,16 +60,11 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData, onFavUpdated }) => {
       setIsFavored(false);
     }
 
-    onFavUpdated();
     updateFavs();
   };
 
   return (
-    <IconButton
-      size="small"
-      className="absolute top-1 left-1 bg-[#ffffffd4]"
-      onClick={handleFavClick}
-    >
+    <IconButton size="small" onClick={handleFavClick}>
       {isFavored && isGoogleLoggedIn ? (
         <MdFavorite color="#EB1E6C" size="20px" />
       ) : (
