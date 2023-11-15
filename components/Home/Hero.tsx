@@ -60,26 +60,35 @@ const Hero = () => {
         </div>
       </div>
       {/* /////////// ad images //////////// */}
-      <div className="relative hidden md:block w-1/3 m-1 overflow-hidden ">
-        <Image
+      <div className="relative hidden md:block w-1/3 m-1 overflow-hidden max-w-[720px]">
+        {/* <Image
           fill={true}
           src={bg10}
           alt="background"
           object-fit="cover"
           objectPosition="center"
           className="z-0"
-        />
+        /> */}
+
+        <video
+          autoPlay
+          loop
+          muted
+          className="w-full h-full object-cover object-top"
+        >
+          <source src="/Pickup-bg-1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div className="absolute top-0 left-0 w-full z-1 flex flex-col justify-between">
-          <div className="text-xl font-semibold text-center flex justify-center content-center my-1">
+          {/* <div className="text-xl font-semibold text-center flex justify-center content-center my-1">
             <Image
               src={logo}
               alt="Today's Pick Up"
               width={150}
               height={90}
-              // className="cursor-pointer"
             />
-          </div>
-          <div className="flex slid-images horizontal justify-center items-center h-full">
+          </div> */}
+          <div className="flex slid-images horizontal justify-center items-center h-full pt-[70px]">
             {[
               randomImage1,
               randomImage2,

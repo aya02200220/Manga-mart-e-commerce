@@ -6,6 +6,7 @@ import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
 import FavoriteToast from "../Notifications/FavoriteToast";
 import { motion } from "framer-motion";
+import { useCartActions } from "../hooks/ useCartActions";
 
 import { DialogModal } from "../Cart/DialogModal";
 import toast from "react-hot-toast";
@@ -139,10 +140,10 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                           {/* 追加：削除ボタン */}
                           <button
                             onClick={() => handleRemoveFav(data)}
-                            className="absolute top-0 right-0 h-6 w-6 rounded-full bg-red-600 text-white flex items-center justify-center hover:bg-red-700"
+                            className="absolute top-0 right-0 h-6 w-6 rounded-full bg-[#fff] text-[#555] hover:text-black flex items-center justify-center hover:bg-[#f2f2f2] transition duration-300 ease-in-out hover:scale-90"
                             aria-label="Remove item"
                           >
-                            × {/* ここには他のアイコンも使用できます */}
+                            <RxCrossCircled size="medium" />
                           </button>
                           <img
                             src={data.image}
