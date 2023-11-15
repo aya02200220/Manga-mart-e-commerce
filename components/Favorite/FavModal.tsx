@@ -121,16 +121,20 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
               <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[70vh] min-h-[30vh]">
                 {favCounts <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
-                    <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
+                    {/* <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
                       No Favorites!
-                    </p>
-                    <Image
+                    </p> */}
+                    <video autoPlay loop muted className="max-w-[300px]">
+                      <source src="/NoFavs.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    {/* <Image
                       className="h-40 sm:h-40 w-auto"
                       src={NoFavImage}
                       alt="hero"
                       object-fit="cover"
                       objectPosition="top"
-                    />
+                    /> */}
                   </div>
                 ) : (
                   <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
