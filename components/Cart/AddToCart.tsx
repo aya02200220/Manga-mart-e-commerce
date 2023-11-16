@@ -7,6 +7,7 @@ import { useCartActions } from "../hooks/ useCartActions";
 
 interface AddToCartProps {
   mangaData: MangaData;
+  size?: "small" | "medium" | "large";
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({ mangaData }) => {

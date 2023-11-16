@@ -10,6 +10,7 @@ import { useCartActions } from "../hooks/ useCartActions";
 
 import { DialogModal } from "../Cart/DialogModal";
 import toast from "react-hot-toast";
+import AddToCart from "../Cart/AddToCart";
 
 const modalVariant = {
   hidden: {
@@ -140,11 +141,10 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                   <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
                     {favData.map((data: MangaData) => (
                       <>
-                        <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg">
-                          {/* 追加：削除ボタン */}
+                        <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg hover:scale-[98%] transition duration-300  shadow-md hover:shadow-none">
                           <button
                             onClick={() => handleRemoveFav(data)}
-                            className="absolute top-0 right-0 h-6 w-6 rounded-full bg-[#fff] text-[#555] hover:text-black flex items-center justify-center hover:bg-[#f2f2f2] transition duration-300 ease-in-out hover:scale-90"
+                            className="absolute top-1 right-1 h-6 w-6 rounded-full bg-[#fff] text-[#555] hover:text-black flex items-center justify-center hover:bg-[#ffaaaa] transition duration-300 ease-in-out hover:scale-[115%]"
                             aria-label="Remove item"
                           >
                             <RxCrossCircled size="medium" />
@@ -162,6 +162,9 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                           <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
                             ${data.price.toFixed(2)}
                           </p>
+                          <div className="flex justify-center mb-2">
+                            <AddToCart mangaData={data} />
+                          </div>
                         </div>
                       </>
                     ))}

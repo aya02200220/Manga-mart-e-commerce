@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import { Rating, Button, IconButton } from "@mui/material/";
-import { FaCartArrowDown } from "react-icons/fa";
+import { Rating } from "@mui/material/";
 
 import AddToFav from "../Favorite/AddToFav";
 import AddToCart from "../Cart/AddToCart";
 import CategoryFilter from "./CategoryFilter";
 import Modal from "./Modal";
-import { log } from "console";
 
 import { MangaData } from "@/types";
-import { useAppContext } from "../providers/AppContext";
 
 interface MangaCardProps {
   filteredData: MangaData[];
