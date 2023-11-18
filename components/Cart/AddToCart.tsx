@@ -7,6 +7,7 @@ import { useCartActions } from "../hooks/ useCartActions";
 
 interface AddToCartProps {
   mangaData: MangaData;
+  size?: "small" | "medium" | "large";
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({ mangaData }) => {
@@ -16,11 +17,6 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData }) => {
     mangaData,
     setItemCount
   );
-
-  // const [isInCart, setIsInCart] = useState<boolean>(false);
-  // useEffect(() => {
-  //   setIsInCart(cartItems.some((item: MangaData) => item.id === mangaData.id));
-  // }, [mangaData.id, cartItems]);
 
   useEffect(() => {
     const count = cartItems.filter((item) => item.id === mangaData.id).length;

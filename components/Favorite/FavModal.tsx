@@ -6,9 +6,11 @@ import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
 import FavoriteToast from "../Notifications/FavoriteToast";
 import { motion } from "framer-motion";
+import { useCartActions } from "../hooks/ useCartActions";
 
 import { DialogModal } from "../Cart/DialogModal";
 import toast from "react-hot-toast";
+import AddToCart from "../Cart/AddToCart";
 
 const modalVariant = {
   hidden: {
@@ -120,29 +122,32 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
               <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[70vh] min-h-[30vh]">
                 {favCounts <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
-                    <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
+                    {/* <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
                       No Favorites!
-                    </p>
-                    <Image
+                    </p> */}
+                    <video autoPlay loop muted className="max-w-[300px]">
+                      <source src="/NoFavs.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    {/* <Image
                       className="h-40 sm:h-40 w-auto"
                       src={NoFavImage}
                       alt="hero"
                       object-fit="cover"
                       objectPosition="top"
-                    />
+                    /> */}
                   </div>
                 ) : (
                   <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
                     {favData.map((data: MangaData) => (
                       <>
-                        <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg">
-                          {/* 追加：削除ボタン */}
+                        <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg hover:scale-[98%] transition duration-300  shadow-md hover:shadow-none">
                           <button
                             onClick={() => handleRemoveFav(data)}
-                            className="absolute top-0 right-0 h-6 w-6 rounded-full bg-red-600 text-white flex items-center justify-center hover:bg-red-700"
+                            className="absolute top-1 right-1 h-6 w-6 rounded-full bg-[#fff] text-[#555] hover:text-black flex items-center justify-center hover:bg-[#ffaaaa] transition duration-300 ease-in-out hover:scale-[115%]"
                             aria-label="Remove item"
                           >
-                            × {/* ここには他のアイコンも使用できます */}
+                            <RxCrossCircled size="medium" />
                           </button>
                           <img
                             src={data.image}
@@ -157,6 +162,9 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                           <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
                             ${data.price.toFixed(2)}
                           </p>
+                          <div className="flex justify-center mb-2">
+                            <AddToCart mangaData={data} />
+                          </div>
                         </div>
                       </>
                     ))}
