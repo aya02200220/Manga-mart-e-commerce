@@ -18,11 +18,6 @@ const AddToCart: React.FC<AddToCartProps> = ({ mangaData }) => {
     setItemCount
   );
 
-  // const [isInCart, setIsInCart] = useState<boolean>(false);
-  // useEffect(() => {
-  //   setIsInCart(cartItems.some((item: MangaData) => item.id === mangaData.id));
-  // }, [mangaData.id, cartItems]);
-
   useEffect(() => {
     const count = cartItems.filter((item) => item.id === mangaData.id).length;
     setItemCount(count);
