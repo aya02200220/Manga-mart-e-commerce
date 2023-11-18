@@ -153,17 +153,19 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                             src={data.image}
                             className="block h-[150px] sm:h-[200px] w-[100px] sm:w-[170px] sm:object-cover rounded-sm"
                           />
-                          <p
-                            className="text-[13px] sm:text-sm flex justify-center items-start break-normal h-[28px] sm:h-[32px] leading-3 sm:leading-4 mt-1 mx-1.5"
-                            key={data.id}
-                          >
-                            {data.title}
-                          </p>
-                          <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
-                            ${data.price.toFixed(2)}
-                          </p>
+                          <div className="h-[50px] mb-2">
+                            <p
+                              className="text-[13px] sm:text-sm flex justify-center items-start break-normal leading-3 sm:leading-4 mt-1 mx-1.5 mb-0.5"
+                              key={data.id}
+                            >
+                              {data.title}
+                            </p>
+                            <p className="text-[15px] sm:text-md flex justify-center items-start break-normal leading-4 pb-2">
+                              ${data.price.toFixed(2)}
+                            </p>
+                          </div>
                           <div className="flex justify-center mb-2">
-                            <AddToCart mangaData={data} />
+                            <AddToCart mangaData={data} size="small" />
                           </div>
                         </div>
                       </>
