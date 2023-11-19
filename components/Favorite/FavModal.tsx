@@ -95,12 +95,8 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
             exit="exit"
             variants={modalVariant}
             onClick={handleContentClick}
-            className="relative w-[92%] md:w-[60%] h-[300px] top-10"
+            className="relative w-[92%] md:w-[65%] h-[300px] top-10"
           >
-            {/* <div
-              onClick={handleContentClick}
-              className="relative w-[92%] md:w-[80%] h-[300px] top-10"
-            > */}
             {/* <!-- Modal content --> */}
             <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden ">
               {/* <!-- Modal header --> */}
@@ -122,23 +118,13 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
               <div className="p-3 text-[#333] flex-grow overflow-auto max-h-[70vh] min-h-[30vh]">
                 {favCounts <= 0 ? (
                   <div className="flex flex-col sm:flex-row justify-center items-center">
-                    {/* <p className="text-[#3c3c3c] text-center ml--0 sm:ml-4 mt-6 text-lg sm:text-2xl">
-                      No Favorites!
-                    </p> */}
                     <video autoPlay loop muted className="max-w-[300px]">
                       <source src="/NoFavs.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
-                    {/* <Image
-                      className="h-40 sm:h-40 w-auto"
-                      src={NoFavImage}
-                      alt="hero"
-                      object-fit="cover"
-                      objectPosition="top"
-                    /> */}
                   </div>
                 ) : (
-                  <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-2 sm:pl-14">
+                  <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-0 md:pl-14 sm:justify-center md:justify-normal">
                     {favData.map((data: MangaData) => (
                       <>
                         <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg hover:scale-[98%] transition duration-300  shadow-md hover:shadow-none">

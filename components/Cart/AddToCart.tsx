@@ -25,7 +25,7 @@ const AddToCart: React.FC<AddToCartProps> = ({
     size === "large"
       ? "w-[150px] h-[50px]"
       : size === "small"
-      ? "w-[100px] h-[40px]"
+      ? "w-[90px] h-[40px]"
       : "w-[120px] h-[40px]";
 
   useEffect(() => {
