@@ -39,7 +39,7 @@ export default function HeroLogo() {
   }
   return (
     <div
-      className="hero-container text-white text-opacity-70"
+      className="hero-container text-white text-opacity-80"
       onClick={() => set((state) => !state)}
     >
       <Trail open={open}>
