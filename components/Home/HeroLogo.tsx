@@ -16,7 +16,11 @@ const Trail: React.FC<{ open: boolean; children: React.ReactNode }> = ({
   return (
     <div>
       {trail.map(({ height, ...style }, index) => (
-        <a.div key={index} className="trailsText" style={style}>
+        <a.div
+          key={index}
+          className="trailsText h-[40px] md:h-[80px] text-[45px] md:text-[80px]"
+          style={style}
+        >
           <a.div style={{ height }}>{items[index]}</a.div>
         </a.div>
       ))}
@@ -39,7 +43,7 @@ export default function HeroLogo() {
   }
   return (
     <div
-      className="hero-container text-white text-opacity-80"
+      className="flex items-center text-white text-opacity-80 h-[40px]"
       onClick={() => set((state) => !state)}
     >
       <Trail open={open}>

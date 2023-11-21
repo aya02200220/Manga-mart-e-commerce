@@ -39,7 +39,7 @@ body {
 
 .slid-images.horizontal {
   display: flex;
-  animation: slideLeftEndless 5s infinite linear; /* アニメーション時間を調整する */
+  animation: slideLeftEndless 15s infinite linear; /* アニメーション時間を調整する */
   align-items: center;
 }
 
@@ -111,10 +111,7 @@ body {
 .trailsText {
   position: relative;
   width: 100%;
-  height: 80px;
   line-height: 50px;
-  /* color: #fff; */
-  font-size: 80px;
   font-weight: 800;
   letter-spacing: -0.05em;
   will-change: transform, opacity;
@@ -124,11 +121,4 @@ body {
 .trailsText > div {
   padding-right: 0.05em;
   overflow: hidden;
-}
-
-.hero-container {
-  display: flex;
-  align-items: center;
-  height: 90%;
-  justify-content: center;
 }
