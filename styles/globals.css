@@ -27,22 +27,22 @@ body {
   background-color: #f3f3f3;
   color: #535353;
 }
+
 @keyframes slideLeftEndless {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.33%);
+    transform: translateX(-134%);
   }
 }
 
 .slid-images.horizontal {
   display: flex;
-  animation: slideLeftEndless 15s infinite linear;
-  align-items: center; /* これを追加して画像を上下中央に配置 */
+  animation: slideLeftEndless 15s infinite linear; /* アニメーション時間を調整する */
+  align-items: center;
 }
 
-/* ホバー時にアニメーションを一時停止 */
 .slid-images.horizontal:hover {
   animation-play-state: paused;
 }
@@ -111,10 +111,7 @@ body {
 .trailsText {
   position: relative;
   width: 100%;
-  height: 80px;
   line-height: 50px;
-  /* color: #fff; */
-  font-size: 80px;
   font-weight: 800;
   letter-spacing: -0.05em;
   will-change: transform, opacity;
@@ -124,11 +121,4 @@ body {
 .trailsText > div {
   padding-right: 0.05em;
   overflow: hidden;
-}
-
-.hero-container {
-  display: flex;
-  align-items: center;
-  height: 90%;
-  justify-content: center;
 }

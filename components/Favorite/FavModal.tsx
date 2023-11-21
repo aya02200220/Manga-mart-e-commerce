@@ -124,7 +124,7 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
                     </video>
                   </div>
                 ) : (
-                  <div className="p-6 flex gap-2 sm:gap-8 flex-wrap pl-0 md:pl-14 sm:justify-center md:justify-normal">
+                  <div className="p-2 md:p-6 flex gap-2 sm:gap-8 flex-wrap pl-0 md:pl-14 justify-center md:justify-normal">
                     {favData.map((data: MangaData) => (
                       <>
                         <div className="flex relative flex-col w-[100px] sm:w-[170px] border border-[#e9e7e7] rounded-lg hover:scale-[98%] transition duration-300  shadow-md hover:shadow-none">

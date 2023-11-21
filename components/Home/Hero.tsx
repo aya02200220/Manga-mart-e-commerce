@@ -51,7 +51,7 @@ const Hero = () => {
           objectFit="cover"
           objectPosition="top"
         />
-        <div className="absolute inset-0 bg-[#4a4a4a56]">
+        <div className="absolute inset-0 bg-[#3c3c3c86]">
           <div className="absolute inset-0 flex items-center justify-center">
             <p className="text-white text-2xl font-semibold">
               <HeroLogo />
