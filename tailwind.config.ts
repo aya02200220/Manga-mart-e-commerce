@@ -15,10 +15,10 @@ const config: Config = {
       },
     },
 
-    screens: {
-      xs: "480px",
-      sm: "646px",
-    },
+    // screens: {
+    //   xs: "480px",
+    //   sm: "646px",
+    // },
   },
   plugins: [],
 };

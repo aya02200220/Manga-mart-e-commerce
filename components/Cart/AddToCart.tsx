@@ -25,7 +25,7 @@ const AddToCart: React.FC<AddToCartProps> = ({
     size === "large"
       ? "w-[150px] h-[50px]"
       : size === "small"
-      ? "w-[90px] h-[40px]"
+      ? "w-[76px] h-[30px]"
       : "w-[120px] h-[40px]";
 
   useEffect(() => {
@@ -62,17 +62,23 @@ const AddToCart: React.FC<AddToCartProps> = ({
             onClick={() => handleDecrease(itemCount)}
             className={`text-white  py-[40px] rounded-l-full
             bg-[#546aaa] hover:bg-[#90a1e4] ${
-              size === "small" ? "px-2" : "px-3"
+              size === "small" ? "px-1" : "px-3"
             } `}
           >
             <AiOutlineMinus />
           </button>
-          <span className="px-2 text-[#333] text-lg">{itemCount}</span>
+          <span
+            className={`px-2 text-[#333] ${
+              size === "small" ? "text-md" : "text-lg"
+            }`}
+          >
+            {itemCount}
+          </span>
           <button
             onClick={() => handleIncrease(itemCount)}
             className={`text-white  py-[40px] rounded-r-full
             bg-[#546aaa] hover:bg-[#90a1e4] ${
-              size === "small" ? "px-2" : "px-3"
+              size === "small" ? "px-1" : "px-3"
             } `}
           >
             <AiOutlinePlus />

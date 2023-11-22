@@ -88,13 +88,22 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               key={manga.id}
               data-aos="fade-up"
               data-aos-duration="700"
-              className="flex w-[220px] sm:w-[300px] h-[160px] sm:h-[210px] mb-2"
+              className="flex xs:w-[170px] sm:w-[300px] h-[130px] sm:h-[210px] mb-2"
             >
-              <div className="w-[100px] sm:w-[130px] flex-shrink-0 relative">
+              <div className="w-[80px] sm:w-[130px] flex-shrink-0 relative">
                 <div className="absolute top-1 left-1 bg-[#ffffffd4] rounded-full">
                   <AddToFav mangaData={manga} />
                 </div>
                 <img
+                  onClick={() => handleModal(manga?.id)}
+                  className="h-[130px] sm:h-[210px] w-[90px] w-[90px] sm:w-full object-cover rounded-sm cursor-pointer"
+                  style={{
+                    boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
+                  }}
+                  src={manga.image}
+                  alt={manga.title}
+                />
+                {/* <img
                   onClick={() => handleModal(manga?.id)}
                   className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm cursor-pointer"
                   style={{
@@ -102,42 +111,47 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                   }}
                   src={manga.image}
                   alt={manga.title}
-                />
+                /> */}
               </div>
-              <div className="m-1 sm:m-4 pl-1 flex-grow flex flex-col justify-between">
-                <div className="">
-                  <p
-                    className="flex justify-center rounded-sm text-white text-[10px] sm:text-[13px]"
-                    style={{
-                      backgroundColor:
-                        categoryColors[manga.category] || "#817db9",
-                    }}
-                  >
-                    {manga.category.toUpperCase()}
-                  </p>
-                  <div className="flex items-center mb-2">
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={manga.rate ?? 0}
-                      precision={0.1}
-                      readOnly
-                      size="small"
-                    />
-                    <p className="text-sm sm:text-[16px]">
-                      {manga.rate?.toFixed(1) ?? 0}
-                    </p>
-                  </div>
 
-                  <p className="text-md sm:text-[19px] leading-5 mb-1 sm:mb-3 ">
-                    {manga.title}
-                  </p>
-                  <p className=" text-[20px] sm:text-[28px] font-extrabold">
-                    ${manga.price.toFixed(2)}
+              {/* ///////////// カード左半分 ////////////////// */}
+              <div className="m-1 sm:m-4 pl-1 w-[80px] flex flex-col justify-between">
+                <p
+                  className="flex justify-center rounded-sm text-white text-[10px] sm:text-[13px]"
+                  style={{
+                    backgroundColor:
+                      categoryColors[manga.category] || "#817db9",
+                  }}
+                >
+                  {manga.category.toUpperCase()}
+                </p>
+                <div className="flex items-center mb-1 sm:mb-2">
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={manga.rate ?? 0}
+                    precision={0.1}
+                    readOnly
+                    className="text-xs sm:text-lg"
+                  />
+                  <p className="text-[10px] sm:text-[16px]">
+                    {manga.rate?.toFixed(1) ?? 0}
                   </p>
                 </div>
 
+                <p className="text-[14px] sm:text-[19px] leading-3 sm:leading-5 mb-[3px] sm:mb-3 ">
+                  {manga.title}
+                </p>
+                <p className=" text-[15px] sm:text-[28px] font-extrabold">
+                  ${manga.price.toFixed(2)}
+                </p>
+
                 <div className="flex ">
-                  <AddToCart mangaData={manga} />
+                  <div className="hidden sm:block">
+                    <AddToCart mangaData={manga} />
+                  </div>
+                  <div className="block sm:hidden">
+                    <AddToCart mangaData={manga} size="small" />
+                  </div>
                 </div>
               </div>
             </div>
