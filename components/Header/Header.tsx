@@ -249,21 +249,6 @@ function Header(props: HeaderProps) {
                   <GrCart size={20} />
                 </Badge>
               </IconButton>
-
-              {/* <IconButton
-                onClick={() => handleCartModalOpen()}
-                className="ml-2"
-              >
-                <Badge badgeContent={cartItemsCounts} color="primary">
-                  <GrCart size={20} />
-                </Badge>
-              </IconButton> */}
-
-              {/* <IconButton size="small" className="mt-2">
-                <Badge badgeContent={cartItemsCounts} color="primary">
-                  <CartMenu />{" "}
-                </Badge>
-              </IconButton> */}
             </div>
           ) : (
             <button
@@ -280,12 +265,7 @@ function Header(props: HeaderProps) {
       <div className="relative">
         <FavModal isFavOpen={isFavOpen} onRequestClose={handleFavModalClose} />
       </div>
-      {/* <div className="relative">
-        <CartModal
-          isCartOpen={isCartOpen}
-          onRequestClose={handleCartModalClose}
-        />
-      </div> */}
+
       <div>
         <CartMenu isOpen={isOpen} toggleOpen={toggleOpen} />
       </div>

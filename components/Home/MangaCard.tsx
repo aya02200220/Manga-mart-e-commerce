@@ -131,7 +131,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                   <p className="text-md sm:text-[19px] leading-5 mb-1 sm:mb-3 ">
                     {manga.title}
                   </p>
-                  <p className="text-2xl sm:text-[28px] font-extrabold">
+                  <p className=" text-[20px] sm:text-[28px] font-extrabold">
                     ${manga.price.toFixed(2)}
                   </p>
                 </div>
