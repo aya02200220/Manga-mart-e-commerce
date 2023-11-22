@@ -115,7 +115,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               </div>
 
               {/* ///////////// カード左半分 ////////////////// */}
-              <div className="m-1 sm:m-4 pl-1 w-[80px] flex flex-col justify-between">
+              <div className="m-1 sm:m-4 pl-1 w-[80px] sm:w-[160px] flex flex-col justify-between">
                 <p
                   className="flex justify-center rounded-sm text-white text-[10px] sm:text-[13px]"
                   style={{
@@ -133,7 +133,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                     readOnly
                     className="text-xs sm:text-lg"
                   />
-                  <p className="text-[10px] sm:text-[16px]">
+                  <p className="text-[10px] sm:text-[20px]">
                     {manga.rate?.toFixed(1) ?? 0}
                   </p>
                 </div>
