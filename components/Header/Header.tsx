@@ -48,6 +48,19 @@ const filterMenu = [
   },
 ];
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+}
+
 function Header(props: HeaderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -57,15 +70,16 @@ function Header(props: HeaderProps) {
   const [isFavOpen, setFavIsOpen] = useState(false);
   const [isCartOpen, setCartIsOpen] = useState(false);
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const [width, height] = useWindowSize();
 
   const { isGoogleLoggedIn, favCounts, cartItemsCounts } = useAppContext();
 
   useEffect(() => {
-    console.log(
-      "props.onSearch availability:",
-      props.onSearch ? "Available" : "Not available"
-    );
-  }, []);
+    if (width < 768) {
+      // TailwindのSMサイズ
+      setSearchCategory("Title");
+    }
+  }, [width]);
 
   // debounced検索処理;
   const debouncedSearch = debounce((term: string, category: string) => {
@@ -130,7 +144,6 @@ function Header(props: HeaderProps) {
   };
   const handleCartModalOpen = () => {
     toggleOpen();
-    // setCartIsOpen(true);
   };
   const handleCartModalClose = () => {
     setCartIsOpen(false);
@@ -151,23 +164,26 @@ function Header(props: HeaderProps) {
 
       <div className="flex justify-between sm:justify-end items-center w-full">
         <div className="flex items-center">
-          <TextField
-            className="bg-[#eaf6ff]"
-            size="small"
-            id="outlined-select-search-category"
-            select
-            label="Search category"
-            defaultValue="Title"
-            sx={{ width: "130px" }}
-            value={searchCategory}
-            onChange={(e) => setSearchCategory(e.target.value)}
-          >
-            {filterMenu.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          <div className="hidden md:block">
+            <TextField
+              className="bg-[#eaf6ff]"
+              size="small"
+              id="outlined-select-search-category"
+              select
+              label="Search category"
+              defaultValue="Title"
+              sx={{ width: "130px" }}
+              value={searchCategory}
+              onChange={(e) => setSearchCategory(e.target.value)}
+            >
+              {filterMenu.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+
           <FormControl
             className="mr-4"
             sx={{ m: 1, width: { xs: "150px", sm: "200px" } }}

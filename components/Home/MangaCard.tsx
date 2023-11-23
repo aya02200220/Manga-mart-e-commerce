@@ -81,7 +81,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
         activeCategory={category}
         onCategorySelect={handleSearch}
       />
-      <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-5 lg:mx-32 mt-10 justify-center gap-3 sm:gap-7">
+      <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-4  mt-10 justify-center gap-3 sm:gap-7">
         {data.length > 0 ? (
           data.map((manga) => (
             <div
@@ -115,7 +115,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
               </div>
 
               {/* ///////////// カード左半分 ////////////////// */}
-              <div className="m-1 sm:m-4 pl-1 w-[75px] sm:w-[160px] flex flex-col justify-between">
+              <div className="m-1 sm:ml-4 pl-1 w-[75px] sm:w-[160px] h-full flex flex-col justify-between">
                 <p
                   className="flex justify-center rounded-sm text-white text-[10px] sm:text-[13px]"
                   style={{
