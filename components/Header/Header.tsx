@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  Typography,
   Button,
   Popover,
   FormControl,
@@ -26,9 +25,10 @@ import {
 } from "firebase/auth";
 import Image from "next/image";
 import Logo from "../../public/Manga.png";
+import LogoSmall from "../../public/Manga-logo-small.png";
 import { useAppContext } from "../providers/AppContext";
 import FavModal from "../Favorite/FavModal";
-import CartModal from "../Cart/CartModal";
+// import CartModal from "../Cart/CartModal";
 import Link from "next/link";
 import { CartMenu } from "../CartMenu/CartMenu";
 import { useCycle } from "framer-motion";
@@ -159,6 +159,12 @@ function Header(props: HeaderProps) {
             height={50}
             alt="Manga-mart Logo"
           />
+          <Image
+            className="block sm:hidden"
+            src={LogoSmall}
+            height={50}
+            alt="Manga-mart Logo"
+          />
         </Link>
       </div>
 
@@ -189,9 +195,17 @@ function Header(props: HeaderProps) {
             sx={{ m: 1, width: { xs: "150px", sm: "200px" } }}
             variant="outlined"
           >
-            <InputLabel htmlFor="search" size="small">
-              Search
-            </InputLabel>
+            <div className="block md:hidden">
+              <InputLabel htmlFor="search" size="small">
+                Search Title
+              </InputLabel>
+            </div>
+            <div className="hidden md:block">
+              <InputLabel htmlFor="search" size="small">
+                Search
+              </InputLabel>
+            </div>
+
             <OutlinedInput
               onChange={(e) => {
                 setSearchInput(e.target.value);
@@ -215,12 +229,12 @@ function Header(props: HeaderProps) {
         {/* <div className="flex-grow"></div> */}
         <div className="flex">
           {isGoogleLoggedIn !== null && user ? (
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center mr-2 md:mr-0">
               <p className="flex flex-col leading-4 justify-center items-center mr-2 text-[15px] uppercase hidden sm:block">
                 <p>HELLO!</p>
                 <p> {user.displayName}</p>
               </p>
-              <IconButton onClick={handleAvatarClick}>
+              <IconButton className="p-0 sm:p-1" onClick={handleAvatarClick}>
                 <Image
                   src={imageUrl}
                   alt="User Photo"
@@ -251,7 +265,10 @@ function Header(props: HeaderProps) {
                 </Button>
               </Popover>
 
-              <IconButton className="ml-2" onClick={() => handleFavModalOpen()}>
+              <IconButton
+                className="ml-0 sm:ml-2 p-2"
+                onClick={() => handleFavModalOpen()}
+              >
                 <Badge badgeContent={favCounts} color="secondary">
                   <GrFavorite size={20} />
                 </Badge>
@@ -259,7 +276,7 @@ function Header(props: HeaderProps) {
 
               <IconButton
                 onClick={() => handleCartModalOpen()}
-                className="ml-2"
+                className="ml-0 sm:ml-2 p-1 sm:p-2"
               >
                 <Badge badgeContent={cartItemsCounts} color="primary">
                   <GrCart size={20} />
