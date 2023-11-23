@@ -80,7 +80,12 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
           })
         ) : (
           <div className="text-center">
-            <video autoPlay loop muted className="w-full h-auto pt-6">
+            <video
+              autoPlay
+              loop
+              muted
+              className="w-full h-auto max-h-[60vh] pt-6"
+            >
               <source src="/NoItem-Pop.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
