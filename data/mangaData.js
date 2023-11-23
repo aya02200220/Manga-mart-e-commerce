@@ -44,8 +44,7 @@ const mangaData = [
   {
     id: 5,
     title: "Bleach",
-    image:
-      "https://www.rightstufanime.com/images/productImages/9781421516035_manga-Bleach-Graphic-Novel-24-primary.jpg?resizeid=3&resizeh=600&resizew=600",
+    image: "https://m.media-amazon.com/images/I/61aSap+A1iL._SY522_.jpg",
     price: 10.99,
     description:
       "For as long as he can remember, high school student Ichigo Kurosaki has been able to see the spirits of the dead, but that has not stopped him from leading an ordinary life. One day, Ichigo returns home to find an intruder in his room who introduces herself as Rukia Kuchiki, a Soul Reaper tasked with helping souls pass over. Suddenly, the two are jolted from their conversation when a Hollow—an evil spirit known for consuming souls—attacks. \n\nAs Ichigo makes a brash attempt to stop the Hollow, Rukia steps in and shields him from a counterattack. Injured and unable to keep fighting, Rukia suggests a risky plan—transfer half of her Soul Reaper powers to Ichigo. He accepts and, to Rukia's surprise, ends up absorbing her powers entirely, allowing him to easily dispatch the Hollow.Now a Soul Reaper himself, Ichigo must take up Rukia's duties of exterminating Hollows and protecting spirits, both living and dead. \n\nAlong with his friends Orihime Inoue and Yasutora Sado—who later discover spiritual abilities of their own—Ichigo soon learns that the consequences of becoming a Soul Reaper and dealing with the world of spirits are far greater than he ever imagined.",
