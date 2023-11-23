@@ -284,24 +284,14 @@ function Header(props: HeaderProps) {
               </IconButton>
             </div>
           ) : (
-            <>
-              <IconButton
-                onClick={() => handleCartModalOpen()}
-                className="ml-0 sm:ml-2 p-1 sm:p-2 mr-3 "
-              >
-                <Badge badgeContent={cartItemsCounts} color="primary">
-                  <GrCart size={20} />
-                </Badge>
-              </IconButton>
-              <button
-                onClick={handleLogin}
-                type="button"
-                className=" text-white bg-[#2f415f] hover:bg-[#223962]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-[10px] sm:text-sm px-3 py-1 h-10 text-center inline-flex items-center leading-[9px] sm:leading-4"
-              >
-                <FcGoogle size="20px" />
-                <p className="ml-1">Sign in with Google</p>
-              </button>
-            </>
+            <button
+              onClick={handleLogin}
+              type="button"
+              className=" text-white bg-[#2f415f] hover:bg-[#223962]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-3 py-1 h-10 text-center inline-flex items-center leading-4"
+            >
+              <FcGoogle size="20px" />
+              <p className="ml-1">Sign in with Google</p>
+            </button>
           )}
         </div>
       </div>
