@@ -287,7 +287,7 @@ function Header(props: HeaderProps) {
             <>
               <IconButton
                 onClick={() => handleCartModalOpen()}
-                className="ml-0 sm:ml-2 p-1 sm:p-2 mr-3"
+                className="ml-0 sm:ml-2 p-1 sm:p-2 mr-3 "
               >
                 <Badge badgeContent={cartItemsCounts} color="primary">
                   <GrCart size={20} />

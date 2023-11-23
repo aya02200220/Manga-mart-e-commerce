@@ -62,13 +62,13 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
 
   return (
     <div className={` ${!isOpen ? "closed-menu" : ""} `}>
-      <div className="absolute top-0 left-0  border border-[#333] w-full h-[50px] items-center flex">
+      <div className="absolute top-0 left-0 border border-[#333] w-full h-[50px] items-center flex">
         <p className="pl-[10px] font-bold">My Cart ,</p>
         <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
 
       <motion.ul
-        className={`overflow-y-auto  h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-1 left-0 w-full  ${
+        className={`overflow-y-auto h-[83%] sm:h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-1 left-0 w-full  ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
@@ -88,13 +88,13 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         )}
       </motion.ul>
       <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[110px] items-center justify-center flex flex-col divide-y-2">
-        <div className="flex flex-1  w-full justify-between items-center">
+        <div className="flex flex-1  w-full justify-between items-center bg-white">
           <p className="pl-[20px] font-bold text-md">Sub-total</p>
           <p className="pr-[20px] font-medium text-md">
             $ {total?.toFixed(2) ?? 0}
           </p>
         </div>
-        <div className="flex flex-1 w-full gap-4 justify-center items-center">
+        <div className="flex flex-1 w-full gap-4 justify-center items-center bg-white">
           <button
             onClick={handleEmptyButtonClick}
             className="py-1 w-[120px] bg-[#c56c6c] hover:bg-[#dd7e7e] text-[#fff] rounded-md transition duration-300 ease-in-out"

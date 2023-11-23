@@ -40,8 +40,18 @@ export const CartMenu: React.FC<CartMenuProps> = ({ isOpen, toggleOpen }) => {
   const { height } = useDimensions(containerRef);
 
   return (
-    <div className="relative">
+    // <div>
+    <div className="relative h-full">
       <motion.div
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        custom={height}
+        ref={containerRef}
+        className={`absolute top-[36px] right-[0%] ${
+          !isOpen ? "closed-menu" : ""
+        } `}
+      >
+        {/* <motion.div
         initial={false}
         animate={isOpen ? "open" : "closed"}
         custom={height}
@@ -49,9 +59,9 @@ export const CartMenu: React.FC<CartMenuProps> = ({ isOpen, toggleOpen }) => {
         className={`absolute top-[36px] right-[-30px] ${
           !isOpen ? "closed-menu" : ""
         } `}
-      >
+      > */}
         <motion.div
-          className="overflow-auto border border-[#333] h-[100vh] sm:h-[500px] w-[300px] 
+          className="overflow-auto border border-[#333] h-[89vh] sm:h-[500px] w-[96vw] sm:w-[300px] 
         "
           variants={sidebar}
           initial={false}
