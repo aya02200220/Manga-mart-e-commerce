@@ -84,7 +84,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
               autoPlay
               loop
               muted
-              className="w-full h-auto max-h-[60vh] pt-6"
+              className="w-full h-auto max-h-[60vh] pt-6 "
             >
               <source src="/NoItem-Pop.mp4" type="video/mp4" />
               Your browser does not support the video tag.
