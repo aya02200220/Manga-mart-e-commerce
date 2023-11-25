@@ -81,7 +81,7 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
         activeCategory={category}
         onCategorySelect={handleSearch}
       />
-      <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-4  mt-10 justify-center gap-3 sm:gap-7">
+      <div className="flex flex-wrap mx-2 sm:mx-2 md:mx-4 xl:mx-20 mt-10 justify-center gap-3 sm:gap-7">
         {data.length > 0 ? (
           data.map((manga) => (
             <div
@@ -103,15 +103,6 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                   src={manga.image}
                   alt={manga.title}
                 />
-                {/* <img
-                  onClick={() => handleModal(manga?.id)}
-                  className="h-[160px] sm:h-[210px] w-[100px] sm:w-full object-cover rounded-sm cursor-pointer"
-                  style={{
-                    boxShadow: "10px 8px 10px 1px rgba(0, 0, 0, 0.4)",
-                  }}
-                  src={manga.image}
-                  alt={manga.title}
-                /> */}
               </div>
 
               {/* ///////////// カード右半分 ////////////////// */}
