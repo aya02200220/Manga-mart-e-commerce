@@ -62,13 +62,13 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
 
   return (
     <div className={` ${!isOpen ? "closed-menu" : ""} `}>
-      <div className="absolute top-0 left-0 border border-[#333] w-full h-[50px] items-center flex">
+      <div className="absolute top-0 left-0 border border-[#333] w-full h-[50px] items-center flex ">
         <p className="pl-[10px] font-bold">My Cart ,</p>
         <p className="pl-[10px] font-medium">{cartItemsCounts} item</p>
       </div>
 
       <motion.ul
-        className={`overflow-y-auto h-[83%] sm:h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-1 left-0 w-full  ${
+        className={`overflow-y-auto h-[83%] sm:h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-10 sm:pt-1 left-0 w-full items-start sm:items-center flex  ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
@@ -79,12 +79,12 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
             return <MenuItem manga={item} quantity={quantity} key={item.id} />;
           })
         ) : (
-          <div className="text-center">
+          <div className="text-center ">
             <video
               autoPlay
               loop
               muted
-              className="w-full h-auto max-h-[60vh] pt-6 "
+              className="w-full h-auto max-h-[60vh] p-6"
             >
               <source src="/NoItem-Pop.mp4" type="video/mp4" />
               Your browser does not support the video tag.
