@@ -124,11 +124,11 @@ body {
 }
 
 .rateStar {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 @media only screen and (max-width: 639px) {
   .rateStar {
-    font-size: 10px;
+    font-size: 10px !important;
   }
 }
