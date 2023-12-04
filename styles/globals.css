@@ -122,3 +122,13 @@ body {
   padding-right: 0.05em;
   overflow: hidden;
 }
+
+.rateStar {
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 639px) {
+  .rateStar {
+    font-size: 10px;
+  }
+}

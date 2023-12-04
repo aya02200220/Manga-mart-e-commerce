@@ -122,7 +122,8 @@ const MangaCard: React.FC<MangaCardProps> = ({ filteredData }) => {
                     defaultValue={manga.rate ?? 0}
                     precision={0.1}
                     readOnly
-                    className="text-[10px] sm:text-lg"
+                    className="rateStar "
+                    // className="text-[10px] sm:text-lg "
                   />
                   <p className="text-[10px] sm:text-[20px]">
                     {manga.rate?.toFixed(1) ?? 0}
