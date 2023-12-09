@@ -33,13 +33,13 @@ body {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-134%);
+    transform: translateX(-178%);
   }
 }
 
 .slid-images.horizontal {
   display: flex;
-  animation: slideLeftEndless 15s infinite linear; /* アニメーション時間を調整する */
+  animation: slideLeftEndless 10s infinite linear; /* アニメーション時間を調整する */
   align-items: center;
 }
 
