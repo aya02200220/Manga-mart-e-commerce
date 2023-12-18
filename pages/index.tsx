@@ -1,7 +1,7 @@
 // import Header from "../components/Header/Header";
 import { useState } from "react";
 import Home from "@/components/Home/Home";
-import Cart from "./chackout";
+import Cart from "./checkout";
 import Header from "@/components/Header/Header";
 
 const MainRoot = () => {
