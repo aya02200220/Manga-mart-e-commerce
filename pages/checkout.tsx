@@ -1,11 +1,11 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import CartMain from "@/components/Cart/CartMain";
+import Checkout from "@/components/Checkout/Checkout";
 
 const index = () => {
   return (
     <>
-      <CartMain />
+      <Checkout />
     </>
   );
 };

@@ -7,6 +7,7 @@ import { useAppContext } from "../providers/AppContext";
 import { MangaData } from "@/types";
 
 import { EmptyCartDialogModal } from "./EmptyCartDialogModal";
+import Link from "next/link";
 
 const variants = {
   open: {
@@ -106,9 +107,11 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
           >
             Empty cart
           </button>
-          <button className="py-1 w-[120px] bg-[#537aa2] hover:bg-[#62b2c2] text-[#fff] rounded-md transition duration-300 ease-in-out">
-            Checkout
-          </button>
+          <Link href={"/checkout"}>
+            <button className="py-1 w-[120px] bg-[#537aa2] hover:bg-[#62b2c2] text-[#fff] rounded-md transition duration-300 ease-in-out">
+              Checkout
+            </button>
+          </Link>
         </div>
       </div>
       <EmptyCartDialogModal open={isDialogOpen} onClose={handleCloseDialog} />
