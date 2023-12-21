@@ -5,7 +5,12 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 
-function Icon({ id, open }) {
+interface IconProps {
+  id: number;
+  open: number;
+}
+
+function Icon({ id, open }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -41,9 +46,10 @@ export const Shipping = () => {
         </AccordionHeader>
         <AccordionBody>
           <div className="m-5">
-            <p>Choose Your Shipping Method</p>
-            <div className="border">
-              <p>Ship to an address</p>
+            <div className="border p-3">
+              <p>Shipping address</p>
+
+              <hr />
             </div>
           </div>
         </AccordionBody>
