@@ -26,6 +26,7 @@
     "lodash": "^4.17.21",
     "next": "latest",
     "react": "latest",
+    "react-country-state-fields": "^1.0.4",
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",

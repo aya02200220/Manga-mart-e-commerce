@@ -208,7 +208,7 @@ function Header(props: HeaderProps) {
 
             <OutlinedInput
               onChange={(e) => {
-                setSearchInput(e.target.value);
+                setgit SearchInput(e.target.value);
               }}
               id="search-arb"
               sx={{
