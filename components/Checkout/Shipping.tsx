@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+
+import {
+  CountryField,
+  StateField,
+  VisitorAPIComponents,
+} from "react-country-state-fields";
+import { OutlinedInput, TextField } from "@mui/material";
 
 interface IconProps {
   id: number;
@@ -45,13 +52,7 @@ export const Shipping = () => {
           01 Shipping
         </AccordionHeader>
         <AccordionBody>
-          <div className="m-5">
-            <div className="border p-3">
-              <p>Shipping address</p>
-
-              <hr />
-            </div>
-          </div>
+          <ShippingForm />
         </AccordionBody>
       </Accordion>
       <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
@@ -76,6 +77,49 @@ export const Shipping = () => {
           dreams.
         </AccordionBody>
       </Accordion>
+    </div>
+  );
+};
+
+export const ShippingForm = () => {
+  const [country, setCountry] = useState({ code: "", label: "" }); // the selected country
+  const [state, setState] = useState({ code: "", label: "" }); // the selected state
+  const visitorApiPrjectId = ""; // assign your project ID here
+
+  return (
+    <div>
+      <div className="m-5">
+        <div className="border">
+          <p className="m-3">Shipping address</p>
+          <p className="border border-b-4" />
+
+          <div className="flex gap-2 p-4">
+            <TextField
+              label="First Name"
+              variant="filled"
+              required
+              size="small"
+            />
+            <TextField
+              label="Last Name"
+              variant="filled"
+              required
+              size="small"
+            />
+          </div>
+
+          <VisitorAPIComponents
+            projectId={visitorApiPrjectId}
+            handleCountryChange={(countryObj) => setCountry(countryObj)}
+            handleStateChange={(stateObj) => setState(stateObj)}
+          >
+            <CountryField label="Country/Territory"></CountryField>
+            <StateField label="State/Province"></StateField>
+          </VisitorAPIComponents>
+
+          <hr />
+        </div>
+      </div>
     </div>
   );
 };
