@@ -16,6 +16,15 @@ interface IconProps {
   id: number;
   open: number;
 }
+interface Country {
+  code: string;
+  label: string;
+}
+
+interface State {
+  code: string;
+  label: string;
+}
 
 function Icon({ id, open }: IconProps) {
   return (
@@ -82,9 +91,9 @@ export const Shipping = () => {
 };
 
 export const ShippingForm = () => {
-  const [country, setCountry] = useState({ code: "", label: "" }); // the selected country
-  const [state, setState] = useState({ code: "", label: "" }); // the selected state
-  const visitorApiPrjectId = ""; // assign your project ID here
+  const visitorApiProjectId = ""; // assign your project ID her
+  const [country, setCountry] = useState<Country>({ code: "", label: "" });
+  const [state, setState] = useState<State>({ code: "", label: "" });
 
   return (
     <div>
@@ -109,9 +118,11 @@ export const ShippingForm = () => {
           </div>
 
           <VisitorAPIComponents
-            projectId={visitorApiPrjectId}
-            handleCountryChange={(countryObj) => setCountry(countryObj)}
-            handleStateChange={(stateObj) => setState(stateObj)}
+            projectId={visitorApiProjectId}
+            handleCountryChange={(countryObj: Country) =>
+              setCountry(countryObj)
+            }
+            handleStateChange={(stateObj: State) => setState(stateObj)}
           >
             <CountryField label="Country/Territory"></CountryField>
             <StateField label="State/Province"></StateField>
