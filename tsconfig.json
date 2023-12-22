@@ -21,7 +21,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/Notifications/FavoriteToast.tsx"
+    "components/Notifications/FavoriteToast.tsx",
+    "react-country-state-fields.d.ts"
   ],
   "exclude": ["node_modules"]
 }
