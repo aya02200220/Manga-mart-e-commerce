@@ -129,6 +129,7 @@ export const ShippingForm = () => {
           </VisitorAPIComponents>
 
           <hr />
+          <hr />
         </div>
       </div>
     </div>
