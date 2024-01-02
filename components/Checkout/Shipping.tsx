@@ -130,6 +130,7 @@ export const ShippingForm = () => {
 
           <hr />
           <hr />
+          <hr />
         </div>
       </div>
     </div>
