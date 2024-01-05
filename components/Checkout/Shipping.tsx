@@ -116,21 +116,22 @@ export const ShippingForm = () => {
               size="small"
             />
           </div>
-          <p>test</p>
-          <VisitorAPIComponents
-            projectId={visitorApiProjectId}
-            handleCountryChange={(countryObj: Country) =>
-              setCountry(countryObj)
-            }
-            handleStateChange={(stateObj: State) => setState(stateObj)}
-          >
-            <CountryField label="Country/Territory"></CountryField>
-            <StateField label="State/Province"></StateField>
-          </VisitorAPIComponents>
+          <div className=" gap-2 p-4">
+            <VisitorAPIComponents
+              projectId={visitorApiProjectId}
+              handleCountryChange={(countryObj: Country) =>
+                setCountry(countryObj)
+              }
+              handleStateChange={(stateObj: State) => setState(stateObj)}
+            >
+              <CountryField label="Country/Territory"></CountryField>
+              <StateField label="State/Province"></StateField>
+            </VisitorAPIComponents>
 
-          <hr />
-          <hr />
-          <hr />
+            <hr />
+            <hr />
+            <hr />
+          </div>
         </div>
       </div>
     </div>
