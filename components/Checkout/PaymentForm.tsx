@@ -4,8 +4,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { FaCcPaypal } from "react-icons/fa";
 
-export const DeliveryForm = () => {
+export const PaymentForm = () => {
   return (
     <div className="m-5">
       <div className="border bg-[#FAFAFA] ">
@@ -16,20 +17,23 @@ export const DeliveryForm = () => {
           <FormControl>
             <RadioGroup
               // aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="Standard"
+              defaultValue="Card"
               name="radio-buttons-group"
-              size="small"
             >
               <FormControlLabel
-                value="Standard"
+                value="Card"
                 control={<Radio size="small" />}
-                label="C$17.99 : Standard Shipping"
+                label="Credit Card or Debit"
               />
-              <FormControlLabel
-                value="Express"
-                control={<Radio size="small" />}
-                label="C$28.99 : Express Shipping (1-2 business days)"
-              />
+              <div className="flex">
+                <FormControlLabel
+                  value="Paypal"
+                  control={<Radio size="small" />}
+                  label="Paypal"
+                />
+
+                <FaCcPaypal />
+              </div>
             </RadioGroup>
           </FormControl>
         </div>

@@ -7,6 +7,7 @@ import {
 
 import { ShippingForm } from "./ShippingForm";
 import { DeliveryForm } from "./DeliveryForm";
+import { PaymentForm } from "./PaymentForm";
 
 interface IconProps {
   id: number;
@@ -68,13 +69,10 @@ export const Shipping = () => {
             className="p-3 font-medium text-md"
             onClick={() => handleOpen(3)}
           >
-            03 What can I do with Material Tailwind?
+            03 Payment
           </AccordionHeader>
           <AccordionBody>
-            We&apos;re not always in the position that we want to be at.
-            We&apos;re constantly growing. We&apos;re constantly making
-            mistakes. We&apos;re constantly trying to express ourselves and
-            actualize our dreams.
+            <PaymentForm />
           </AccordionBody>
         </Accordion>
       </div>
