@@ -53,10 +53,10 @@ export const Shipping = () => {
 
   return (
     <div className="flex m-10 gap-4">
-      <div className="border border-black w-auto sm:w-2/3 h-auto">
+      <div className=" w-auto sm:w-2/3 h-auto bg-white">
         <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
           <AccordionHeader
-            className="p-3 font-medium text-md"
+            className="p-3 font-medium text-md "
             onClick={() => handleOpen(1)}
           >
             01 Shipping
@@ -70,13 +70,10 @@ export const Shipping = () => {
             className="p-3 font-medium text-md"
             onClick={() => handleOpen(2)}
           >
-            02 How to use Material Tailwind?
+            02 Delivery
           </AccordionHeader>
           <AccordionBody>
-            We&apos;re not always in the position that we want to be at.
-            We&apos;re constantly growing. We&apos;re constantly making
-            mistakes. We&apos;re constantly trying to express ourselves and
-            actualize our dreams.
+            <DeliveryForm />
           </AccordionBody>
         </Accordion>
         <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
@@ -95,8 +92,8 @@ export const Shipping = () => {
         </Accordion>
       </div>
 
-      <div className="w-auto sm:w-1/3">
-        <div className="border ">test</div>
+      <div className="w-auto sm:w-1/3 hidden sm:block bg-white p-3 font-medium text-md">
+        <div className="">test</div>
       </div>
     </div>
   );
@@ -110,78 +107,103 @@ export const ShippingForm = () => {
   return (
     <div>
       <div className="m-5">
-        <div className="border">
-          <p className="m-3 text-md ">Shipping address</p>
-          <p className="border border-b-4" />
+        <div className="border bg-[#FAFAFA] ">
+          <p className="m-3 text-md font-medium">Shipping address</p>
+          <p className="border border-b-0 border-[#333]" />
 
-          <div className="flex flex-col sm:flex-row gap-2 pb-2 pt-4">
-            <TextField
-              label="First Name"
-              // variant="filled"
-              required
-              size="small"
-            />
-            <TextField
-              label="Last Name"
-              // variant="filled"
-              required
-              size="small"
-            />
-          </div>
-          <div className="flex flex-col gap-2 pb-2">
-            <VisitorAPIComponents
-              projectId={visitorApiProjectId}
-              handleCountryChange={(countryObj: Country) =>
-                setCountry(countryObj)
-              }
-              handleStateChange={(stateObj: State) => setState(stateObj)}
-            >
-              <CountryField label="Country/Territory"></CountryField>
-              {/* <StateField label="State/Province"></StateField> */}
-            </VisitorAPIComponents>
-
-            <div></div>
-            <TextField
-              label="Street Address"
-              // variant="filled"
-              required
-              size="small"
-            />
-            <div className="flex gap-2">
+          <div className="px-5 pb-3">
+            <div className="flex flex-col sm:flex-row gap-2 pb-2 pt-4">
               <TextField
-                label="Apt/Unit"
-                // variant="filled"
-                // required
-                size="small"
-              />
-              <TextField
-                label="City"
-                // variant="filled"
+                label="First Name"
+                fullWidth
                 required
                 size="small"
-              />
-            </div>
-            <div className="flex gap-2">
-              <TextField
-                label="Province"
-                // variant="filled"
-                // required
-                size="small"
+                className="bg-white mb-2"
               />
               <TextField
-                label="Postal Code"
-                // variant="filled"
+                label="Last Name"
+                fullWidth
                 required
                 size="small"
+                className="bg-white mb-2 font-light"
               />
             </div>
-            <TextField
-              label="Phone Number"
-              // variant="filled"
-              required
-              size="small"
-            />
+            <div className="flex flex-col gap-2 pb-2">
+              <VisitorAPIComponents
+                projectId={visitorApiProjectId}
+                handleCountryChange={(countryObj: Country) =>
+                  setCountry(countryObj)
+                }
+                handleStateChange={(stateObj: State) => setState(stateObj)}
+              >
+                <CountryField
+                  className="bg-white"
+                  label="Country/Territory"
+                ></CountryField>
+                {/* <StateField label="State/Province"></StateField> */}
+              </VisitorAPIComponents>
+
+              <TextField
+                fullWidth
+                label="Street Address"
+                required
+                size="small"
+                className="bg-white mb-2"
+              />
+              <div className="flex gap-2">
+                <TextField
+                  fullWidth
+                  label="Apt/Unit"
+                  size="small"
+                  className="bg-white mb-2"
+                />
+                <TextField
+                  fullWidth
+                  label="City"
+                  required
+                  size="small"
+                  className="bg-white mb-2"
+                />
+              </div>
+              <div className="flex gap-2">
+                <TextField
+                  fullWidth
+                  label="Province"
+                  size="small"
+                  className="bg-white mb-2"
+                />
+                <TextField
+                  fullWidth
+                  label="Postal Code"
+                  required
+                  size="small"
+                  className="bg-white mb-2"
+                />
+              </div>
+              <TextField
+                fullWidth
+                label="Phone Number"
+                required
+                size="small"
+                className="bg-white mb-2"
+              />
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const DeliveryForm = () => {
+  return (
+    <div>
+      <div className="m-5">
+        <div className="border bg-[#FAFAFA] ">
+          <p className="m-3 text-md font-medium">Shipping Option</p>
+          <p className="border border-b-0 border-[#333]" />
+
+          <div className="px-5 pb-3"></div>
         </div>
       </div>
     </div>
