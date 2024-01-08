@@ -5,19 +5,19 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 
-import {
-  CountryField,
-  StateField,
-  VisitorAPIComponents,
-} from "react-country-state-fields";
-import { OutlinedInput, TextField } from "@mui/material";
+import { ShippingForm } from "./ShippingForm";
+import { DeliveryForm } from "./DeliveryForm";
+import { PaymentForm } from "./PaymentForm";
 
 interface IconProps {
   id: number;
-  open: number;
+  openSections: number[];
+  setOpenSections: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-function Icon({ id, open }: IconProps) {
+function Icon({ id, openSections, setOpenSections }: IconProps) {
+  const isOpen = openSections.includes(id);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +25,7 @@ function Icon({ id, open }: IconProps) {
       viewBox="0 0 24 24"
       strokeWidth={2}
       stroke="currentColor"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${isOpen ? "rotate-180" : ""} h-5 w-5 transition-transform`}
     >
       <path
         strokeLinecap="round"
@@ -39,86 +37,88 @@ function Icon({ id, open }: IconProps) {
 }
 
 export const Shipping = () => {
-  const [open, setOpen] = React.useState(0);
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
+  const [openSections, setOpenSections] = React.useState<number[]>([1]);
+
+  const handleOpen = (value) => {
+    if (openSections.includes(value)) {
+      setOpenSections((prev) =>
+        prev.filter((sectionId) => sectionId !== value)
+      );
+    } else {
+      setOpenSections((prev) => [...prev, value]);
+    }
+  };
 
   return (
-    <div className="border border-black w-[600px] m-10 h-auto">
-      <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
-        <AccordionHeader
-          className="p-3 font-medium text-md"
-          onClick={() => handleOpen(1)}
+    <div className="flex m-2 sm:m-10 gap-4">
+      <div className="w-full sm:w-2/3 h-auto">
+        <Accordion
+          className="bg-white"
+          open={openSections.includes(1)}
+          icon={
+            <Icon
+              id={1}
+              openSections={openSections}
+              setOpenSections={setOpenSections}
+            />
+          }
         >
-          01 Shipping
-        </AccordionHeader>
-        <AccordionBody>
-          <ShippingForm />
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
-        <AccordionHeader onClick={() => handleOpen(2)}>
-          How to use Material Tailwind?
-        </AccordionHeader>
-        <AccordionBody>
-          We&apos;re not always in the position that we want to be at.
-          We&apos;re constantly growing. We&apos;re constantly making mistakes.
-          We&apos;re constantly trying to express ourselves and actualize our
-          dreams.
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
-        <AccordionHeader onClick={() => handleOpen(3)}>
-          What can I do with Material Tailwind?
-        </AccordionHeader>
-        <AccordionBody>
-          We&apos;re not always in the position that we want to be at.
-          We&apos;re constantly growing. We&apos;re constantly making mistakes.
-          We&apos;re constantly trying to express ourselves and actualize our
-          dreams.
-        </AccordionBody>
-      </Accordion>
-    </div>
-  );
-};
-
-export const ShippingForm = () => {
-  const [country, setCountry] = useState({ code: "", label: "" }); // the selected country
-  const [state, setState] = useState({ code: "", label: "" }); // the selected state
-  const visitorApiPrjectId = ""; // assign your project ID here
-
-  return (
-    <div>
-      <div className="m-5">
-        <div className="border">
-          <p className="m-3">Shipping address</p>
-          <p className="border border-b-4" />
-
-          <div className="flex gap-2 p-4">
-            <TextField
-              label="First Name"
-              variant="filled"
-              required
-              size="small"
-            />
-            <TextField
-              label="Last Name"
-              variant="filled"
-              required
-              size="small"
-            />
-          </div>
-
-          <VisitorAPIComponents
-            projectId={visitorApiPrjectId}
-            handleCountryChange={(countryObj) => setCountry(countryObj)}
-            handleStateChange={(stateObj) => setState(stateObj)}
+          <AccordionHeader
+            className="p-3 font-medium text-md"
+            onClick={() => handleOpen(1)}
           >
-            <CountryField label="Country/Territory"></CountryField>
-            <StateField label="State/Province"></StateField>
-          </VisitorAPIComponents>
+            01 Shipping
+          </AccordionHeader>
+          <AccordionBody>
+            <ShippingForm />
+          </AccordionBody>
+        </Accordion>
+        <Accordion
+          className="bg-white"
+          open={openSections.includes(2)}
+          icon={
+            <Icon
+              id={2}
+              openSections={openSections}
+              setOpenSections={setOpenSections}
+            />
+          }
+        >
+          <AccordionHeader
+            className="p-3 font-medium text-md mt-4"
+            onClick={() => handleOpen(2)}
+          >
+            02 Delivery
+          </AccordionHeader>
+          <AccordionBody>
+            <DeliveryForm />
+          </AccordionBody>
+        </Accordion>
+        <Accordion
+          className="bg-white"
+          open={openSections.includes(3)}
+          icon={
+            <Icon
+              id={3}
+              openSections={openSections}
+              setOpenSections={setOpenSections}
+            />
+          }
+        >
+          <AccordionHeader
+            className="p-3 font-medium text-md mt-4"
+            onClick={() => handleOpen(3)}
+          >
+            03 Payment
+          </AccordionHeader>
+          <AccordionBody>
+            <PaymentForm />
+          </AccordionBody>
+        </Accordion>
+      </div>
 
-          <hr />
-        </div>
+      <div className="w-auto sm:w-1/3 hidden sm:block bg-white p-3 font-medium text-md">
+        <div className="">test</div>
       </div>
     </div>
   );
