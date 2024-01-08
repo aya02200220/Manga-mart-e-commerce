@@ -50,8 +50,8 @@ export const Shipping = () => {
   };
 
   return (
-    <div className="flex m-10 gap-4">
-      <div className=" w-auto sm:w-2/3 h-auto">
+    <div className="flex m-2 sm:m-10 gap-4">
+      <div className="w-full sm:w-2/3 h-auto">
         <Accordion
           className="bg-white"
           open={openSections.includes(1)}
