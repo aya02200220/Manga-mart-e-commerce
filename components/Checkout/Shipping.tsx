@@ -51,8 +51,9 @@ export const Shipping = () => {
 
   return (
     <div className="flex m-10 gap-4">
-      <div className=" w-auto sm:w-2/3 h-auto bg-white">
+      <div className=" w-auto sm:w-2/3 h-auto">
         <Accordion
+          className="bg-white"
           open={openSections.includes(1)}
           icon={
             <Icon
@@ -63,7 +64,7 @@ export const Shipping = () => {
           }
         >
           <AccordionHeader
-            className="p-3 font-medium text-md "
+            className="p-3 font-medium text-md"
             onClick={() => handleOpen(1)}
           >
             01 Shipping
@@ -73,6 +74,7 @@ export const Shipping = () => {
           </AccordionBody>
         </Accordion>
         <Accordion
+          className="bg-white"
           open={openSections.includes(2)}
           icon={
             <Icon
@@ -83,7 +85,7 @@ export const Shipping = () => {
           }
         >
           <AccordionHeader
-            className="p-3 font-medium text-md"
+            className="p-3 font-medium text-md mt-4"
             onClick={() => handleOpen(2)}
           >
             02 Delivery
@@ -93,6 +95,7 @@ export const Shipping = () => {
           </AccordionBody>
         </Accordion>
         <Accordion
+          className="bg-white"
           open={openSections.includes(3)}
           icon={
             <Icon
@@ -103,7 +106,7 @@ export const Shipping = () => {
           }
         >
           <AccordionHeader
-            className="p-3 font-medium text-md"
+            className="p-3 font-medium text-md mt-4"
             onClick={() => handleOpen(3)}
           >
             03 Payment
