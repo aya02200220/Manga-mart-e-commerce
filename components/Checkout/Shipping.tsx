@@ -11,10 +11,13 @@ import { PaymentForm } from "./PaymentForm";
 
 interface IconProps {
   id: number;
-  open: number;
+  openSections: number[];
+  setOpenSections: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-function Icon({ id, open }: IconProps) {
+function Icon({ id, openSections, setOpenSections }: IconProps) {
+  const isOpen = openSections.includes(id);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,9 +25,7 @@ function Icon({ id, open }: IconProps) {
       viewBox="0 0 24 24"
       strokeWidth={2}
       stroke="currentColor"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${isOpen ? "rotate-180" : ""} h-5 w-5 transition-transform`}
     >
       <path
         strokeLinecap="round"
@@ -36,13 +37,31 @@ function Icon({ id, open }: IconProps) {
 }
 
 export const Shipping = () => {
-  const [open, setOpen] = React.useState(0);
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
+  const [openSections, setOpenSections] = React.useState<number[]>([1]);
+
+  const handleOpen = (value) => {
+    if (openSections.includes(value)) {
+      setOpenSections((prev) =>
+        prev.filter((sectionId) => sectionId !== value)
+      );
+    } else {
+      setOpenSections((prev) => [...prev, value]);
+    }
+  };
 
   return (
     <div className="flex m-10 gap-4">
       <div className=" w-auto sm:w-2/3 h-auto bg-white">
-        <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+        <Accordion
+          open={openSections.includes(1)}
+          icon={
+            <Icon
+              id={1}
+              openSections={openSections}
+              setOpenSections={setOpenSections}
+            />
+          }
+        >
           <AccordionHeader
             className="p-3 font-medium text-md "
             onClick={() => handleOpen(1)}
@@ -53,7 +72,16 @@ export const Shipping = () => {
             <ShippingForm />
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
+        <Accordion
+          open={openSections.includes(2)}
+          icon={
+            <Icon
+              id={2}
+              openSections={openSections}
+              setOpenSections={setOpenSections}
+            />
+          }
+        >
           <AccordionHeader
             className="p-3 font-medium text-md"
             onClick={() => handleOpen(2)}
@@ -64,7 +92,16 @@ export const Shipping = () => {
             <DeliveryForm />
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
+        <Accordion
+          open={openSections.includes(3)}
+          icon={
+            <Icon
+              id={3}
+              openSections={openSections}
+              setOpenSections={setOpenSections}
+            />
+          }
+        >
           <AccordionHeader
             className="p-3 font-medium text-md"
             onClick={() => handleOpen(3)}
