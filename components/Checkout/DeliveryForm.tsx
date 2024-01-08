@@ -18,7 +18,6 @@ export const DeliveryForm = () => {
               // aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="Standard"
               name="radio-buttons-group"
-              size="small"
             >
               <FormControlLabel
                 value="Standard"

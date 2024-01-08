@@ -39,7 +39,7 @@ function Icon({ id, openSections, setOpenSections }: IconProps) {
 export const Shipping = () => {
   const [openSections, setOpenSections] = React.useState<number[]>([1]);
 
-  const handleOpen = (value) => {
+  const handleOpen = (value: number) => {
     if (openSections.includes(value)) {
       setOpenSections((prev) =>
         prev.filter((sectionId) => sectionId !== value)
