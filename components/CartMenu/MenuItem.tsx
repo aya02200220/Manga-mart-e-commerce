@@ -51,7 +51,13 @@ export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="flex gap-3 w-full pt-2">
+      <motion.div
+        variants={variants}
+        // whileHover={{ scale: 1.1 }}
+        // whileTap={{ scale: 0.95 }}
+        className="flex gap-3 w-full pt-2"
+      >
+        {/* <div className="flex gap-3 w-full pt-2"> */}
         <img src={manga.image} className="w-[75px] h-[117px]" />
         <div className="flex-grow flex flex-col justify-between py-3">
           <p className="text-sm leading-[14px]">{manga.title}</p>
@@ -81,7 +87,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({ manga, quantity }) => {
         >
           <ImBin />
         </button>
-      </div>
+      </motion.div>
     </motion.li>
   );
 };

@@ -8,6 +8,7 @@ import {
 import { ShippingForm } from "./ShippingForm";
 import { DeliveryForm } from "./DeliveryForm";
 import { PaymentForm } from "./PaymentForm";
+import { ItemInCart } from "./ItemInCart";
 
 interface IconProps {
   id: number;
@@ -118,7 +119,7 @@ export const Shipping = () => {
       </div>
 
       <div className="w-auto sm:w-1/3 hidden sm:block bg-white p-3 font-medium text-md">
-        <div className="">test</div>
+        <ItemInCart />
       </div>
     </div>
   );
