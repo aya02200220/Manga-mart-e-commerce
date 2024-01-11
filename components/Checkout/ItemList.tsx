@@ -1,9 +1,19 @@
 import React from "react";
+import { MangaData } from "@/types";
 
-export const ItemList = ({ manga }) => {
+interface MenuItemProps {
+  manga: MangaData;
+  quantity: number;
+}
+
+export const ItemList: React.FC<MenuItemProps> = ({ manga }) => {
   return (
-    <div>
-      <img src={manga.image} className="w-[75px] h-[117px]" />
+    <div className="flex mb-2">
+      <img src={manga.image} className="w-[50px] h-[70px]" />
+      <div className="flex flex-col pl-2">
+        <p className="text-[12px]">{manga.title}</p>
+        <p className="text-sm">${manga.price.toFixed(2)}</p>
+      </div>
     </div>
   );
 };

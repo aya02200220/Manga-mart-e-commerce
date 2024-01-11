@@ -15,8 +15,8 @@ export const ItemInCart = () => {
   return (
     <div className="h-[70vh]">
       <p className="m-1 text-md font-medium">Item In Cart </p>
-      <div className="border bg-[#FAFAFA]">
-        <div className="px-5 pt-2">
+      <div className="border bg-[#FAFAFA] overflow-y-auto h-[100%]">
+        <div className="px-2 pt-2 ">
           <div>
             {cartItems.map((item) => {
               const quantity = cartItemsCounts;
