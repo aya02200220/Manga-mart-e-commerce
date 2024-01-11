@@ -1,12 +1,6 @@
 import * as React from "react";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import { FaCcPaypal } from "react-icons/fa";
-import { FaRegCreditCard } from "react-icons/fa";
 import { useAppContext } from "../providers/AppContext";
+import { ItemList } from "./ItemList";
 
 export const ItemInCart = () => {
   const { cartItemsCounts, cartItems } = useAppContext();
@@ -26,7 +20,9 @@ export const ItemInCart = () => {
           <div>
             {cartItems.map((item) => {
               const quantity = cartItemsCounts;
-              return <div key={item.id}>{item.title}</div>;
+              return (
+                <ItemList manga={item} quantity={quantity} key={item.id} />
+              );
             })}
           </div>
         </div>
