@@ -69,7 +69,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
       </div>
 
       <motion.ul
-        className={`overflow-y-auto h-[83%] sm:h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-10 sm:pt-1 left-0 w-full items-start sm:items-center flex  ${
+        className={`overflow-y-auto h-[83%] sm:h-[320px]  pl-[20px] pr-[20px] absolute top-[55px] pt-2 sm:pt-1 left-0 w-full items-start sm:items-center ${
           !isOpen ? "closed-menu" : ""
         } `}
         variants={variants}
