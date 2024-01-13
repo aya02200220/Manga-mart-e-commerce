@@ -43,16 +43,18 @@ const AddToFav: React.FC<AddToFavProps> = ({ mangaData }) => {
       (fav: MangaData) => fav.id === mangaData.id
     );
     if (!isAlreadyFav) {
-      toast.custom((t) => (
-        <FavoriteToast mangaData={mangaData} actionType="Add" />
-      ));
+      toast.custom(
+        (t) => <FavoriteToast mangaData={mangaData} actionType="Add" />,
+        { duration: 250 }
+      );
       favItems.push(mangaData);
       localStorage.setItem("favs", JSON.stringify(favItems));
       setIsFavored(true);
     } else {
-      toast.custom((t) => (
-        <FavoriteToast mangaData={mangaData} actionType="Remove" />
-      ));
+      toast.custom(
+        (t) => <FavoriteToast mangaData={mangaData} actionType="Remove" />,
+        { duration: 250 }
+      );
       const newFavs = favItems.filter(
         (fav: MangaData) => fav.id !== mangaData.id
       );

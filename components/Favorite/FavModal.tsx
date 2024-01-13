@@ -66,9 +66,10 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
   };
 
   const handleRemoveFav = (dataToRemove: MangaData) => {
-    toast.custom((t) => (
-      <FavoriteToast mangaData={dataToRemove} actionType="Remove" />
-    ));
+    toast.custom(
+      (t) => <FavoriteToast mangaData={dataToRemove} actionType="Remove" />,
+      { duration: 250 }
+    );
     // 選択されたアイテムを削除
     const updatedFavData = favData.filter(
       (item) => item.id !== dataToRemove.id
