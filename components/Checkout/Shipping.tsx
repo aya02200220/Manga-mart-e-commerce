@@ -51,8 +51,8 @@ export const Shipping = () => {
   };
 
   return (
-    <div className="flex m-2 sm:m-10 gap-4">
-      <div className="w-full sm:w-2/3 h-auto">
+    <div className="flex m-2 sm:m-10 md:mx-[15%] gap-4 justify-center ">
+      <div className="w-full sm:w-2/3 max-w-[520px] h-auto ">
         <Accordion
           className="bg-white"
           open={openSections.includes(1)}
@@ -118,8 +118,10 @@ export const Shipping = () => {
         </Accordion>
       </div>
 
-      <div className="w-auto sm:w-1/3 hidden sm:block bg-white p-3 font-medium text-md ">
-        <ItemInCart />
+      <div className="w-auto sm:w-1/3 max-w-[300px] hidden sm:block bg-white p-3 font-medium text-md h-full">
+        <div className="sticky top-0 ">
+          <ItemInCart />
+        </div>
       </div>
     </div>
   );
