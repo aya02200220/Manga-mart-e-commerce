@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MangaData } from "@/types";
 import { useAppContext } from "../providers/AppContext";
 import NoFavImage from "../../public/NoFavorites.png";
@@ -46,6 +46,7 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [favData, setFavData] = useState<MangaData[]>([]);
   const { favItems, favCounts, updateFavs } = useAppContext();
+  const videoRef = useRef(null);
 
   // ダイアログを開くハンドラ
   const handleDeleteClick = () => {
@@ -59,6 +60,14 @@ const FavModal: React.FC<ModalProps> = ({ isFavOpen, onRequestClose }) => {
 
   useEffect(() => {
     setFavData(favItems);
+    // モーダルが閉じられるときに動画の再生を停止
+    return () => {
+      if (videoRef.current) {
+        const video = videoRef.current as HTMLVideoElement;
+        video.pause();
+        video.currentTime = 0;
+      }
+    };
   }, [favCounts]);
 
   const handleContentClick = (e: React.MouseEvent) => {
