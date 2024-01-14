@@ -16,7 +16,7 @@ const FavoriteToast: React.FC<Props> = ({ mangaData, actionType }) => {
       <div
         className={`max-w-md w-[240px] ${bgColor} shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
       >
-        <div className="flex-1  py-6 px-2">
+        <div className="flex-1 py-6 px-2">
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5 pl-3">
               <img

@@ -11,7 +11,9 @@ export const useCartActions = (mangaData, setItemCount, itemCount) => {
     const newItem = { ...mangaData, timestamp };
 
     setItemCount((prev) => prev + 1);
-    toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />);
+    toast.custom((t) => <CartToast mangaData={mangaData} actionType="Add" />, {
+      duration: 300,
+    });
     cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     updateCart();
@@ -23,9 +25,12 @@ export const useCartActions = (mangaData, setItemCount, itemCount) => {
 
     if (itemCount === 1) {
       console.log("toast remove2");
-      toast.custom((t) => (
-        <CartToast mangaData={mangaData} actionType="Remove" />
-      ));
+      toast.custom(
+        (t) => <CartToast mangaData={mangaData} actionType="Remove" />,
+        {
+          duration: 300,
+        }
+      );
     }
     const index = cartItems.findIndex((item) => item.id === mangaData.id);
     if (index !== -1) {
