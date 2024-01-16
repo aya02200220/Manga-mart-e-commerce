@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { MangaData } from "@/types";
 import { useAppContext } from "../providers/AppContext";
 import NoFavImage from "../../public/NoFavorites.png";
-import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
 import FavoriteToast from "../Notifications/FavoriteToast";
 import { motion } from "framer-motion";
