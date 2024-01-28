@@ -58,6 +58,7 @@ export const ItemInCart = () => {
         </div>
       </div>
       <button>button</button>
+      <button>button</button>
     </>
   );
 };
