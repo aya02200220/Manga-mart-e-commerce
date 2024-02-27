@@ -20,6 +20,7 @@ const variants = {
 
 export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   // ダイアログを開くハンドラ
   const handleEmptyButtonClick = () => {
@@ -80,6 +81,30 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
             return <MenuItem manga={item} quantity={quantity} key={item.id} />;
           })
         ) : (
+          <div className="text-center">
+            {/* モバイルデバイスの場合は静止画像を表示 */}
+            {isMobile ? (
+              <img src="/public/bg-jojo.png" alt="No items" />
+            ) : (
+              <video
+                autoPlay
+                loop
+                muted
+                className="w-full h-auto max-h-[60vh] p-6"
+              >
+                <source src="/NoItem-Pop.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+        )}
+
+        {/* {descendingCartItems.length > 0 ? (
+          descendingCartItems.map((item) => {
+            const quantity = itemsCount[item.id];
+            return <MenuItem manga={item} quantity={quantity} key={item.id} />;
+          })
+        ) : (
           <div className="text-center ">
             <video
               autoPlay
@@ -91,7 +116,7 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
               Your browser does not support the video tag.
             </video>
           </div>
-        )}
+        )} */}
       </motion.ul>
       <div className="absolute bottom-0 left-0  border border-[#333] w-full h-[110px] items-center justify-center flex flex-col divide-y-2">
         <div className="flex flex-1  w-full justify-between items-center bg-white">
