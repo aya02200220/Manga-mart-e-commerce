@@ -20,7 +20,10 @@ const variants = {
 
 export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile =
+    typeof window !== "undefined" &&
+    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   // ダイアログを開くハンドラ
   const handleEmptyButtonClick = () => {
