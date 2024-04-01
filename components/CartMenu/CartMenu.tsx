@@ -52,7 +52,7 @@ export const CartMenu: React.FC<CartMenuProps> = ({ isOpen, toggleOpen }) => {
         } `}
       >
         <motion.div
-          className="overflow-auto border border-[#333] h-[89vh] sm:h-[500px] w-[96vw] sm:w-[300px] 
+          className="overflow-auto border border-[#333] h-[80vh] sm:h-[500px] w-[96vw] sm:w-[300px] 
         "
           variants={sidebar}
           initial={false}

@@ -8,8 +8,7 @@ import { MangaData } from "@/types";
 
 import { EmptyCartDialogModal } from "./EmptyCartDialogModal";
 import Link from "next/link";
-import { log } from "console";
-// import { isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const variants = {
   open: {
@@ -20,31 +19,12 @@ const variants = {
   },
 };
 
-// Navigationコンポーネントのサーバーサイドレンダリング
-export async function getServerSideProps(context) {
-  // User-Agentからモバイルかどうかを判定するロジックをここに記述
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(
-    context.req.headers["user-agent"]
-  );
-  console.log(isMobile, "isMobile-getServerSideProps");
-
-  return {
-    props: {
-      isMobile,
-    },
-  };
-}
-
-export const Navigation = ({
-  isOpen,
-  isMobile,
-}: {
-  isOpen: boolean;
-  isMobile: boolean;
-}) => {
+export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  console.log(isMobile, "isMobile");
+  const isMobile =
+    typeof window !== "undefined" &&
+    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   // ダイアログを開くハンドラ
   const handleEmptyButtonClick = () => {
