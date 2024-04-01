@@ -6,7 +6,7 @@ import { useAppContext } from "../providers/AppContext";
 import { MangaData } from "@/types";
 import { EmptyCartDialogModal } from "./EmptyCartDialogModal";
 import Link from "next/link";
-import { isMobile } from "react-device-detect";
+// import { isMobile } from "react-device-detect";
 
 const variants = {
   open: {
@@ -53,6 +53,10 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
     setIsDialogOpen(false);
   };
 
+  // クライアントサイドでのみライブラリをインポート
+  const isMobile =
+    typeof window !== "undefined" && require("react-device-detect").isMobile;
+
   return (
     <div className={` ${!isOpen ? "closed-menu" : ""} `}>
       <div className="absolute top-0 left-0 border border-[#333] w-full h-[50px] items-center flex ">
@@ -74,17 +78,31 @@ export const Navigation = ({ isOpen }: { isOpen: boolean }) => {
         ) : (
           <div className="text-center">
             {isMobile ? (
-              <p>No items</p>
+              <>
+                <p>No Items</p>
+                <video
+                  // autoPlay
+                  // loop
+                  // muted
+                  className="w-full h-auto max-h-[60vh] p-6"
+                >
+                  <source />
+                  Your browser does not support the video tag.
+                </video>
+              </>
             ) : (
-              <video
-                autoPlay
-                loop
-                muted
-                className="w-full h-auto max-h-[60vh] p-6"
-              >
-                <source src="/NoItem-Pop.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <>
+                <p className=" block">No Items</p>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  className="w-full h-auto max-h-[60vh] p-6"
+                >
+                  <source src="/NoItem-Pop.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </>
             )}
           </div>
         )}
