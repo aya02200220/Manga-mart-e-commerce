@@ -286,6 +286,14 @@ function Header(props: HeaderProps) {
           ) : (
             <>
               <IconButton
+                className="ml-0 sm:ml-2 p-2"
+                onClick={() => handleFavModalOpen()}
+              >
+                <Badge badgeContent={favCounts} color="secondary">
+                  <GrFavorite size={20} />
+                </Badge>
+              </IconButton>
+              <IconButton
                 onClick={() => handleCartModalOpen()}
                 className="ml-0 sm:ml-2 p-1 sm:p-2 mr-3 "
               >
